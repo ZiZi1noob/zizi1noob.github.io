@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Candy House · Portfolio</title>
+<title>ZIYANG · Portfolio</title>
 <meta name="description" content="Ziyang ZHAN portfolio.">
 
 <!-- Google Fonts: pixel fonts -->
@@ -21,7 +21,7 @@
 <!-- Sticky nav -->
 <header class="nav">
   <div class="wrap nav-inner">
-    <a href="#hero" class="logo" aria-label="Ziyang House">
+    <a href="#about" class="logo" aria-label="Ziyang House">
       <span class="mark" aria-hidden="true">
         <img class="mark-img" src="assets/sword.svg" alt="" width="24" height="24">
       </span>
@@ -36,188 +36,18 @@
 <div id="errorBanner" role="alert"></div>
 
 <main id="main">
-  <!-- Sections are rendered from data.json by app.js logic below -->
-  <div id="heroMount"></div>
+  <!-- Sections are rendered from data.json by app.js logic below.
+       About Me now lives at the top (replacing the old Hero). -->
+  <div id="aboutMount"></div>
   <div id="skillsMount"></div>
   <div id="projectsMount"></div>
   <div id="timelineMount"></div>
-  <div id="aboutMount"></div>
   <div id="contactMount"></div>
 </main>
 
 <footer class="foot" id="footerMount"></footer>
 
-<!-- Embedded fallback data: used when opened via file:// (fetch blocked).
-     When served over HTTP, data.json is still fetched and takes priority. -->
-<script id="embeddedData" type="application/json">
-{
-  "site": "Candy House",
-  "nav": [
-    { "label": "Home", "href": "#hero" },
-    { "label": "Skills", "href": "#skills" },
-    { "label": "Work", "href": "#projects" },
-    { "label": "Journey", "href": "#timeline" },
-    { "label": "About", "href": "#about" },
-    { "label": "Contact", "href": "#contact" }
-  ],
-  "hero": {
-    "tag": "FRONTEND · UI · MOTION",
-    "titlePre": "Hi, I'm",
-    "titleName": "Candy",
-    "titleRole": "Frontend Engineer",
-    "lede": "I build warm, human products with code and color — pixel-perfect builds, buttery motion, and accessibility baked in from the first commit.",
-    "ctaPrimary": { "label": "View Work →", "href": "#projects" },
-    "ctaSecondary": { "label": "Contact Me", "href": "#contact" },
-    "card": {
-      "name": "Candy / Tangtang",
-      "role": "SENIOR FRONTEND ENGINEER",
-      "stats": [
-        { "num": "6+", "label": "Years" },
-        { "num": "40+", "label": "Projects" },
-        { "num": "2.1k", "label": "Stars" }
-      ]
-    }
-  },
-  "skills": {
-    "kicker": "// SKILLS",
-    "title": "My Skill Stack",
-    "desc": "From semantic structure to performance tuning — every skill sharpened on real production builds. Bars fill automatically as you scroll.",
-    "items": [
-      { "name": "HTML / CSS / JS", "pct": 95, "color": "c1" },
-      { "name": "React / Vue", "pct": 90, "color": "c2" },
-      { "name": "UI / Motion Design", "pct": 88, "color": "c3" },
-      { "name": "Performance", "pct": 85, "color": "c4" },
-      { "name": "Accessibility a11y", "pct": 80, "color": "c5" },
-      { "name": "Tooling / CI", "pct": 82, "color": "c1" }
-    ]
-  },
-  "projects": {
-    "kicker": "// PROJECTS",
-    "title": "Featured Work",
-    "desc": "From commerce rebuilds to music players — each one wears its candy-colored personality. Tap to hear the story.",
-    "items": [
-      {
-        "title": "Donut Commerce Rebuild",
-        "tag": "ECOMMERCE",
-        "desc": "Front-end architecture overhaul for a large store. 60% faster first paint, 80%+ component reuse.",
-        "chips": ["React", "PWA", "Perf"],
-        "color": "pink",
-        "size": "wide"
-      },
-      {
-        "title": "Pixel Weather",
-        "tag": "WEBAPP",
-        "desc": "Retro pixel-art weather app.",
-        "chips": ["Vue", "SVG"],
-        "color": "blue",
-        "size": ""
-      },
-      {
-        "title": "Neon Music Player",
-        "tag": "PLAYER",
-        "desc": "Web player with live audio spectrum.",
-        "chips": ["WebAudio", "Canvas"],
-        "color": "purple",
-        "size": ""
-      },
-      {
-        "title": "Doodle Notes",
-        "tag": "PRODUCTIVITY",
-        "desc": "Minimal note tool with handwriting and offline sync. Keyboard-accessible, zero dependencies.",
-        "chips": ["IndexedDB", "a11y", "Offline"],
-        "color": "lime",
-        "size": "tall"
-      },
-      {
-        "title": "Retro Game Hub",
-        "tag": "GAME",
-        "desc": "8-bit mini-game collection.",
-        "chips": ["Canvas"],
-        "color": "orange",
-        "size": ""
-      },
-      {
-        "title": "Candy Dashboard",
-        "tag": "DASHBOARD",
-        "desc": "Real-time viz wall with dark + high-contrast themes, WCAG AA compliant.",
-        "chips": ["D3", "Realtime", "Themes"],
-        "color": "yellow",
-        "size": "wide"
-      }
-    ]
-  },
-  "timeline": {
-    "kicker": "// JOURNEY",
-    "title": "Experience",
-    "items": [
-      {
-        "year": "2024 — Now",
-        "role": "Senior Frontend Engineer",
-        "company": "Candy Tech",
-        "desc": "Lead the design system, pushed Core Web Vitals across the board, and mentor a 4-person frontend squad."
-      },
-      {
-        "year": "2022 — 2024",
-        "role": "Frontend Engineer",
-        "company": "Rainbow Interactive",
-        "desc": "Shipped multiple 0-to-1 consumer products and a component library; averaged 55% first-paint improvement."
-      },
-      {
-        "year": "2020 — 2022",
-        "role": "Junior Frontend Dev",
-        "company": "Block Studio",
-        "desc": "Built internal admin systems, extracted reusable business components, and set the team a11y standard."
-      },
-      {
-        "year": "2019",
-        "role": "Frontend Intern",
-        "company": "Lemon Networks",
-        "desc": "Started with slicing and motion — and felt the joy of pixel alignment for the first time."
-      }
-    ]
-  },
-  "about": {
-    "kicker": "// ABOUT",
-    "title": "About Me",
-    "paragraphs": [
-      "I'm Candy, a frontend engineer who believes good interfaces should be both beautiful and genuinely usable. Over six years I've shipped commerce, tools, games, and data-viz — always hunting the sweet spot between pixels and performance.",
-      "Off the clock I collect vintage candy wrappers, doodle little SVG illustrations, and share notes on accessibility and motion in the community."
-    ],
-    "stats": [
-      { "num": "40+", "label": "Shipped" },
-      { "num": "6", "label": "Years" },
-      { "num": "12", "label": "Talks" }
-    ]
-  },
-  "contact": {
-    "title": "Wanna make something sweet? 🍬",
-    "desc": "Got a project, a role, or just want to say hi? Drop me a line — I reply within 48 hours.",
-    "email": "hi@candyhouse.dev",
-    "cta": "Back to top ↑",
-    "ctaHref": "#hero"
-  },
-  "footer": {
-    "tagline": "Building warm products with code and color. © 2026 Candy.",
-    "navTitle": "Navigate",
-    "nav": [
-      { "label": "Home", "href": "#hero" },
-      { "label": "Skills", "href": "#skills" },
-      { "label": "Work", "href": "#projects" },
-      { "label": "Journey", "href": "#timeline" }
-    ],
-    "socialTitle": "Social",
-    "social": [
-      { "label": "GitHub", "href": "#contact" },
-      { "label": "Twitter", "href": "#contact" },
-      { "label": "Email", "href": "mailto:hi@candyhouse.dev" },
-      { "label": "Dribbble", "href": "#contact" }
-    ],
-    "slogan": "\"Pixel-perfect, happily shipped.\"",
-    "bottomLeft": "BUILT WITH ♥ & PURE HTML/CSS/JS",
-    "bottomRight": "NO FRAMEWORK · WCAG 2.1 AA"
-  }
-}
-</script>
+
 
 <script>
 (function(){
@@ -233,11 +63,11 @@
   function svg(inner){ return inner; }
 
   /* ---------- decorative SVG snippets (not user content) ---------- */
-  var STAR = '<svg class="float" style="top:-30px;right:-10px;" width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" shape-rendering="crispEdges"><circle cx="32" cy="32" r="28" fill="#FFE135" stroke="#000" stroke-width="4"/><circle cx="32" cy="32" r="10" fill="#FF1493" stroke="#000" stroke-width="4"/></svg>';
-  var BURST = '<svg class="float" style="bottom:-26px;left:-18px;" width="56" height="56" viewBox="0 0 56 56" aria-hidden="true" shape-rendering="crispEdges"><path d="M28 4l6 16 17 1-13 11 4 17-14-9-14 9 4-17-13-11 17-1z" fill="#9B5DE5" stroke="#000" stroke-width="4" stroke-linejoin="miter"/></svg>';
   var ARROW = '<svg class="arrow" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true" shape-rendering="crispEdges"><path d="M6 20L20 6M20 6H9M20 6V17" stroke="#000" stroke-width="3" fill="none" stroke-linecap="square"/></svg>';
-  var HERO_AVATAR = '<svg width="46" height="46" viewBox="0 0 46 46" fill="#000" shape-rendering="crispEdges"><circle cx="23" cy="18" r="9"/><path d="M8 40c0-9 7-14 15-14s15 5 15 14z"/></svg>';
   var ABOUT_ART = '<svg viewBox="0 0 240 240" fill="none" aria-hidden="true" shape-rendering="crispEdges"><rect x="20" y="20" width="200" height="200" fill="#FF1493" stroke="#000" stroke-width="5"/><circle cx="120" cy="100" r="42" fill="#FFE135" stroke="#000" stroke-width="5"/><circle cx="104" cy="96" r="7" fill="#000"/><circle cx="136" cy="96" r="7" fill="#000"/><path d="M100 118h40" stroke="#000" stroke-width="5" stroke-linecap="square"/><rect x="60" y="160" width="120" height="40" fill="#00BFFF" stroke="#000" stroke-width="5"/></svg>';
+  var ERR_ICON = '<svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true" shape-rendering="crispEdges"><rect x="3" y="3" width="38" height="38" fill="#FFE135" stroke="#000" stroke-width="4"/><rect x="19" y="11" width="6" height="16" fill="#000"/><rect x="19" y="31" width="6" height="6" fill="#000"/></svg>';
+  var ERR_STAR = '<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" shape-rendering="crispEdges"><rect x="9" y="1" width="4" height="20" fill="#fff"/><rect x="1" y="9" width="20" height="4" fill="#fff"/><rect x="6" y="6" width="10" height="10" fill="#fff"/></svg>';
+  var ERR_DOT  = '<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" shape-rendering="crispEdges"><rect x="2" y="2" width="10" height="10" fill="#00BFFF" stroke="#000" stroke-width="2"/></svg>';
 
   /* pixel sword (transparent background, crisp edges) */
   var SWORD = '<img class="mark-img" src="assets/sword.svg" alt="" width="24" height="24" aria-hidden="true">';
@@ -251,32 +81,21 @@
       return '<li><a href="'+esc(n.href)+'">'+esc(n.label)+'</a></li>';
     }).join('');
   }
-
-  function renderHero(d){
-    var h = d.hero, c = h.card;
-    var stats = c.stats.map(function(s){
-      return '<div class="box"><div class="num">'+esc(s.num)+'</div><div class="lbl">'+esc(s.label)+'</div></div>';
+    function renderAbout(d){
+    var a = d.about;
+    var paras = a.paragraphs.map(function(p){ return '<p>'+esc(p)+'</p>'; }).join('');
+    var stats = a.stats.map(function(s){
+      return '<div class="s"><div class="n">'+esc(s.num)+'</div><div class="t">'+esc(s.label)+'</div></div>';
     }).join('');
     return ''+
-    '<section class="hero" id="hero">'+
-      '<div class="wrap hero-grid">'+
-        '<div class="reveal">'+
-          '<span class="tag">'+esc(h.tag)+'</span>'+
-          '<h1 style="margin-top:18px;">'+esc(h.titlePre)+'<br><span class="hl">'+esc(h.titleName)+'</span><br>'+esc(h.titleRole)+'</h1>'+
-          '<p class="lede">'+esc(h.lede)+'</p>'+
-          '<div class="hero-cta">'+
-            '<a href="'+esc(h.ctaPrimary.href)+'" class="btn btn--pink">'+esc(h.ctaPrimary.label)+'</a>'+
-            '<a href="'+esc(h.ctaSecondary.href)+'" class="btn">'+esc(h.ctaSecondary.label)+'</a>'+
-          '</div>'+
-        '</div>'+
-        '<div class="hero-deco reveal" style="--d:.12s">'+
-          STAR + BURST +
-          '<div class="hero-card tex-dots">'+
-            '<div class="avatar" aria-hidden="true">'+HERO_AVATAR+'</div>'+
-            '<h3>'+esc(c.name)+'</h3>'+
-            '<div class="role">'+esc(c.role)+'</div>'+
-            '<div class="hero-stat">'+stats+'</div>'+
-          '</div>'+
+    '<section class="about" id="about">'+
+      '<div class="wrap about-grid">'+
+        '<div class="about-portrait reveal tex-stripes"><img class="about-photo" src="assets/photo-pixel.png" alt="'+esc(a.title)+' — Ziyang ZHAN" width="240" height="240"></div>'+
+        '<div class="reveal" style="--d:.1s">'+
+          '<span class="kicker" style="display:inline-block;font-family:\'Press Start 2P\';font-size:.68rem;background:var(--text);color:var(--bg);padding:9px 14px;border:3px solid var(--line);margin-bottom:16px;line-height:1.5;">'+esc(a.kicker)+'</span>'+
+          '<h2>'+esc(a.title)+'</h2>'+
+          paras+
+          '<div class="about-stats">'+stats+'</div>'+
         '</div>'+
       '</div>'+
     '</section>';
@@ -361,25 +180,7 @@
     '</section>';
   }
 
-  function renderAbout(d){
-    var a = d.about;
-    var paras = a.paragraphs.map(function(p){ return '<p>'+esc(p)+'</p>'; }).join('');
-    var stats = a.stats.map(function(s){
-      return '<div class="s"><div class="n">'+esc(s.num)+'</div><div class="t">'+esc(s.label)+'</div></div>';
-    }).join('');
-    return ''+
-    '<section class="about" id="about">'+
-      '<div class="wrap about-grid">'+
-        '<div class="about-portrait reveal tex-stripes">'+ABOUT_ART+'</div>'+
-        '<div class="reveal" style="--d:.1s">'+
-          '<span class="kicker" style="display:inline-block;font-family:\'Press Start 2P\';font-size:.68rem;background:var(--text);color:var(--bg);padding:9px 14px;border:3px solid var(--line);margin-bottom:16px;line-height:1.5;">'+esc(a.kicker)+'</span>'+
-          '<h2>'+esc(a.title)+'</h2>'+
-          paras+
-          '<div class="about-stats">'+stats+'</div>'+
-        '</div>'+
-      '</div>'+
-    '</section>';
-  }
+
 
   function renderContact(d){
     var c = d.contact;
@@ -408,7 +209,7 @@
     '<div class="wrap">'+
       '<div class="foot-grid">'+
         '<div>'+
-          '<a href="#hero" class="logo" aria-label="Candy House"><span class="mark" aria-hidden="true">'+SWORD+'</span></a>'+
+          '<a href="#about" class="logo" aria-label="Candy House"><span class="mark" aria-hidden="true">'+SWORD+'</span></a>'+
           '<p style="color:var(--muted);margin-top:12px;max-width:260px;font-size:20px;">'+esc(f.tagline)+'</p>'+
         '</div>'+
         '<div><h3>'+esc(f.navTitle)+'</h3><ul>'+nav+'</ul></div>'+
@@ -473,11 +274,12 @@
     // weapon arsenal — drop more SVGs into /assets and add an entry to cycle through them.
     // clicking the sword advances to the next weapon (loops back to the first).
     var WEAPONS = [
+      { name: '斧', src: 'assets/axe.svg' },
       { name: '剑', src: 'assets/sword.svg' },
       { name: '刀', src: 'assets/blade.svg' },
       { name: '枪', src: 'assets/spear.svg' },
       { name: '棍', src: 'assets/staff.svg' },
-      { name: '斧', src: 'assets/axe.svg' }
+      
     ];
     // preload all SVGs so switching is instant (no decode hitch on click)
     WEAPONS.forEach(function(w){ var _i = new Image(); _i.src = w.src; });
@@ -572,7 +374,7 @@
   /* ---------- boot ---------- */
   function boot(d){
     renderNav(d);
-    document.getElementById('heroMount').innerHTML = renderHero(d);
+    document.getElementById('aboutMount').innerHTML = renderAbout(d);
     document.getElementById('skillsMount').innerHTML = renderSkills(d);
     document.getElementById('projectsMount').innerHTML = renderProjects(d);
     document.getElementById('timelineMount').innerHTML = renderTimeline(d);
@@ -585,26 +387,25 @@
   function showError(msg){
     var b = document.getElementById('errorBanner');
     b.classList.add('show');
-    b.innerHTML = msg;
+    b.innerHTML =
+      '<span class="err-ico" aria-hidden="true">'+ERR_ICON+'</span>'+
+      '<div class="err-body">'+msg+'</div>'+
+      '<span class="err-float err-float--1" aria-hidden="true">'+ERR_STAR+'</span>'+
+      '<span class="err-float err-float--2" aria-hidden="true">'+ERR_DOT+'</span>';
   }
 
-  function loadFromEmbedded(){
-    var raw = document.getElementById('embeddedData').textContent;
-    try { boot(JSON.parse(raw)); }
-    catch(e){ showError('⚠ Embedded data is invalid: '+esc(e.message)); }
+  function fetchData(){
+    fetch('./assets/data.json', { cache: 'no-store' })
+      .then(function(r){
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function(d){ boot(d); })
+      .catch(function(err){
+        showError(' Could not load <code>assets/data.json</code> — the site needs this file to render. ');
+      });
   }
-
-  // Try to fetch data.json (works when served over HTTP).
-  // Fall back to embedded data when opened via file:// (fetch blocked).
-  fetch('./assets/data.json', { cache: 'no-store' })
-    .then(function(r){
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    })
-    .then(function(d){ boot(d); })
-    .catch(function(){
-      loadFromEmbedded();
-    });
+  fetchData();
 })();
 </script>
 </body>

@@ -1,30 +1,26 @@
 {
-  "site": "Candy House",
+  "site": "Ziyang ZHAN",
   "nav": [
-    { "label": "Home", "href": "#hero" },
+    { "label": "Home", "href": "#about" },
     { "label": "Skills", "href": "#skills" },
     { "label": "Work", "href": "#projects" },
     { "label": "Journey", "href": "#timeline" },
     { "label": "About", "href": "#about" },
     { "label": "Contact", "href": "#contact" }
   ],
-  "hero": {
-    "tag": "FRONTEND · UI · MOTION",
-    "titlePre": "Hi, I'm",
-    "titleName": "Candy",
-    "titleRole": "Frontend Engineer",
-    "lede": "I build warm, human products with code and color — pixel-perfect builds, buttery motion, and accessibility baked in from the first commit.",
-    "ctaPrimary": { "label": "View Work →", "href": "#projects" },
-    "ctaSecondary": { "label": "Contact Me", "href": "#contact" },
-    "card": {
-      "name": "Candy / Tangtang",
-      "role": "SENIOR FRONTEND ENGINEER",
-      "stats": [
-        { "num": "6+", "label": "Years" },
-        { "num": "40+", "label": "Projects" },
-        { "num": "2.1k", "label": "Stars" }
-      ]
-    }
+    "about": {
+    "kicker": "// ABOUT",
+    "title": "About Me",
+    "paragraphs": [
+      "I'm Ziyang, a full-stack engineer who believes good interfaces should be both beautiful and genuinely usable.",
+      "Outside of code, I'm just a gamer who enjoys life, and believes in good vibes."
+    ],
+    "stats": [
+      { "num": "10+", "label": "Shipped" },
+      { "num": "3+", "label": "Years" },
+      { "num": "24/7", "label": "Coffee Powered" },
+      { "num": "∞", "label": "Still Stuck on Black Wukong" }
+    ]
   },
   "skills": {
     "kicker": "// SKILLS",
@@ -124,31 +120,19 @@
       }
     ]
   },
-  "about": {
-    "kicker": "// ABOUT",
-    "title": "About Me",
-    "paragraphs": [
-      "I'm Candy, a frontend engineer who believes good interfaces should be both beautiful and genuinely usable. Over six years I've shipped commerce, tools, games, and data-viz — always hunting the sweet spot between pixels and performance.",
-      "Off the clock I collect vintage candy wrappers, doodle little SVG illustrations, and share notes on accessibility and motion in the community."
-    ],
-    "stats": [
-      { "num": "40+", "label": "Shipped" },
-      { "num": "6", "label": "Years" },
-      { "num": "12", "label": "Talks" }
-    ]
-  },
+
   "contact": {
     "title": "Wanna make something sweet? 🍬",
     "desc": "Got a project, a role, or just want to say hi? Drop me a line — I reply within 48 hours.",
     "email": "hi@candyhouse.dev",
     "cta": "Back to top ↑",
-    "ctaHref": "#hero"
+    "ctaHref": "#about"
   },
   "footer": {
     "tagline": "Building warm products with code and color. © 2026 Candy.",
     "navTitle": "Navigate",
     "nav": [
-      { "label": "Home", "href": "#hero" },
+      { "label": "Home", "href": "#about" },
       { "label": "Skills", "href": "#skills" },
       { "label": "Work", "href": "#projects" },
       { "label": "Journey", "href": "#timeline" }
