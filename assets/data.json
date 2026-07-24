@@ -1,0 +1,167 @@
+{
+  "site": "Candy House",
+  "nav": [
+    { "label": "Home", "href": "#hero" },
+    { "label": "Skills", "href": "#skills" },
+    { "label": "Work", "href": "#projects" },
+    { "label": "Journey", "href": "#timeline" },
+    { "label": "About", "href": "#about" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "hero": {
+    "tag": "FRONTEND · UI · MOTION",
+    "titlePre": "Hi, I'm",
+    "titleName": "Candy",
+    "titleRole": "Frontend Engineer",
+    "lede": "I build warm, human products with code and color — pixel-perfect builds, buttery motion, and accessibility baked in from the first commit.",
+    "ctaPrimary": { "label": "View Work →", "href": "#projects" },
+    "ctaSecondary": { "label": "Contact Me", "href": "#contact" },
+    "card": {
+      "name": "Candy / Tangtang",
+      "role": "SENIOR FRONTEND ENGINEER",
+      "stats": [
+        { "num": "6+", "label": "Years" },
+        { "num": "40+", "label": "Projects" },
+        { "num": "2.1k", "label": "Stars" }
+      ]
+    }
+  },
+  "skills": {
+    "kicker": "// SKILLS",
+    "title": "My Skill Stack",
+    "desc": "From semantic structure to performance tuning — every skill sharpened on real production builds. Bars fill automatically as you scroll.",
+    "items": [
+      { "name": "HTML / CSS / JS", "pct": 95, "color": "c1" },
+      { "name": "React / Vue", "pct": 90, "color": "c2" },
+      { "name": "UI / Motion Design", "pct": 88, "color": "c3" },
+      { "name": "Performance", "pct": 85, "color": "c4" },
+      { "name": "Accessibility a11y", "pct": 80, "color": "c5" },
+      { "name": "Tooling / CI", "pct": 82, "color": "c1" }
+    ]
+  },
+  "projects": {
+    "kicker": "// PROJECTS",
+    "title": "Featured Work",
+    "desc": "From commerce rebuilds to music players — each one wears its candy-colored personality. Tap to hear the story.",
+    "items": [
+      {
+        "title": "Donut Commerce Rebuild",
+        "tag": "ECOMMERCE",
+        "desc": "Front-end architecture overhaul for a large store. 60% faster first paint, 80%+ component reuse.",
+        "chips": ["React", "PWA", "Perf"],
+        "color": "pink",
+        "size": "wide"
+      },
+      {
+        "title": "Pixel Weather",
+        "tag": "WEBAPP",
+        "desc": "Retro pixel-art weather app.",
+        "chips": ["Vue", "SVG"],
+        "color": "blue",
+        "size": ""
+      },
+      {
+        "title": "Neon Music Player",
+        "tag": "PLAYER",
+        "desc": "Web player with live audio spectrum.",
+        "chips": ["WebAudio", "Canvas"],
+        "color": "purple",
+        "size": ""
+      },
+      {
+        "title": "Doodle Notes",
+        "tag": "PRODUCTIVITY",
+        "desc": "Minimal note tool with handwriting and offline sync. Keyboard-accessible, zero dependencies.",
+        "chips": ["IndexedDB", "a11y", "Offline"],
+        "color": "lime",
+        "size": "tall"
+      },
+      {
+        "title": "Retro Game Hub",
+        "tag": "GAME",
+        "desc": "8-bit mini-game collection.",
+        "chips": ["Canvas"],
+        "color": "orange",
+        "size": ""
+      },
+      {
+        "title": "Candy Dashboard",
+        "tag": "DASHBOARD",
+        "desc": "Real-time viz wall with dark + high-contrast themes, WCAG AA compliant.",
+        "chips": ["D3", "Realtime", "Themes"],
+        "color": "yellow",
+        "size": "wide"
+      }
+    ]
+  },
+  "timeline": {
+    "kicker": "// JOURNEY",
+    "title": "Experience",
+    "items": [
+      {
+        "year": "2024 — Now",
+        "role": "Senior Frontend Engineer",
+        "company": "Candy Tech",
+        "desc": "Lead the design system, pushed Core Web Vitals across the board, and mentor a 4-person frontend squad."
+      },
+      {
+        "year": "2022 — 2024",
+        "role": "Frontend Engineer",
+        "company": "Rainbow Interactive",
+        "desc": "Shipped multiple 0-to-1 consumer products and a component library; averaged 55% first-paint improvement."
+      },
+      {
+        "year": "2020 — 2022",
+        "role": "Junior Frontend Dev",
+        "company": "Block Studio",
+        "desc": "Built internal admin systems, extracted reusable business components, and set the team a11y standard."
+      },
+      {
+        "year": "2019",
+        "role": "Frontend Intern",
+        "company": "Lemon Networks",
+        "desc": "Started with slicing and motion — and felt the joy of pixel alignment for the first time."
+      }
+    ]
+  },
+  "about": {
+    "kicker": "// ABOUT",
+    "title": "About Me",
+    "paragraphs": [
+      "I'm Candy, a frontend engineer who believes good interfaces should be both beautiful and genuinely usable. Over six years I've shipped commerce, tools, games, and data-viz — always hunting the sweet spot between pixels and performance.",
+      "Off the clock I collect vintage candy wrappers, doodle little SVG illustrations, and share notes on accessibility and motion in the community."
+    ],
+    "stats": [
+      { "num": "40+", "label": "Shipped" },
+      { "num": "6", "label": "Years" },
+      { "num": "12", "label": "Talks" }
+    ]
+  },
+  "contact": {
+    "title": "Wanna make something sweet? 🍬",
+    "desc": "Got a project, a role, or just want to say hi? Drop me a line — I reply within 48 hours.",
+    "email": "hi@candyhouse.dev",
+    "cta": "Back to top ↑",
+    "ctaHref": "#hero"
+  },
+  "footer": {
+    "tagline": "Building warm products with code and color. © 2026 Candy.",
+    "navTitle": "Navigate",
+    "nav": [
+      { "label": "Home", "href": "#hero" },
+      { "label": "Skills", "href": "#skills" },
+      { "label": "Work", "href": "#projects" },
+      { "label": "Journey", "href": "#timeline" }
+    ],
+    "socialTitle": "Social",
+    "social": [
+      { "label": "GitHub", "href": "#contact" },
+      { "label": "Twitter", "href": "#contact" },
+      { "label": "Email", "href": "mailto:hi@candyhouse.dev" },
+      { "label": "Dribbble", "href": "#contact" }
+    ],
+    "slogan": "\"Pixel-perfect, happily shipped.\"",
+    "bottomLeft": "BUILT WITH ♥ & PURE HTML/CSS/JS",
+    "bottomRight": "NO FRAMEWORK · WCAG 2.1 AA"
+  }
+}

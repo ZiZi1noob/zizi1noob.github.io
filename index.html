@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candy House · Portfolio</title>
+<meta name="description" content="Ziyang ZHAN portfolio.">
+
+<!-- Google Fonts: pixel fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+<!-- Stylesheet (all visual styling lives in style.css) -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+
+<!-- Sticky nav -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#hero" class="logo" aria-label="Ziyang House">
+      <span class="mark" aria-hidden="true">
+        <img class="mark-img" src="assets/sword.svg" alt="" width="24" height="24">
+      </span>
+    </a>
+    <nav aria-label="Primary">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">≡</button>
+      <ul class="nav-links" id="navLinks"></ul>
+    </nav>
+  </div>
+</header>
+
+<div id="errorBanner" role="alert"></div>
+
+<main id="main">
+  <!-- Sections are rendered from data.json by app.js logic below -->
+  <div id="heroMount"></div>
+  <div id="skillsMount"></div>
+  <div id="projectsMount"></div>
+  <div id="timelineMount"></div>
+  <div id="aboutMount"></div>
+  <div id="contactMount"></div>
+</main>
+
+<footer class="foot" id="footerMount"></footer>
+
+<!-- Embedded fallback data: used when opened via file:// (fetch blocked).
+     When served over HTTP, data.json is still fetched and takes priority. -->
+<script id="embeddedData" type="application/json">
+{
+  "site": "Candy House",
+  "nav": [
+    { "label": "Home", "href": "#hero" },
+    { "label": "Skills", "href": "#skills" },
+    { "label": "Work", "href": "#projects" },
+    { "label": "Journey", "href": "#timeline" },
+    { "label": "About", "href": "#about" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "hero": {
+    "tag": "FRONTEND · UI · MOTION",
+    "titlePre": "Hi, I'm",
+    "titleName": "Candy",
+    "titleRole": "Frontend Engineer",
+    "lede": "I build warm, human products with code and color — pixel-perfect builds, buttery motion, and accessibility baked in from the first commit.",
+    "ctaPrimary": { "label": "View Work →", "href": "#projects" },
+    "ctaSecondary": { "label": "Contact Me", "href": "#contact" },
+    "card": {
+      "name": "Candy / Tangtang",
+      "role": "SENIOR FRONTEND ENGINEER",
+      "stats": [
+        { "num": "6+", "label": "Years" },
+        { "num": "40+", "label": "Projects" },
+        { "num": "2.1k", "label": "Stars" }
+      ]
+    }
+  },
+  "skills": {
+    "kicker": "// SKILLS",
+    "title": "My Skill Stack",
+    "desc": "From semantic structure to performance tuning — every skill sharpened on real production builds. Bars fill automatically as you scroll.",
+    "items": [
+      { "name": "HTML / CSS / JS", "pct": 95, "color": "c1" },
+      { "name": "React / Vue", "pct": 90, "color": "c2" },
+      { "name": "UI / Motion Design", "pct": 88, "color": "c3" },
+      { "name": "Performance", "pct": 85, "color": "c4" },
+      { "name": "Accessibility a11y", "pct": 80, "color": "c5" },
+      { "name": "Tooling / CI", "pct": 82, "color": "c1" }
+    ]
+  },
+  "projects": {
+    "kicker": "// PROJECTS",
+    "title": "Featured Work",
+    "desc": "From commerce rebuilds to music players — each one wears its candy-colored personality. Tap to hear the story.",
+    "items": [
+      {
+        "title": "Donut Commerce Rebuild",
+        "tag": "ECOMMERCE",
+        "desc": "Front-end architecture overhaul for a large store. 60% faster first paint, 80%+ component reuse.",
+        "chips": ["React", "PWA", "Perf"],
+        "color": "pink",
+        "size": "wide"
+      },
+      {
+        "title": "Pixel Weather",
+        "tag": "WEBAPP",
+        "desc": "Retro pixel-art weather app.",
+        "chips": ["Vue", "SVG"],
+        "color": "blue",
+        "size": ""
+      },
+      {
+        "title": "Neon Music Player",
+        "tag": "PLAYER",
+        "desc": "Web player with live audio spectrum.",
+        "chips": ["WebAudio", "Canvas"],
+        "color": "purple",
+        "size": ""
+      },
+      {
+        "title": "Doodle Notes",
+        "tag": "PRODUCTIVITY",
+        "desc": "Minimal note tool with handwriting and offline sync. Keyboard-accessible, zero dependencies.",
+        "chips": ["IndexedDB", "a11y", "Offline"],
+        "color": "lime",
+        "size": "tall"
+      },
+      {
+        "title": "Retro Game Hub",
+        "tag": "GAME",
+        "desc": "8-bit mini-game collection.",
+        "chips": ["Canvas"],
+        "color": "orange",
+        "size": ""
+      },
+      {
+        "title": "Candy Dashboard",
+        "tag": "DASHBOARD",
+        "desc": "Real-time viz wall with dark + high-contrast themes, WCAG AA compliant.",
+        "chips": ["D3", "Realtime", "Themes"],
+        "color": "yellow",
+        "size": "wide"
+      }
+    ]
+  },
+  "timeline": {
+    "kicker": "// JOURNEY",
+    "title": "Experience",
+    "items": [
+      {
+        "year": "2024 — Now",
+        "role": "Senior Frontend Engineer",
+        "company": "Candy Tech",
+        "desc": "Lead the design system, pushed Core Web Vitals across the board, and mentor a 4-person frontend squad."
+      },
+      {
+        "year": "2022 — 2024",
+        "role": "Frontend Engineer",
+        "company": "Rainbow Interactive",
+        "desc": "Shipped multiple 0-to-1 consumer products and a component library; averaged 55% first-paint improvement."
+      },
+      {
+        "year": "2020 — 2022",
+        "role": "Junior Frontend Dev",
+        "company": "Block Studio",
+        "desc": "Built internal admin systems, extracted reusable business components, and set the team a11y standard."
+      },
+      {
+        "year": "2019",
+        "role": "Frontend Intern",
+        "company": "Lemon Networks",
+        "desc": "Started with slicing and motion — and felt the joy of pixel alignment for the first time."
+      }
+    ]
+  },
+  "about": {
+    "kicker": "// ABOUT",
+    "title": "About Me",
+    "paragraphs": [
+      "I'm Candy, a frontend engineer who believes good interfaces should be both beautiful and genuinely usable. Over six years I've shipped commerce, tools, games, and data-viz — always hunting the sweet spot between pixels and performance.",
+      "Off the clock I collect vintage candy wrappers, doodle little SVG illustrations, and share notes on accessibility and motion in the community."
+    ],
+    "stats": [
+      { "num": "40+", "label": "Shipped" },
+      { "num": "6", "label": "Years" },
+      { "num": "12", "label": "Talks" }
+    ]
+  },
+  "contact": {
+    "title": "Wanna make something sweet? 🍬",
+    "desc": "Got a project, a role, or just want to say hi? Drop me a line — I reply within 48 hours.",
+    "email": "hi@candyhouse.dev",
+    "cta": "Back to top ↑",
+    "ctaHref": "#hero"
+  },
+  "footer": {
+    "tagline": "Building warm products with code and color. © 2026 Candy.",
+    "navTitle": "Navigate",
+    "nav": [
+      { "label": "Home", "href": "#hero" },
+      { "label": "Skills", "href": "#skills" },
+      { "label": "Work", "href": "#projects" },
+      { "label": "Journey", "href": "#timeline" }
+    ],
+    "socialTitle": "Social",
+    "social": [
+      { "label": "GitHub", "href": "#contact" },
+      { "label": "Twitter", "href": "#contact" },
+      { "label": "Email", "href": "mailto:hi@candyhouse.dev" },
+      { "label": "Dribbble", "href": "#contact" }
+    ],
+    "slogan": "\"Pixel-perfect, happily shipped.\"",
+    "bottomLeft": "BUILT WITH ♥ & PURE HTML/CSS/JS",
+    "bottomRight": "NO FRAMEWORK · WCAG 2.1 AA"
+  }
+}
+</script>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- tiny helpers ---------- */
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+  // safe SVG passthrough for our own static decorative markup
+  function svg(inner){ return inner; }
+
+  /* ---------- decorative SVG snippets (not user content) ---------- */
+  var STAR = '<svg class="float" style="top:-30px;right:-10px;" width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" shape-rendering="crispEdges"><circle cx="32" cy="32" r="28" fill="#FFE135" stroke="#000" stroke-width="4"/><circle cx="32" cy="32" r="10" fill="#FF1493" stroke="#000" stroke-width="4"/></svg>';
+  var BURST = '<svg class="float" style="bottom:-26px;left:-18px;" width="56" height="56" viewBox="0 0 56 56" aria-hidden="true" shape-rendering="crispEdges"><path d="M28 4l6 16 17 1-13 11 4 17-14-9-14 9 4-17-13-11 17-1z" fill="#9B5DE5" stroke="#000" stroke-width="4" stroke-linejoin="miter"/></svg>';
+  var ARROW = '<svg class="arrow" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true" shape-rendering="crispEdges"><path d="M6 20L20 6M20 6H9M20 6V17" stroke="#000" stroke-width="3" fill="none" stroke-linecap="square"/></svg>';
+  var HERO_AVATAR = '<svg width="46" height="46" viewBox="0 0 46 46" fill="#000" shape-rendering="crispEdges"><circle cx="23" cy="18" r="9"/><path d="M8 40c0-9 7-14 15-14s15 5 15 14z"/></svg>';
+  var ABOUT_ART = '<svg viewBox="0 0 240 240" fill="none" aria-hidden="true" shape-rendering="crispEdges"><rect x="20" y="20" width="200" height="200" fill="#FF1493" stroke="#000" stroke-width="5"/><circle cx="120" cy="100" r="42" fill="#FFE135" stroke="#000" stroke-width="5"/><circle cx="104" cy="96" r="7" fill="#000"/><circle cx="136" cy="96" r="7" fill="#000"/><path d="M100 118h40" stroke="#000" stroke-width="5" stroke-linecap="square"/><rect x="60" y="160" width="120" height="40" fill="#00BFFF" stroke="#000" stroke-width="5"/></svg>';
+
+  /* pixel sword (transparent background, crisp edges) */
+  var SWORD = '<img class="mark-img" src="assets/sword.svg" alt="" width="24" height="24" aria-hidden="true">';
+
+  /* ---------- render functions ---------- */
+  function renderNav(d){
+    var lt = document.getElementById('logoText');
+    if (lt) lt.textContent = d.site;
+    document.title = d.site + ' · Portfolio';
+    document.getElementById('navLinks').innerHTML = d.nav.map(function(n){
+      return '<li><a href="'+esc(n.href)+'">'+esc(n.label)+'</a></li>';
+    }).join('');
+  }
+
+  function renderHero(d){
+    var h = d.hero, c = h.card;
+    var stats = c.stats.map(function(s){
+      return '<div class="box"><div class="num">'+esc(s.num)+'</div><div class="lbl">'+esc(s.label)+'</div></div>';
+    }).join('');
+    return ''+
+    '<section class="hero" id="hero">'+
+      '<div class="wrap hero-grid">'+
+        '<div class="reveal">'+
+          '<span class="tag">'+esc(h.tag)+'</span>'+
+          '<h1 style="margin-top:18px;">'+esc(h.titlePre)+'<br><span class="hl">'+esc(h.titleName)+'</span><br>'+esc(h.titleRole)+'</h1>'+
+          '<p class="lede">'+esc(h.lede)+'</p>'+
+          '<div class="hero-cta">'+
+            '<a href="'+esc(h.ctaPrimary.href)+'" class="btn btn--pink">'+esc(h.ctaPrimary.label)+'</a>'+
+            '<a href="'+esc(h.ctaSecondary.href)+'" class="btn">'+esc(h.ctaSecondary.label)+'</a>'+
+          '</div>'+
+        '</div>'+
+        '<div class="hero-deco reveal" style="--d:.12s">'+
+          STAR + BURST +
+          '<div class="hero-card tex-dots">'+
+            '<div class="avatar" aria-hidden="true">'+HERO_AVATAR+'</div>'+
+            '<h3>'+esc(c.name)+'</h3>'+
+            '<div class="role">'+esc(c.role)+'</div>'+
+            '<div class="hero-stat">'+stats+'</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</section>';
+  }
+
+  function renderSkills(d){
+    var s = d.skills;
+    var cards = s.items.map(function(it, i){
+      var delay = (i*0.06).toFixed(2);
+      return ''+
+      '<article class="skill-card reveal" style="--d:'+delay+'s">'+
+        '<div class="top"><span class="name">'+esc(it.name)+'</span><span class="pct mono">'+esc(it.pct)+'%</span></div>'+
+        '<div class="bar"><div class="bar-fill '+esc(it.color)+'" data-width="'+esc(it.pct)+'%"></div></div>'+
+      '</article>';
+    }).join('');
+    return ''+
+    '<section class="skills tex-stripes" id="skills">'+
+      '<div class="wrap">'+
+        '<div class="section-head reveal">'+
+          '<span class="kicker">'+esc(s.kicker)+'</span>'+
+          '<h2>'+esc(s.title)+'</h2>'+
+          '<p>'+esc(s.desc)+'</p>'+
+        '</div>'+
+        '<div class="skill-grid">'+cards+'</div>'+
+      '</div>'+
+    '</section>';
+  }
+
+  function renderProjects(d){
+    var p = d.projects;
+    var cards = p.items.map(function(it, i){
+      var delay = (i*0.06).toFixed(2);
+      var chips = (it.chips||[]).map(function(ch){ return '<span class="chip">'+esc(ch)+'</span>'; }).join('');
+      return ''+
+      '<a href="#contact" class="proj proj--'+esc(it.color)+' '+esc(it.size)+' reveal" style="--d:'+delay+'s">'+
+        ARROW +
+        '<div>'+
+          '<span class="ptag">'+esc(it.tag)+'</span>'+
+          '<h3>'+esc(it.title)+'</h3>'+
+          '<p>'+esc(it.desc)+'</p>'+
+        '</div>'+
+        '<div class="chips">'+chips+'</div>'+
+      '</a>';
+    }).join('');
+    return ''+
+    '<section id="projects">'+
+      '<div class="wrap">'+
+        '<div class="section-head reveal">'+
+          '<span class="kicker">'+esc(p.kicker)+'</span>'+
+          '<h2>'+esc(p.title)+'</h2>'+
+          '<p>'+esc(p.desc)+'</p>'+
+        '</div>'+
+        '<div class="bento">'+cards+'</div>'+
+      '</div>'+
+    '</section>';
+  }
+
+  function renderTimeline(d){
+    var t = d.timeline;
+    var items = t.items.map(function(it, i){
+      var delay = (i*0.08).toFixed(2);
+      return ''+
+      '<div class="tl-item reveal" style="--d:'+delay+'s">'+
+        '<span class="tl-dot" aria-hidden="true"></span>'+
+        '<div class="tl-card">'+
+          '<span class="yr">'+esc(it.year)+'</span>'+
+          '<h3>'+esc(it.role)+'</h3>'+
+          '<div class="co">'+esc(it.company)+'</div>'+
+          '<p>'+esc(it.desc)+'</p>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+    return ''+
+    '<section class="timeline tex-dots" id="timeline">'+
+      '<div class="wrap">'+
+        '<div class="section-head reveal" style="text-align:center;">'+
+          '<span class="kicker">'+esc(t.kicker)+'</span>'+
+          '<h2>'+esc(t.title)+'</h2>'+
+        '</div>'+
+        '<div class="tl">'+items+'</div>'+
+      '</div>'+
+    '</section>';
+  }
+
+  function renderAbout(d){
+    var a = d.about;
+    var paras = a.paragraphs.map(function(p){ return '<p>'+esc(p)+'</p>'; }).join('');
+    var stats = a.stats.map(function(s){
+      return '<div class="s"><div class="n">'+esc(s.num)+'</div><div class="t">'+esc(s.label)+'</div></div>';
+    }).join('');
+    return ''+
+    '<section class="about" id="about">'+
+      '<div class="wrap about-grid">'+
+        '<div class="about-portrait reveal tex-stripes">'+ABOUT_ART+'</div>'+
+        '<div class="reveal" style="--d:.1s">'+
+          '<span class="kicker" style="display:inline-block;font-family:\'Press Start 2P\';font-size:.68rem;background:var(--text);color:var(--bg);padding:9px 14px;border:3px solid var(--line);margin-bottom:16px;line-height:1.5;">'+esc(a.kicker)+'</span>'+
+          '<h2>'+esc(a.title)+'</h2>'+
+          paras+
+          '<div class="about-stats">'+stats+'</div>'+
+        '</div>'+
+      '</div>'+
+    '</section>';
+  }
+
+  function renderContact(d){
+    var c = d.contact;
+    return ''+
+    '<section class="contact" id="contact">'+
+      '<div class="wrap">'+
+        '<div class="contact-box tex-noise reveal">'+
+          '<svg class="float" style="top:18px;left:22px;" width="50" height="50" viewBox="0 0 50 50" aria-hidden="true" shape-rendering="crispEdges"><rect x="6" y="6" width="38" height="38" fill="#FF1493" stroke="#000" stroke-width="4"/></svg>'+
+          '<svg class="float" style="bottom:16px;right:24px;" width="46" height="46" viewBox="0 0 46 46" aria-hidden="true" shape-rendering="crispEdges"><path d="M23 4l5 13 14 1-11 9 4 14-12-8-12 8 4-14-11-9 14-1z" fill="#00BFFF" stroke="#000" stroke-width="4" stroke-linejoin="miter"/></svg>'+
+          '<h2>'+esc(c.title)+'</h2>'+
+          '<p>'+esc(c.desc)+'</p>'+
+          '<div class="contact-actions">'+
+            '<a href="mailto:'+esc(c.email)+'" class="btn btn--pink">✉ '+esc(c.email)+'</a>'+
+            '<a href="'+esc(c.ctaHref)+'" class="btn btn--blue">'+esc(c.cta)+'</a>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</section>';
+  }
+
+  function renderFooter(d){
+    var f = d.footer;
+    var nav = f.nav.map(function(n){ return '<li><a href="'+esc(n.href)+'">'+esc(n.label)+'</a></li>'; }).join('');
+    var social = f.social.map(function(n){ return '<li><a href="'+esc(n.href)+'">'+esc(n.label)+'</a></li>'; }).join('');
+    return ''+
+    '<div class="wrap">'+
+      '<div class="foot-grid">'+
+        '<div>'+
+          '<a href="#hero" class="logo" aria-label="Candy House"><span class="mark" aria-hidden="true">'+SWORD+'</span></a>'+
+          '<p style="color:var(--muted);margin-top:12px;max-width:260px;font-size:20px;">'+esc(f.tagline)+'</p>'+
+        '</div>'+
+        '<div><h3>'+esc(f.navTitle)+'</h3><ul>'+nav+'</ul></div>'+
+        '<div><h3>'+esc(f.socialTitle)+'</h3><ul>'+social+'</ul></div>'+
+        '<div><h3>Slogan</h3><p class="mono" style="color:var(--lime);font-size:22px;">'+esc(f.slogan)+'</p></div>'+
+      '</div>'+
+      '<div class="foot-bottom">'+
+        '<span>'+esc(f.bottomLeft)+'</span>'+
+        '<span>'+esc(f.bottomRight)+'</span>'+
+      '</div>'+
+    '</div>';
+  }
+
+  /* ---------- init interactions after render ---------- */
+  function initInteractions(d){
+    // mobile nav toggle (delegated, survives re-render)
+    var toggle = document.getElementById('navToggle');
+    var links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', function(){
+      var open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.addEventListener('click', function(e){
+      if (e.target.tagName === 'A'){
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && links.classList.contains('open')){
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+        toggle.focus();
+      }
+    });
+
+    // scroll reveal + progress bars
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var reveals = document.querySelectorAll('.reveal');
+    var bars = document.querySelectorAll('.bar-fill');
+    function fillBars(scope){
+      scope.querySelectorAll('.bar-fill').forEach(function(b){
+        b.style.width = b.getAttribute('data-width');
+      });
+    }
+    if (reduce || !('IntersectionObserver' in window)){
+      reveals.forEach(function(el){ el.classList.add('in-view'); });
+      bars.forEach(function(b){ b.style.width = b.getAttribute('data-width'); });
+    } else {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            fillBars(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach(function(el){ io.observe(el); });
+    }
+
+    // weapon arsenal — drop more SVGs into /assets and add an entry to cycle through them.
+    // clicking the sword advances to the next weapon (loops back to the first).
+    var WEAPONS = [
+      { name: '剑', src: 'assets/sword.svg' },
+      { name: '刀', src: 'assets/blade.svg' },
+      { name: '枪', src: 'assets/spear.svg' },
+      { name: '棍', src: 'assets/staff.svg' },
+      { name: '斧', src: 'assets/axe.svg' }
+    ];
+    // preload all SVGs so switching is instant (no decode hitch on click)
+    WEAPONS.forEach(function(w){ var _i = new Image(); _i.src = w.src; });
+    var weaponIndex = 0;
+    function applyWeapon(logo, nextIdx){
+      weaponIndex = ((nextIdx % WEAPONS.length) + WEAPONS.length) % WEAPONS.length;
+      var w = WEAPONS[weaponIndex];
+      var img = logo.querySelector('.mark-img');
+      if (img){
+        img.src = w.src;
+        img.alt = w.name;
+        // missing file -> fall back to the sword so we never show a broken icon
+        img.onerror = function(){ img.src = WEAPONS[0].src; };
+        // spin the new weapon in
+        img.classList.remove('swap');
+        void img.offsetWidth;
+        img.classList.add('swap');
+      }
+      logo.setAttribute('aria-label', 'Ziyang House · 兵器：' + w.name);
+    }
+
+    // pixel explosion: spawn sparks around the sword on click
+    var SPARK_COLORS = ['#00E5FF', '#FF1493', '#FFCB2E', '#7CFF4F', '#B388FF', '#FB923C'];
+    function explode(mark){
+      var N = 30; // more particles = more satisfying impact
+      for (var i = 0; i < N; i++){
+        var p = document.createElement('span');
+        p.className = 'spark';
+        // full 360° radial burst for a richer explosion
+        var ang  = Math.random() * Math.PI * 2;
+        var dist = 18 + Math.random() * 34;
+        var size = 4 + Math.floor(Math.random() * 5); // 4–8px pixel chunks
+        p.style.setProperty('--tx', (Math.cos(ang) * dist).toFixed(1) + 'px');
+        p.style.setProperty('--ty', (Math.sin(ang) * dist).toFixed(1) + 'px');
+        p.style.setProperty('--sz', size + 'px');
+        p.style.background = SPARK_COLORS[i % SPARK_COLORS.length];
+        p.style.animationDelay = (Math.random() * 0.06).toFixed(3) + 's';
+        p.style.animationDuration = (0.45 + Math.random() * 0.35).toFixed(2) + 's';
+        mark.appendChild(p);
+        p.addEventListener('animationend', function(){ p.remove(); });
+      }
+      // quick shockwave ring for extra punch
+      var ring = document.createElement('span');
+      ring.className = 'spark-ring';
+      mark.appendChild(ring);
+      ring.addEventListener('animationend', function(){ ring.remove(); });
+    }
+
+    // pixel sword: hover loops, click resets position and starts a persistent loop
+    document.querySelectorAll('.logo').forEach(function(logo){
+      var img = logo.querySelector('.mark-img');
+      if (!img) return;
+      logo.addEventListener('mouseenter', function(){ img.classList.add('is-chop'); });
+      logo.addEventListener('mouseleave', function(){
+        if (!img.classList.contains('pinned')) img.classList.remove('is-chop');
+      });
+      logo.addEventListener('click', function(){
+        // reset position, swap weapon with a spin-in; chop loop resumes after the entrance
+        img.classList.remove('is-chop', 'pinned', 'swap');
+        void img.offsetWidth; // force reflow
+        applyWeapon(logo, weaponIndex + 1);
+        var mark = logo.querySelector('.mark');
+        if (mark) explode(mark);
+
+        // resume the chop loop once the new weapon has spun in
+        img.addEventListener('animationend', function onIn(e){
+          if (e.animationName !== 'weaponIn') return;
+          img.removeEventListener('animationend', onIn);
+          img.classList.remove('swap');
+          img.classList.add('is-chop', 'pinned');
+        });
+
+        // impact: screen shake + sword flash
+        document.body.classList.remove('shake');
+        void document.body.offsetWidth;
+        document.body.classList.add('shake');
+        document.body.addEventListener('animationend', function(){
+          document.body.classList.remove('shake');
+        }, { once: true });
+        if (mark){
+          mark.classList.remove('flash');
+          void mark.offsetWidth;
+          mark.classList.add('flash');
+          mark.addEventListener('animationend', function(){
+            mark.classList.remove('flash');
+          }, { once: true });
+        }
+      });
+    });
+  }
+
+  /* ---------- boot ---------- */
+  function boot(d){
+    renderNav(d);
+    document.getElementById('heroMount').innerHTML = renderHero(d);
+    document.getElementById('skillsMount').innerHTML = renderSkills(d);
+    document.getElementById('projectsMount').innerHTML = renderProjects(d);
+    document.getElementById('timelineMount').innerHTML = renderTimeline(d);
+    document.getElementById('aboutMount').innerHTML = renderAbout(d);
+    document.getElementById('contactMount').innerHTML = renderContact(d);
+    document.getElementById('footerMount').innerHTML = renderFooter(d);
+    initInteractions(d);
+  }
+
+  function showError(msg){
+    var b = document.getElementById('errorBanner');
+    b.classList.add('show');
+    b.innerHTML = msg;
+  }
+
+  function loadFromEmbedded(){
+    var raw = document.getElementById('embeddedData').textContent;
+    try { boot(JSON.parse(raw)); }
+    catch(e){ showError('⚠ Embedded data is invalid: '+esc(e.message)); }
+  }
+
+  // Try to fetch data.json (works when served over HTTP).
+  // Fall back to embedded data when opened via file:// (fetch blocked).
+  fetch('./assets/data.json', { cache: 'no-store' })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(d){ boot(d); })
+    .catch(function(){
+      loadFromEmbedded();
+    });
+})();
+</script>
+</body>
+</html>
