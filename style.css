@@ -86,48 +86,28 @@ section{padding:80px 0;position:relative;}
 header.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:var(--border-thick);}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;}
 .logo{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-size:.95rem;text-decoration:none;color:var(--text);line-height:1.3;}
-.logo .mark{width:42px;height:42px;display:grid;place-items:center;position:relative;overflow:visible;cursor:pointer;}
 
 
 
-.mark-img{width:26px;height:26px;display:block;image-rendering:pixelated;transform-origin:50% 88%;
-  filter: drop-shadow(0 0 4px var(--cyan)) drop-shadow(0 0 2px var(--pink));
-  animation: glow 2.4s ease-in-out infinite;}
 
 
 
-/* pixel sword: neon glow pulse (independent of chop) */
-@keyframes glow{
-  0%,100% { filter: drop-shadow(0 0 3px var(--cyan)) drop-shadow(0 0 1px var(--pink)); }
-  50%     { filter: drop-shadow(0 0 7px var(--cyan)) drop-shadow(0 0 4px var(--pink)); }
-}
 
-/* pixel sword chop — loops forever on hover, and on click (reset + pinned loop) */
-@keyframes chopLoop{
-  0%   { transform: rotate(0)     translateY(0); }
-  50%  { transform: rotate(82deg) translateY(3px); }
-  100% { transform: rotate(0)     translateY(0); }
-}
-/* identical, separate name so a click can reliably RESTART the animation */
-@keyframes chopLoopB{
-  0%   { transform: rotate(0)     translateY(0); }
-  50%  { transform: rotate(82deg) translateY(3px); }
-  100% { transform: rotate(0)     translateY(0); }
-}
-.logo:hover .mark-img{ animation: chopLoop .7s steps(6) infinite, glow 2.4s ease-in-out infinite; }
-.logo .mark-img.is-chop{ animation: chopLoopB .7s steps(6) infinite, glow 2.4s ease-in-out infinite; }
 
-/* weapon spin-in entrance when switching (placed after hover/is-chop so it wins during the brief entrance) */
-.mark-img.swap{ animation: weaponIn .42s steps(8), glow 2.4s ease-in-out infinite; }
+
+
+
+/* weapon spin-in entrance when switching weapons on the floating button */
+.float-top img.swap{ animation: weaponIn .42s steps(8); }
 @keyframes weaponIn{
   0%   { transform: rotate(-200deg) scale(.35); }
   60%  { transform: rotate(18deg)   scale(1.06); }
   100% { transform: rotate(0)       scale(1); }
 }
 
-/* pixel explosion sparks (spawned on sword click, burst in all directions) */
+/* pixel explosion sparks (burst in all directions from the float button) */
 .spark{
-  position:absolute; left:50%; top:74%;
+  position:absolute; left:50%; top:50%;
   width:var(--sz,5px); height:var(--sz,5px);
   transform: translate(-50%,-50%);
   pointer-events:none; z-index:5;
@@ -141,7 +121,7 @@ header.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:
 
 /* shockwave ring — quick expanding pixel halo on impact */
 .spark-ring{
-  position:absolute; left:50%; top:74%;
+  position:absolute; left:50%; top:50%;
   width:8px; height:8px;
   border:3px solid var(--cyan);
   transform: translate(-50%,-50%);
@@ -153,7 +133,7 @@ header.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:
   100% { transform: translate(-50%,-50%) scale(7); opacity:0; border-color:var(--pink); }
 }
 
-/* impact: whole-screen shake + sword flash on click */
+/* impact: whole-screen shake + float button flash on click */
 @keyframes shake{
   0%,100% { transform: translate(0,0); }
   20% { transform: translate(-4px,2px); }
@@ -166,7 +146,7 @@ body.shake{ animation: shake .3s steps(4); }
   0%   { filter: brightness(2.6) drop-shadow(0 0 9px #fff); }
   100% { filter: brightness(1); }
 }
-.logo .mark.flash{ animation: flash .28s steps(3); }
+.float-top.flash{ animation: flash .28s steps(3); }
 .nav-links{display:flex;gap:6px;align-items:center;list-style:none;}
 .nav-links a{font-family:var(--font-head);font-size:.6rem;text-decoration:none;color:var(--text);padding:9px 12px;border:3px solid transparent;transition:background .12s,border-color .12s,color .12s;}
 .nav-links a:hover{border-color:var(--line);background:var(--panel);color:var(--cyan);}
@@ -268,7 +248,7 @@ body.shake{ animation: shake .3s steps(4); }
   box-shadow:var(--shadow);transition:transform .09s ease,box-shadow .09s ease,border-color .09s ease;}
 .ctc-card:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow-lg);border-color:var(--cyan);}
 .ctc-card:active{transform:translate(4px,4px);box-shadow:0 0 0 transparent;}
-.ctc-icon{font-size:28px;line-height:1;font-family:var(--font-head);}
+.ctc-icon{display:inline-block;font-size:28px;line-height:1;font-family:var(--font-head);}
 .ctc-label{font-family:var(--font-head);font-size:.58rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
 .ctc-val{font-family:var(--font-body);font-size:16px;color:var(--text);word-break:break-all;text-align:center;}
 .ctc--email .ctc-icon{color:var(--pink);}
@@ -279,6 +259,54 @@ body.shake{ animation: shake .3s steps(4); }
 .ctc--resume:hover{border-color:var(--green);}
 .ctc--top .ctc-icon{color:var(--yellow);}
 .ctc--top:hover{border-color:var(--yellow);}
+.ctc--github .ctc-icon{color:var(--purple);}
+.ctc--github:hover{border-color:var(--purple);}
+
+/* ---------- floating back-to-top button ---------- */
+.float-top{
+  position:fixed;bottom:24px;right:24px;z-index:200;
+  width:52px;height:52px;
+  border:var(--border-thick);background:var(--panel);
+  box-shadow:0 0 8px rgba(34,211,238,.25),0 0 22px rgba(255,46,136,.1),var(--shadow);
+  cursor:pointer;
+  display:grid;place-items:center;
+  transition:transform .09s ease,box-shadow .18s ease,border-color .18s ease;
+  -webkit-user-select:none;user-select:none;
+  animation:floatGlow 2.8s ease-in-out infinite;
+}
+@keyframes floatGlow{
+  0%,100%{box-shadow:0 0 6px rgba(34,211,238,.18),0 0 16px rgba(255,46,136,.06),var(--shadow);}
+  33%     {box-shadow:0 0 14px rgba(34,211,238,.42),0 0 30px rgba(255,46,136,.16),var(--shadow);}
+  66%     {box-shadow:0 0 10px rgba(167,139,250,.35),0 0 24px rgba(34,211,238,.14),var(--shadow);}
+}
+.float-top:hover{
+  transform:translate(-2px,-2px);
+  box-shadow:0 0 20px rgba(34,211,238,.55),0 0 42px rgba(255,46,136,.28),var(--shadow-lg);
+  border-color:var(--cyan);
+  animation:none;
+}
+.float-top:active{transform:translate(3px,3px);box-shadow:0 0 0 transparent;}
+/* 「TOP」pixel badge — slides in from the right on hover */
+.float-top::after{
+  content:'TOP';
+  position:absolute;right:60px;
+  font-family:var(--font-head);font-size:.56rem;
+  background:var(--panel);color:var(--cyan);
+  border:3px solid var(--line);padding:5px 12px;
+  white-space:nowrap;pointer-events:none;
+  opacity:0;transform:translateX(6px);
+  transition:opacity .14s ease,transform .14s ease;
+}
+.float-top:hover::after{opacity:1;transform:translateX(0);}
+.float-top img{
+  display:block;image-rendering:pixelated;width:28px;height:28px;
+  filter:drop-shadow(0 0 3px var(--cyan)) drop-shadow(0 0 1px var(--pink));
+  animation:ftIconGlow 2.4s ease-in-out infinite;
+}
+@keyframes ftIconGlow{
+  0%,100%{filter:drop-shadow(0 0 2px var(--cyan)) drop-shadow(0 0 1px var(--pink));}
+  50%    {filter:drop-shadow(0 0 7px var(--cyan)) drop-shadow(0 0 4px var(--pink));}
+}
 
 /* ============ Footer (dark) ============ */
 footer.foot{background:var(--bg);color:var(--text);padding:54px 0 34px;border-top:var(--border-thick);}

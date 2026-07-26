@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ZIYANG · Portfolio</title>
-<meta name="description" content="Ziyang ZHAN portfolio.">
+<meta name="Ziyang ZHAN Portfolio" content="Ziyang ZHAN Portfolio">
 
 <!-- Google Fonts: pixel fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,11 +21,7 @@
 <!-- Sticky nav -->
 <header class="nav">
   <div class="wrap nav-inner">
-    <a href="#about" class="logo" aria-label="Ziyang House">
-      <span class="mark" aria-hidden="true">
-        <img class="mark-img" src="assets/sword.svg" alt="" width="24" height="24">
-      </span>
-    </a>
+    <a href="#about" class="logo" aria-label="Ziyang House"><span id="logoText"></span></a>
     <nav aria-label="Primary">
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">≡</button>
       <ul class="nav-links" id="navLinks"></ul>
@@ -98,18 +94,6 @@
     });
     return safe;
   }
-  // safe SVG passthrough for our own static decorative markup
-  function svg(inner){ return inner; }
-
-  /* ---------- decorative SVG snippets (not user content) ---------- */
-  var ARROW = '<svg class="arrow" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true" shape-rendering="crispEdges"><path d="M6 20L20 6M20 6H9M20 6V17" stroke="#000" stroke-width="3" fill="none" stroke-linecap="square"/></svg>';
-  var ABOUT_ART = '<svg viewBox="0 0 240 240" fill="none" aria-hidden="true" shape-rendering="crispEdges"><rect x="20" y="20" width="200" height="200" fill="#FF1493" stroke="#000" stroke-width="5"/><circle cx="120" cy="100" r="42" fill="#FFE135" stroke="#000" stroke-width="5"/><circle cx="104" cy="96" r="7" fill="#000"/><circle cx="136" cy="96" r="7" fill="#000"/><path d="M100 118h40" stroke="#000" stroke-width="5" stroke-linecap="square"/><rect x="60" y="160" width="120" height="40" fill="#00BFFF" stroke="#000" stroke-width="5"/></svg>';
-  var ERR_ICON = '<svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true" shape-rendering="crispEdges"><rect x="3" y="3" width="38" height="38" fill="#FFE135" stroke="#000" stroke-width="4"/><rect x="19" y="11" width="6" height="16" fill="#000"/><rect x="19" y="31" width="6" height="6" fill="#000"/></svg>';
-  var ERR_STAR = '<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" shape-rendering="crispEdges"><rect x="9" y="1" width="4" height="20" fill="#fff"/><rect x="1" y="9" width="20" height="4" fill="#fff"/><rect x="6" y="6" width="10" height="10" fill="#fff"/></svg>';
-  var ERR_DOT  = '<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" shape-rendering="crispEdges"><rect x="2" y="2" width="10" height="10" fill="#00BFFF" stroke="#000" stroke-width="2"/></svg>';
-
-  /* pixel sword (transparent background, crisp edges) */
-  var SWORD = '<img class="mark-img" src="assets/sword.svg" alt="" width="24" height="24" aria-hidden="true">';
 
   /* ---------- render functions ---------- */
   function renderNav(d){
@@ -170,7 +154,7 @@
       var chips = (it.chips||[]).map(function(ch){ return '<span class="chip">'+esc(ch)+'</span>'; }).join('');
       return ''+
       '<a href="#contact" class="proj proj--'+esc(it.color)+' '+esc(it.size)+' reveal" style="--d:'+delay+'s">'+
-        ARROW +
+        '<img class="arrow" src="assets/arrow.svg" width="26" height="26" alt="" aria-hidden="true">'+
         '<div>'+
           '<span class="ptag">'+esc(it.tag)+'</span>'+
           '<h3>'+esc(it.title)+'</h3>'+
@@ -246,8 +230,8 @@
     '<section class="contact" id="contact">'+
       '<div class="wrap">'+
         '<div class="contact-box tex-noise reveal">'+
-          '<svg class="float" style="top:18px;left:22px;" width="50" height="50" viewBox="0 0 50 50" aria-hidden="true" shape-rendering="crispEdges"><rect x="6" y="6" width="38" height="38" fill="#FF1493" stroke="#000" stroke-width="4"/></svg>'+
-          '<svg class="float" style="bottom:16px;right:24px;" width="46" height="46" viewBox="0 0 46 46" aria-hidden="true" shape-rendering="crispEdges"><path d="M23 4l5 13 14 1-11 9 4 14-12-8-12 8 4-14-11-9 14-1z" fill="#00BFFF" stroke="#000" stroke-width="4" stroke-linejoin="miter"/></svg>'+
+          '<img class="float" style="top:18px;left:22px;" src="assets/contact-rect.svg" width="50" height="50" alt="" aria-hidden="true">'+
+          '<img class="float" style="bottom:16px;right:24px;" src="assets/contact-star.svg" width="46" height="46" alt="" aria-hidden="true">'+
           '<h2>'+esc(c.title)+'</h2>'+
           '<p>'+rich(c.desc)+'</p>'+
           '<div class="contact-cards">'+
@@ -257,7 +241,7 @@
               '<span class="ctc-val">'+esc(c.email)+'</span>'+
             '</a>'+
             '<a href="'+esc(c.linkedin)+'" target="_blank" rel="noopener" class="ctc-card ctc--linkedin">'+
-              '<span class="ctc-icon">in</span>'+
+              '<img class="ctc-icon" src="assets/lin-icon.svg" width="28" height="28" alt="" aria-hidden="true">'+
               '<span class="ctc-label">LinkedIn</span>'+
               '<span class="ctc-val">Let\'s connect</span>'+
             '</a>'+
@@ -266,10 +250,10 @@
               '<span class="ctc-label">Resume</span>'+
               '<span class="ctc-val">Download PDF</span>'+
             '</a>'+
-            '<a href="'+esc(c.ctaHref)+'" class="ctc-card ctc--top">'+
-              '<span class="ctc-icon">↑</span>'+
-              '<span class="ctc-label">Top</span>'+
-              '<span class="ctc-val">Back to top</span>'+
+            '<a href="'+esc(c.github)+'" target="_blank" rel="noopener" class="ctc-card ctc--github">'+
+              '<img class="ctc-icon" src="assets/github-icon.svg" width="28" height="28" alt="" aria-hidden="true">'+
+              '<span class="ctc-label">GitHub</span>'+
+              '<span class="ctc-val">zizi1noob</span>'+
             '</a>'+
           '</div>'+
         '</div>'+
@@ -285,7 +269,7 @@
     '<div class="wrap">'+
       '<div class="foot-grid">'+
         '<div>'+
-          '<a href="#about" class="logo" aria-label="Candy House"><span class="mark" aria-hidden="true">'+SWORD+'</span></a>'+
+          '<a href="#about" class="logo" aria-label="Candy House">'+esc(d.site)+'</a>'+
           '<p style="color:var(--muted);margin-top:12px;max-width:260px;font-size:20px;">'+rich(f.tagline)+'</p>'+
         '</div>'+
         '<div><h3>'+esc(f.navTitle)+'</h3><ul>'+nav+'</ul></div>'+
@@ -347,104 +331,78 @@
       reveals.forEach(function(el){ io.observe(el); });
     }
 
-    // weapon arsenal — drop more SVGs into /assets and add an entry to cycle through them.
-    // clicking the sword advances to the next weapon (loops back to the first).
+    // weapon arsenal for the floating scroll-to-top button
     var WEAPONS = [
       { name: '斧', src: 'assets/axe.svg' },
       { name: '剑', src: 'assets/sword.svg' },
       { name: '刀', src: 'assets/blade.svg' },
       { name: '枪', src: 'assets/spear.svg' },
       { name: '棍', src: 'assets/staff.svg' },
-      
     ];
-    // preload all SVGs so switching is instant (no decode hitch on click)
     WEAPONS.forEach(function(w){ var _i = new Image(); _i.src = w.src; });
-    var weaponIndex = 0;
-    function applyWeapon(logo, nextIdx){
-      weaponIndex = ((nextIdx % WEAPONS.length) + WEAPONS.length) % WEAPONS.length;
-      var w = WEAPONS[weaponIndex];
-      var img = logo.querySelector('.mark-img');
-      if (img){
-        img.src = w.src;
-        img.alt = w.name;
-        // missing file -> fall back to the sword so we never show a broken icon
-        img.onerror = function(){ img.src = WEAPONS[0].src; };
-        // spin the new weapon in
-        img.classList.remove('swap');
-        void img.offsetWidth;
-        img.classList.add('swap');
+
+    var SPARK_COLORS = ['#00E5FF','#FF1493','#FFCB2E','#7CFF4F','#B388FF','#FB923C'];
+
+    // floating scroll-to-top button: click = back to top + cycle weapon + shake + sparks
+    var _ftBadge = document.getElementById('floatTop');
+    if (_ftBadge){
+      var _ftImg = _ftBadge.querySelector('img');
+      var _ftIdx  = 0;
+
+      function explode(el){
+        var N = 28;
+        for (var i = 0; i < N; i++){
+          var p = document.createElement('span');
+          p.className = 'spark';
+          var ang  = Math.random() * Math.PI * 2;
+          var dist = 14 + Math.random() * 28;
+          var size = 3 + Math.floor(Math.random() * 4);
+          p.style.setProperty('--tx', (Math.cos(ang) * dist).toFixed(1) + 'px');
+          p.style.setProperty('--ty', (Math.sin(ang) * dist).toFixed(1) + 'px');
+          p.style.setProperty('--sz', size + 'px');
+          p.style.background = SPARK_COLORS[i % SPARK_COLORS.length];
+          p.style.animationDelay = (Math.random() * 0.06).toFixed(3) + 's';
+          p.style.animationDuration = (0.4 + Math.random() * 0.3).toFixed(2) + 's';
+          el.appendChild(p);
+          p.addEventListener('animationend', function(){ p.remove(); });
+        }
+        var ring = document.createElement('span');
+        ring.className = 'spark-ring';
+        el.appendChild(ring);
+        ring.addEventListener('animationend', function(){ ring.remove(); });
       }
-      logo.setAttribute('aria-label', 'Ziyang House · 兵器：' + w.name);
-    }
 
-    // pixel explosion: spawn sparks around the sword on click
-    var SPARK_COLORS = ['#00E5FF', '#FF1493', '#FFCB2E', '#7CFF4F', '#B388FF', '#FB923C'];
-    function explode(mark){
-      var N = 30; // more particles = more satisfying impact
-      for (var i = 0; i < N; i++){
-        var p = document.createElement('span');
-        p.className = 'spark';
-        // full 360° radial burst for a richer explosion
-        var ang  = Math.random() * Math.PI * 2;
-        var dist = 18 + Math.random() * 34;
-        var size = 4 + Math.floor(Math.random() * 5); // 4–8px pixel chunks
-        p.style.setProperty('--tx', (Math.cos(ang) * dist).toFixed(1) + 'px');
-        p.style.setProperty('--ty', (Math.sin(ang) * dist).toFixed(1) + 'px');
-        p.style.setProperty('--sz', size + 'px');
-        p.style.background = SPARK_COLORS[i % SPARK_COLORS.length];
-        p.style.animationDelay = (Math.random() * 0.06).toFixed(3) + 's';
-        p.style.animationDuration = (0.45 + Math.random() * 0.35).toFixed(2) + 's';
-        mark.appendChild(p);
-        p.addEventListener('animationend', function(){ p.remove(); });
-      }
-      // quick shockwave ring for extra punch
-      var ring = document.createElement('span');
-      ring.className = 'spark-ring';
-      mark.appendChild(ring);
-      ring.addEventListener('animationend', function(){ ring.remove(); });
-    }
+      _ftBadge.addEventListener('click', function(){
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        _ftIdx = (_ftIdx + 1) % WEAPONS.length;
+        var w = WEAPONS[_ftIdx];
+        _ftImg.src = w.src;
+        _ftImg.alt = w.name;
+        _ftBadge.setAttribute('aria-label', 'Back to top · ' + w.name);
+        _ftImg.classList.remove('swap');
+        void _ftImg.offsetWidth;
+        _ftImg.classList.add('swap');
 
-    // pixel sword: hover loops, click resets position and starts a persistent loop
-    document.querySelectorAll('.logo').forEach(function(logo){
-      var img = logo.querySelector('.mark-img');
-      if (!img) return;
-      logo.addEventListener('mouseenter', function(){ img.classList.add('is-chop'); });
-      logo.addEventListener('mouseleave', function(){
-        if (!img.classList.contains('pinned')) img.classList.remove('is-chop');
-      });
-      logo.addEventListener('click', function(){
-        // reset position, swap weapon with a spin-in; chop loop resumes after the entrance
-        img.classList.remove('is-chop', 'pinned', 'swap');
-        void img.offsetWidth; // force reflow
-        applyWeapon(logo, weaponIndex + 1);
-        var mark = logo.querySelector('.mark');
-        if (mark) explode(mark);
+        // explosion sparks
+        explode(_ftBadge);
 
-        // resume the chop loop once the new weapon has spun in
-        img.addEventListener('animationend', function onIn(e){
-          if (e.animationName !== 'weaponIn') return;
-          img.removeEventListener('animationend', onIn);
-          img.classList.remove('swap');
-          img.classList.add('is-chop', 'pinned');
-        });
-
-        // impact: screen shake + sword flash
+        // screen shake
         document.body.classList.remove('shake');
         void document.body.offsetWidth;
         document.body.classList.add('shake');
         document.body.addEventListener('animationend', function(){
           document.body.classList.remove('shake');
         }, { once: true });
-        if (mark){
-          mark.classList.remove('flash');
-          void mark.offsetWidth;
-          mark.classList.add('flash');
-          mark.addEventListener('animationend', function(){
-            mark.classList.remove('flash');
-          }, { once: true });
-        }
+
+        // flash
+        _ftBadge.classList.remove('flash');
+        void _ftBadge.offsetWidth;
+        _ftBadge.classList.add('flash');
+        _ftBadge.addEventListener('animationend', function(){
+          _ftBadge.classList.remove('flash');
+        }, { once: true });
       });
-    });
+    }
   }
 
   /* ---------- boot ---------- */
@@ -466,10 +424,10 @@
     var b = document.getElementById('errorBanner');
     b.classList.add('show');
     b.innerHTML =
-      '<span class="err-ico" aria-hidden="true">'+ERR_ICON+'</span>'+
+      '<img class="err-ico" src="assets/err-icon.svg" width="44" height="44" alt="" aria-hidden="true">'+
       '<div class="err-body">'+msg+'</div>'+
-      '<span class="err-float err-float--1" aria-hidden="true">'+ERR_STAR+'</span>'+
-      '<span class="err-float err-float--2" aria-hidden="true">'+ERR_DOT+'</span>';
+      '<img class="err-float err-float--1" src="assets/err-star.svg" width="22" height="22" alt="" aria-hidden="true">'+
+      '<img class="err-float err-float--2" src="assets/err-dot.svg" width="14" height="14" alt="" aria-hidden="true">';
   }
 
   function fetchData(){
@@ -486,5 +444,8 @@
   fetchData();
 })();
 </script>
+<button class="float-top" id="floatTop" aria-label="Back to top">
+  <img src="assets/sword.svg" alt="" width="28" height="28" aria-hidden="true">
+</button>
 </body>
 </html>
