@@ -248,18 +248,12 @@ body.shake{ animation: shake .3s steps(4); }
   box-shadow:var(--shadow);transition:transform .09s ease,box-shadow .09s ease,border-color .09s ease;}
 .ctc-card:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow-lg);border-color:var(--cyan);}
 .ctc-card:active{transform:translate(4px,4px);box-shadow:0 0 0 transparent;}
-.ctc-icon{display:inline-block;font-size:28px;line-height:1;font-family:var(--font-head);}
+.ctc-icon{display:inline-block;image-rendering:pixelated;width:28px;height:28px;}
 .ctc-label{font-family:var(--font-head);font-size:.58rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
 .ctc-val{font-family:var(--font-body);font-size:16px;color:var(--text);word-break:break-all;text-align:center;}
-.ctc--email .ctc-icon{color:var(--pink);}
 .ctc--email:hover{border-color:var(--pink);}
-.ctc--linkedin .ctc-icon{color:var(--cyan);}
 .ctc--linkedin:hover{border-color:var(--cyan);}
-.ctc--resume .ctc-icon{color:var(--green);}
 .ctc--resume:hover{border-color:var(--green);}
-.ctc--top .ctc-icon{color:var(--yellow);}
-.ctc--top:hover{border-color:var(--yellow);}
-.ctc--github .ctc-icon{color:var(--purple);}
 .ctc--github:hover{border-color:var(--purple);}
 
 /* ---------- floating back-to-top button ---------- */
