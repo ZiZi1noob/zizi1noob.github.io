@@ -17,6 +17,7 @@
   --cyan:#22D3EE;
   --purple:#A78BFA;
   --lime:#BEF264;
+  --green:#7CFF4F;
   --orange:#FB923C;
   --yellow:#FDE047;
 
@@ -96,14 +97,6 @@ header.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:
 
 
 
-
-/* weapon spin-in entrance when switching weapons on the floating button */
-.float-top img.swap{ animation: weaponIn .42s steps(8); }
-@keyframes weaponIn{
-  0%   { transform: rotate(-200deg) scale(.35); }
-  60%  { transform: rotate(18deg)   scale(1.06); }
-  100% { transform: rotate(0)       scale(1); }
-}
 
 /* pixel explosion sparks (burst in all directions from the float button) */
 .spark{
@@ -295,11 +288,26 @@ body.shake{ animation: shake .3s steps(4); }
 .float-top img{
   display:block;image-rendering:pixelated;width:28px;height:28px;
   filter:drop-shadow(0 0 3px var(--cyan)) drop-shadow(0 0 1px var(--pink));
-  animation:ftIconGlow 2.4s ease-in-out infinite;
+  animation:ftIconGlow 2.4s ease-in-out infinite,
+             chop 1.3s ease-in-out infinite;
 }
 @keyframes ftIconGlow{
   0%,100%{filter:drop-shadow(0 0 2px var(--cyan)) drop-shadow(0 0 1px var(--pink));}
   50%    {filter:drop-shadow(0 0 7px var(--cyan)) drop-shadow(0 0 4px var(--pink));}
+}
+/* continuous weapon chopping motion (45° tilt) */
+@keyframes chop{
+  0%   { transform: rotate(0deg); }
+  28%  { transform: rotate(45deg); }
+  48%  { transform: rotate(45deg); }
+  76%  { transform: rotate(-4deg); }
+  84%  { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+/* snap back to upright on click */
+.float-top img.reset{
+  animation:ftIconGlow 2.4s ease-in-out infinite;
+  transform:rotate(0deg);
 }
 
 /* ============ Footer (dark) ============ */

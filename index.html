@@ -379,9 +379,10 @@
         _ftImg.src = w.src;
         _ftImg.alt = w.name;
         _ftBadge.setAttribute('aria-label', 'Back to top · ' + w.name);
-        _ftImg.classList.remove('swap');
-        void _ftImg.offsetWidth;
-        _ftImg.classList.add('swap');
+
+        // snap weapon upright, then resume chopping
+        _ftImg.classList.add('reset');
+        setTimeout(function(){ _ftImg.classList.remove('reset'); }, 420);
 
         // explosion sparks
         explode(_ftBadge);
