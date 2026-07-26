@@ -11,8 +11,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
+<!-- Version stamp – bump this number when you update style.css or data.json -->
+<script>const VERSION = '3';</script>
 <!-- Stylesheet (all visual styling lives in style.css) -->
-<link rel="stylesheet" href="style.css">
+<script>document.write('<link rel="stylesheet" href="style.css?v=' + VERSION + '">');</script>
 </head>
 <body>
 
@@ -428,7 +430,7 @@
   }
 
   function fetchData(){
-    fetch('./assets/data.json', { cache: 'no-store' })
+    fetch('./assets/data.json?v=' + VERSION, { cache: 'no-store' })
       .then(function(r){
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
