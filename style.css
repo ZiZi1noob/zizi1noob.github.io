@@ -226,8 +226,21 @@ body.shake{ animation: shake .3s steps(4); }
 .tl-card:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow-lg);border-color:var(--cyan);}
 .tl-card .yr{font-family:var(--font-body);font-size:20px;background:var(--text);color:var(--bg);padding:4px 10px;display:inline-block;margin-bottom:8px;}
 .tl-card h3{font-size:.8rem;line-height:1.5;}
+.tl-card .tl-place{font-size:19px;color:var(--pink);margin-bottom:6px;}
 .tl-card .co{font-weight:400;color:var(--cyan);font-size:21px;}
 .tl-card p{font-size:20px;margin-top:6px;color:var(--muted);}
+
+/* Timeline sub-projects */
+.tl-subs{margin-top:18px;border-top:2px dashed var(--line);padding-top:16px;}
+.tl-sub{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+.tl-sub:last-child{margin-bottom:0;}
+.tl-sub-dot{flex-shrink:0;margin-top:6px;width:10px;height:10px;border:2px solid var(--line);background:var(--cyan);}
+.tl-sub h4{font-family:var(--font-body);font-size:20px;margin-bottom:6px;}
+.tl-sub p{font-size:18px;margin:0;color:var(--muted);}
+.tl-bullets{list-style:none;padding:0;margin:0;}
+.tl-bullets li{font-size:18px;color:var(--muted);padding-left:20px;position:relative;margin-bottom:6px;line-height:1.6;}
+.tl-bullets li:last-child{margin-bottom:0;}
+.tl-bullets li::before{content:"—";position:absolute;left:0;color:var(--pink);}
 
 /* ============ About ============ */
 .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:center;}

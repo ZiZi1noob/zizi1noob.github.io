@@ -1,14 +1,32 @@
 {
   "site": "Ziyang ZHAN",
   "nav": [
-    { "label": "Home", "href": "#about" },
-    { "label": "Skills", "href": "#skills" },
-    { "label": "Work", "href": "#projects" },
-    { "label": "Journey", "href": "#timeline" },
-    { "label": "About", "href": "#about" },
-    { "label": "Contact", "href": "#contact" }
+    {
+      "label": "Home",
+      "href": "#about"
+    },
+    {
+      "label": "Skills",
+      "href": "#skills"
+    },
+    {
+      "label": "Work",
+      "href": "#projects"
+    },
+    {
+      "label": "Journey",
+      "href": "#timeline"
+    },
+    {
+      "label": "About",
+      "href": "#about"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    }
   ],
-    "about": {
+  "about": {
     "kicker": "// ABOUT",
     "title": "About Me",
     "paragraphs": [
@@ -16,10 +34,91 @@
       "Outside of code, I'm just a gamer who enjoys life, and believes in good vibes."
     ],
     "stats": [
-      { "num": "10+", "label": "Shipped" },
-      { "num": "3+", "label": "Years" },
-      { "num": "24/7", "label": "Coffee Powered" },
-      { "num": "∞", "label": "Still Stuck on Black Wukong" }
+      {
+        "num": "10+",
+        "label": "Shipped"
+      },
+      {
+        "num": "3+",
+        "label": "Years"
+      },
+      {
+        "num": "24/7",
+        "label": "Coffee Powered"
+      },
+      {
+        "num": "∞",
+        "label": "Still Stuck on Black Wukong"
+      }
+    ]
+  },
+  "timeline": {
+    "kicker": "// JOURNEY",
+    "title": "Experience",
+    "items": [
+      {
+        "year": "2023.11 — Now",
+        "role": "Full Stack Engineer",
+        "place": "Hong Kong SAR",
+        "company": "<a href='https://www.astri.org' target='_blank' rel='noopener'>Hong Kong Applied Science and Technology Research Institute</a>",
+        "desc": "Lead the design system, pushed Core Web Vitals across the board, and mentor a 4-person frontend squad.",
+        "projects": [
+          {
+            "proj": "LVLM-RPA System",
+            "desc": [
+              "Built a PySide6 screen recorder capturing video and user actions across Windows apps (Word, Excel, Chrome, Edge, Firefox) with timestamped event logs.",
+              "Integrated Playwright to align video frames with UI actions and DOM selectors, generating paired training data (frame + action sequence) for VLM fine-tuning."
+            ]
+          },
+          {
+            "proj": "OCR Recognition Platform",
+            "desc": [
+              "OCR Model (PyTorch + FastAPI): Fine-tuned TrOCR with a synthetic image data generator server (diverse fonts + noise injection) to improve real-world generalization without manual labelling",
+              "Frontend (Flutter): Built responsive Flutter app targeting Web + iOS with MVVM (Provider); implemented caching strategies and WebSocket for real-time OCR status updates.",
+              "Backend (Node.js + MongoDB): Designed RESTful APIs with chunked uploads for large PDFs, Bull queue for async OCR job scheduling, and worker pool for parallel page processing—achieving 1,000+ docs/hour with 99.9% uptime and 35% faster queries."
+            ]
+          },
+                {
+            "proj": "Comprehensive Federated Learning Platform",
+            "desc": [
+              "As the first project at the company, rapidly onboarded Flutter with MVVM architecture (Provider) and MongoDB to design and deliver a responsive model monitoring dashboard.",
+              "Designed and implemented unit and integration tests, utilizing dependency injections and mocking to verify page navigation and widget states.",
+              "Drafted the whitepaper: Federated Learning: <a href='https://www.astri.org/wp-content/uploads/2025/11/Whitepaper-on-Federated-Learning_Unlocking-Innovation-in-the-Insurance-Sector.pdf' target='_blank' rel='noopener'>Unlocking Innovation in the Insurance Sector</a>"
+            ]
+          }
+        ]
+      },
+      {
+        "year": "2022 — 2024",
+        "role": "Researcher",
+        "place": "Shanghai",
+        "company": "<a href='https://github.com' target='_blank' rel='noopener'>Forward Data Lab</a>",
+        "desc": "Shipped multiple 0-to-1 consumer products and a component library; averaged 55% first-paint improvement.",
+        "projects": [
+          {
+            "proj": "Real-time Data Viz Platform",
+            "desc": "Designed the streaming pipeline UI from scratch — adopted by 3 research teams internally."
+          },
+          {
+            "proj": "Component Library v1",
+            "desc": "Authored 40+ accessible React components; published internal docs with live playground."
+          }
+        ]
+      },
+      {
+        "year": "2020 — 2022",
+        "role": "Junior Frontend Dev",
+        "place": "Shenzhen",
+        "company": "Block Studio",
+        "desc": "Built internal admin systems, extracted reusable business components, and set the team a11y standard."
+      },
+      {
+        "year": "2019",
+        "role": "Frontend Intern",
+        "place": "Guangzhou",
+        "company": "Lemon Networks",
+        "desc": "Started with slicing and motion — and felt the joy of pixel alignment for the first time."
+      }
     ]
   },
   "skills": {
@@ -27,12 +126,36 @@
     "title": "My Skill Stack",
     "desc": "From semantic structure to performance tuning — every skill sharpened on real production builds. Bars fill automatically as you scroll.",
     "items": [
-      { "name": "HTML / CSS / JS", "pct": 95, "color": "c1" },
-      { "name": "React / Vue", "pct": 90, "color": "c2" },
-      { "name": "UI / Motion Design", "pct": 88, "color": "c3" },
-      { "name": "Performance", "pct": 85, "color": "c4" },
-      { "name": "Accessibility a11y", "pct": 80, "color": "c5" },
-      { "name": "Tooling / CI", "pct": 82, "color": "c1" }
+      {
+        "name": "HTML / CSS / JS",
+        "pct": 95,
+        "color": "c1"
+      },
+      {
+        "name": "React / Vue",
+        "pct": 90,
+        "color": "c2"
+      },
+      {
+        "name": "UI / Motion Design",
+        "pct": 88,
+        "color": "c3"
+      },
+      {
+        "name": "Performance",
+        "pct": 85,
+        "color": "c4"
+      },
+      {
+        "name": "Accessibility a11y",
+        "pct": 80,
+        "color": "c5"
+      },
+      {
+        "name": "Tooling / CI",
+        "pct": 82,
+        "color": "c1"
+      }
     ]
   },
   "projects": {
@@ -44,7 +167,11 @@
         "title": "Donut Commerce Rebuild",
         "tag": "ECOMMERCE",
         "desc": "Front-end architecture overhaul for a large store. 60% faster first paint, 80%+ component reuse.",
-        "chips": ["React", "PWA", "Perf"],
+        "chips": [
+          "React",
+          "PWA",
+          "Perf"
+        ],
         "color": "pink",
         "size": "wide"
       },
@@ -52,7 +179,10 @@
         "title": "Pixel Weather",
         "tag": "WEBAPP",
         "desc": "Retro pixel-art weather app.",
-        "chips": ["Vue", "SVG"],
+        "chips": [
+          "Vue",
+          "SVG"
+        ],
         "color": "blue",
         "size": ""
       },
@@ -60,7 +190,10 @@
         "title": "Neon Music Player",
         "tag": "PLAYER",
         "desc": "Web player with live audio spectrum.",
-        "chips": ["WebAudio", "Canvas"],
+        "chips": [
+          "WebAudio",
+          "Canvas"
+        ],
         "color": "purple",
         "size": ""
       },
@@ -68,7 +201,11 @@
         "title": "Doodle Notes",
         "tag": "PRODUCTIVITY",
         "desc": "Minimal note tool with handwriting and offline sync. Keyboard-accessible, zero dependencies.",
-        "chips": ["IndexedDB", "a11y", "Offline"],
+        "chips": [
+          "IndexedDB",
+          "a11y",
+          "Offline"
+        ],
         "color": "lime",
         "size": "tall"
       },
@@ -76,7 +213,9 @@
         "title": "Retro Game Hub",
         "tag": "GAME",
         "desc": "8-bit mini-game collection.",
-        "chips": ["Canvas"],
+        "chips": [
+          "Canvas"
+        ],
         "color": "orange",
         "size": ""
       },
@@ -84,43 +223,16 @@
         "title": "Candy Dashboard",
         "tag": "DASHBOARD",
         "desc": "Real-time viz wall with dark + high-contrast themes, WCAG AA compliant.",
-        "chips": ["D3", "Realtime", "Themes"],
+        "chips": [
+          "D3",
+          "Realtime",
+          "Themes"
+        ],
         "color": "yellow",
         "size": "wide"
       }
     ]
   },
-  "timeline": {
-    "kicker": "// JOURNEY",
-    "title": "Experience",
-    "items": [
-      {
-        "year": "2024 — Now",
-        "role": "Senior Frontend Engineer",
-        "company": "Candy Tech",
-        "desc": "Lead the design system, pushed Core Web Vitals across the board, and mentor a 4-person frontend squad."
-      },
-      {
-        "year": "2022 — 2024",
-        "role": "Frontend Engineer",
-        "company": "Rainbow Interactive",
-        "desc": "Shipped multiple 0-to-1 consumer products and a component library; averaged 55% first-paint improvement."
-      },
-      {
-        "year": "2020 — 2022",
-        "role": "Junior Frontend Dev",
-        "company": "Block Studio",
-        "desc": "Built internal admin systems, extracted reusable business components, and set the team a11y standard."
-      },
-      {
-        "year": "2019",
-        "role": "Frontend Intern",
-        "company": "Lemon Networks",
-        "desc": "Started with slicing and motion — and felt the joy of pixel alignment for the first time."
-      }
-    ]
-  },
-
   "contact": {
     "title": "Wanna make something sweet? 🍬",
     "desc": "Got a project, a role, or just want to say hi? Drop me a line — I reply within 48 hours.",
@@ -132,17 +244,41 @@
     "tagline": "Building warm products with code and color. © 2026 Candy.",
     "navTitle": "Navigate",
     "nav": [
-      { "label": "Home", "href": "#about" },
-      { "label": "Skills", "href": "#skills" },
-      { "label": "Work", "href": "#projects" },
-      { "label": "Journey", "href": "#timeline" }
+      {
+        "label": "Home",
+        "href": "#about"
+      },
+      {
+        "label": "Skills",
+        "href": "#skills"
+      },
+      {
+        "label": "Work",
+        "href": "#projects"
+      },
+      {
+        "label": "Journey",
+        "href": "#timeline"
+      }
     ],
     "socialTitle": "Social",
     "social": [
-      { "label": "GitHub", "href": "#contact" },
-      { "label": "Twitter", "href": "#contact" },
-      { "label": "Email", "href": "mailto:hi@candyhouse.dev" },
-      { "label": "Dribbble", "href": "#contact" }
+      {
+        "label": "GitHub",
+        "href": "#contact"
+      },
+      {
+        "label": "Twitter",
+        "href": "#contact"
+      },
+      {
+        "label": "Email",
+        "href": "mailto:hi@candyhouse.dev"
+      },
+      {
+        "label": "Dribbble",
+        "href": "#contact"
+      }
     ],
     "slogan": "\"Pixel-perfect, happily shipped.\"",
     "bottomLeft": "BUILT WITH ♥ & PURE HTML/CSS/JS",

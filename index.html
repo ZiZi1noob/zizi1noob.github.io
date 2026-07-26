@@ -39,9 +39,10 @@
   <!-- Sections are rendered from data.json by app.js logic below.
        About Me now lives at the top (replacing the old Hero). -->
   <div id="aboutMount"></div>
+  <div id="timelineMount"></div>
   <div id="skillsMount"></div>
   <div id="projectsMount"></div>
-  <div id="timelineMount"></div>
+
   <div id="contactMount"></div>
 </main>
 
@@ -58,6 +59,21 @@
     return String(s == null ? '' : s)
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
       .replace(/"/g,'&quot;');
+  }
+  // rich text — escapes everything except <a> hyperlinks, so you can write
+  // <a href='...' target='_blank'>text</a> directly in data.json
+  function rich(s){
+    var str = String(s == null ? '' : s);
+    var links = [];
+    var safe = str.replace(/<a\b[^>]*>[\s\S]*?<\/a>/gi, function(m){
+      links.push(m);
+      return '\x00A'+(links.length-1)+'\x00';
+    });
+    safe = safe.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    safe = safe.replace(/\x00A(\d+)\x00/g, function(_, idx){
+      return links[parseInt(idx)];
+    });
+    return safe;
   }
   // safe SVG passthrough for our own static decorative markup
   function svg(inner){ return inner; }
@@ -83,7 +99,7 @@
   }
     function renderAbout(d){
     var a = d.about;
-    var paras = a.paragraphs.map(function(p){ return '<p>'+esc(p)+'</p>'; }).join('');
+    var paras = a.paragraphs.map(function(p){ return '<p>'+rich(p)+'</p>'; }).join('');
     var stats = a.stats.map(function(s){
       return '<div class="s"><div class="n">'+esc(s.num)+'</div><div class="t">'+esc(s.label)+'</div></div>';
     }).join('');
@@ -135,7 +151,7 @@
         '<div>'+
           '<span class="ptag">'+esc(it.tag)+'</span>'+
           '<h3>'+esc(it.title)+'</h3>'+
-          '<p>'+esc(it.desc)+'</p>'+
+          '<p>'+rich(it.desc)+'</p>'+
         '</div>'+
         '<div class="chips">'+chips+'</div>'+
       '</a>';
@@ -157,14 +173,32 @@
     var t = d.timeline;
     var items = t.items.map(function(it, i){
       var delay = (i*0.08).toFixed(2);
+      var projectsHtml = '';
+      if (it.projects && it.projects.length){
+        projectsHtml = '<div class="tl-subs">' + it.projects.map(function(sub){
+          var descHtml = Array.isArray(sub.desc)
+            ? '<ul class="tl-bullets">' + sub.desc.map(function(d){ return '<li>'+rich(d)+'</li>'; }).join('') + '</ul>'
+            : '<p>'+rich(sub.desc)+'</p>';
+          return ''+
+          '<div class="tl-sub">'+
+            '<span class="tl-sub-dot" aria-hidden="true"></span>'+
+            '<div>'+
+              '<h4>'+rich(sub.proj)+'</h4>'+
+              descHtml+
+            '</div>'+
+          '</div>';
+        }).join('') + '</div>';
+      }
       return ''+
       '<div class="tl-item reveal" style="--d:'+delay+'s">'+
         '<span class="tl-dot" aria-hidden="true"></span>'+
         '<div class="tl-card">'+
           '<span class="yr">'+esc(it.year)+'</span>'+
-          '<h3>'+esc(it.role)+'</h3>'+
-          '<div class="co">'+esc(it.company)+'</div>'+
-          '<p>'+esc(it.desc)+'</p>'+
+          '<h3>'+rich(it.role)+'</h3>'+
+          (it.place ? '<div class="tl-place">'+rich(it.place)+'</div>' : '')+
+          '<div class="co">'+rich(it.company)+'</div>'+
+          '<p>'+rich(it.desc)+'</p>'+
+          projectsHtml+
         '</div>'+
       '</div>';
     }).join('');
@@ -191,7 +225,7 @@
           '<svg class="float" style="top:18px;left:22px;" width="50" height="50" viewBox="0 0 50 50" aria-hidden="true" shape-rendering="crispEdges"><rect x="6" y="6" width="38" height="38" fill="#FF1493" stroke="#000" stroke-width="4"/></svg>'+
           '<svg class="float" style="bottom:16px;right:24px;" width="46" height="46" viewBox="0 0 46 46" aria-hidden="true" shape-rendering="crispEdges"><path d="M23 4l5 13 14 1-11 9 4 14-12-8-12 8 4-14-11-9 14-1z" fill="#00BFFF" stroke="#000" stroke-width="4" stroke-linejoin="miter"/></svg>'+
           '<h2>'+esc(c.title)+'</h2>'+
-          '<p>'+esc(c.desc)+'</p>'+
+          '<p>'+rich(c.desc)+'</p>'+
           '<div class="contact-actions">'+
             '<a href="mailto:'+esc(c.email)+'" class="btn btn--pink">✉ '+esc(c.email)+'</a>'+
             '<a href="'+esc(c.ctaHref)+'" class="btn btn--blue">'+esc(c.cta)+'</a>'+
@@ -210,11 +244,11 @@
       '<div class="foot-grid">'+
         '<div>'+
           '<a href="#about" class="logo" aria-label="Candy House"><span class="mark" aria-hidden="true">'+SWORD+'</span></a>'+
-          '<p style="color:var(--muted);margin-top:12px;max-width:260px;font-size:20px;">'+esc(f.tagline)+'</p>'+
+          '<p style="color:var(--muted);margin-top:12px;max-width:260px;font-size:20px;">'+rich(f.tagline)+'</p>'+
         '</div>'+
         '<div><h3>'+esc(f.navTitle)+'</h3><ul>'+nav+'</ul></div>'+
         '<div><h3>'+esc(f.socialTitle)+'</h3><ul>'+social+'</ul></div>'+
-        '<div><h3>Slogan</h3><p class="mono" style="color:var(--lime);font-size:22px;">'+esc(f.slogan)+'</p></div>'+
+        '<div><h3>Slogan</h3><p class="mono" style="color:var(--lime);font-size:22px;">'+rich(f.slogan)+'</p></div>'+
       '</div>'+
       '<div class="foot-bottom">'+
         '<span>'+esc(f.bottomLeft)+'</span>'+
@@ -378,7 +412,6 @@
     document.getElementById('skillsMount').innerHTML = renderSkills(d);
     document.getElementById('projectsMount').innerHTML = renderProjects(d);
     document.getElementById('timelineMount').innerHTML = renderTimeline(d);
-    document.getElementById('aboutMount').innerHTML = renderAbout(d);
     document.getElementById('contactMount').innerHTML = renderContact(d);
     document.getElementById('footerMount').innerHTML = renderFooter(d);
     initInteractions(d);
