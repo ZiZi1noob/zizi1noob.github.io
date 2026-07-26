@@ -11,10 +11,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
-<!-- Version stamp – bump this number when you update style.css or data.json -->
-<script>const VERSION = '3';</script>
 <!-- Stylesheet (all visual styling lives in style.css) -->
-<script>document.write('<link rel="stylesheet" href="style.css?v=' + VERSION + '">');</script>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -73,6 +71,29 @@
     });
     safe = safe.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     safe = safe.replace(/\x00A(\d+)\x00/g, function(_, idx){
+      return links[parseInt(idx)];
+    });
+    return safe;
+  }
+  // rich() + tech-stack highlighting (preserves both <a> and <span class="hl">)
+  function richWithHL(s, highlights){
+    var str = String(s == null ? '' : s);
+    if (highlights && highlights.length){
+      // sort longest first so e.g. "Federated Learning" beats "Learning"
+      var sorted = highlights.slice().sort(function(a,b){ return b.length - a.length; });
+      sorted.forEach(function(h){
+        var escaped = h.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        var re = new RegExp('\\b(' + escaped + ')\\b', 'gi');
+        str = str.replace(re, '<span class="hl">$1</span>');
+      });
+    }
+    var links = [];
+    var safe = str.replace(/<(a|span)\b[^>]*>[\s\S]*?<\/\1>/gi, function(m){
+      links.push(m);
+      return '\x00T'+(links.length-1)+'\x00';
+    });
+    safe = safe.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    safe = safe.replace(/\x00T(\d+)\x00/g, function(_, idx){
       return links[parseInt(idx)];
     });
     return safe;
@@ -173,14 +194,15 @@
 
   function renderTimeline(d){
     var t = d.timeline;
+    var hl = t.highlights || [];
     var items = t.items.map(function(it, i){
       var delay = (i*0.08).toFixed(2);
       var projectsHtml = '';
       if (it.projects && it.projects.length){
         projectsHtml = '<div class="tl-subs">' + it.projects.map(function(sub){
           var descHtml = Array.isArray(sub.desc)
-            ? '<ul class="tl-bullets">' + sub.desc.map(function(d){ return '<li>'+rich(d)+'</li>'; }).join('') + '</ul>'
-            : '<p>'+rich(sub.desc)+'</p>';
+            ? '<ul class="tl-bullets">' + sub.desc.map(function(d){ return '<li>'+richWithHL(d, hl)+'</li>'; }).join('') + '</ul>'
+            : '<p>'+richWithHL(sub.desc, hl)+'</p>';
           return ''+
           '<div class="tl-sub">'+
             '<span class="tl-sub-dot" aria-hidden="true"></span>'+
@@ -199,7 +221,7 @@
           '<h3>'+rich(it.role)+'</h3>'+
           (it.place ? '<div class="tl-place">'+rich(it.place)+'</div>' : '')+
           '<div class="co">'+rich(it.company)+'</div>'+
-          '<p>'+rich(it.desc)+'</p>'+
+          '<p>'+richWithHL(it.desc, hl)+'</p>'+
           projectsHtml+
         '</div>'+
       '</div>';
@@ -228,9 +250,27 @@
           '<svg class="float" style="bottom:16px;right:24px;" width="46" height="46" viewBox="0 0 46 46" aria-hidden="true" shape-rendering="crispEdges"><path d="M23 4l5 13 14 1-11 9 4 14-12-8-12 8 4-14-11-9 14-1z" fill="#00BFFF" stroke="#000" stroke-width="4" stroke-linejoin="miter"/></svg>'+
           '<h2>'+esc(c.title)+'</h2>'+
           '<p>'+rich(c.desc)+'</p>'+
-          '<div class="contact-actions">'+
-            '<a href="mailto:'+esc(c.email)+'" class="btn btn--pink">✉ '+esc(c.email)+'</a>'+
-            '<a href="'+esc(c.ctaHref)+'" class="btn btn--blue">'+esc(c.cta)+'</a>'+
+          '<div class="contact-cards">'+
+            '<a href="mailto:'+esc(c.email)+'" class="ctc-card ctc--email">'+
+              '<span class="ctc-icon">✉</span>'+
+              '<span class="ctc-label">Email</span>'+
+              '<span class="ctc-val">'+esc(c.email)+'</span>'+
+            '</a>'+
+            '<a href="'+esc(c.linkedin)+'" target="_blank" rel="noopener" class="ctc-card ctc--linkedin">'+
+              '<span class="ctc-icon">in</span>'+
+              '<span class="ctc-label">LinkedIn</span>'+
+              '<span class="ctc-val">Let\'s connect</span>'+
+            '</a>'+
+            '<a href="'+esc(c.resume)+'" target="_blank" download class="ctc-card ctc--resume">'+
+              '<span class="ctc-icon">↡</span>'+
+              '<span class="ctc-label">Resume</span>'+
+              '<span class="ctc-val">Download PDF</span>'+
+            '</a>'+
+            '<a href="'+esc(c.ctaHref)+'" class="ctc-card ctc--top">'+
+              '<span class="ctc-icon">↑</span>'+
+              '<span class="ctc-label">Top</span>'+
+              '<span class="ctc-val">Back to top</span>'+
+            '</a>'+
           '</div>'+
         '</div>'+
       '</div>'+
@@ -409,6 +449,9 @@
 
   /* ---------- boot ---------- */
   function boot(d){
+    // bust CSS cache using version from data.json
+    var ss = document.querySelector('link[href="style.css"]');
+    if (ss && d.version) ss.href = 'style.css?v=' + d.version;
     renderNav(d);
     document.getElementById('aboutMount').innerHTML = renderAbout(d);
     document.getElementById('skillsMount').innerHTML = renderSkills(d);
@@ -430,7 +473,7 @@
   }
 
   function fetchData(){
-    fetch('./assets/data.json?v=' + VERSION, { cache: 'no-store' })
+    fetch('./assets/data.json', { cache: 'no-store' })
       .then(function(r){
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();

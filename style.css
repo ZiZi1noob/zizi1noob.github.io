@@ -202,6 +202,7 @@ body.shake{ animation: shake .3s steps(4); }
 .proj p{font-size:20px;color:var(--muted);}
 .proj .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
 .proj .chip{font-family:var(--font-body);font-size:18px;border:2px solid var(--line);padding:3px 8px;background:var(--panel);color:var(--text);}
+.hl{font-family:var(--font-body);border:2px solid var(--line);padding:1px 6px;background:var(--panel);color:var(--cyan);white-space:nowrap;}
 .proj.wide{grid-column:span 2;}
 .proj.tall{grid-row:span 2;}
 .proj--pink{background:var(--pink-bg);}
@@ -260,6 +261,24 @@ body.shake{ animation: shake .3s steps(4); }
 .contact-box h2{font-size:clamp(1rem,3vw,1.7rem);line-height:1.4;}
 .contact-box p{margin:16px auto 28px;max-width:480px;color:var(--muted);font-size:22px;}
 .contact-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.contact-cards{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+.ctc-card{display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:24px 28px 22px;border:var(--border-thick);background:var(--panel);
+  text-decoration:none;color:var(--text);min-width:180px;
+  box-shadow:var(--shadow);transition:transform .09s ease,box-shadow .09s ease,border-color .09s ease;}
+.ctc-card:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow-lg);border-color:var(--cyan);}
+.ctc-card:active{transform:translate(4px,4px);box-shadow:0 0 0 transparent;}
+.ctc-icon{font-size:28px;line-height:1;font-family:var(--font-head);}
+.ctc-label{font-family:var(--font-head);font-size:.58rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
+.ctc-val{font-family:var(--font-body);font-size:16px;color:var(--text);word-break:break-all;text-align:center;}
+.ctc--email .ctc-icon{color:var(--pink);}
+.ctc--email:hover{border-color:var(--pink);}
+.ctc--linkedin .ctc-icon{color:var(--cyan);}
+.ctc--linkedin:hover{border-color:var(--cyan);}
+.ctc--resume .ctc-icon{color:var(--green);}
+.ctc--resume:hover{border-color:var(--green);}
+.ctc--top .ctc-icon{color:var(--yellow);}
+.ctc--top:hover{border-color:var(--yellow);}
 
 /* ============ Footer (dark) ============ */
 footer.foot{background:var(--bg);color:var(--text);padding:54px 0 34px;border-top:var(--border-thick);}
