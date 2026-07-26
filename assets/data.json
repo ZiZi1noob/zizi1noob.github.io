@@ -62,17 +62,20 @@
       "VLM",
       "PyTorch",
       "FastAPI",
-      "TrOCR",
+      "image data generator",
       "Flutter",
-      "MVVM",
+      "MVVM architecture",
       "WebSocket",
       "Node.js",
+      "RESTful APIs",
       "MongoDB",
+      "JavaScript",
       "Federated Learning",
       "CNN",
       "Bi-LSTM",
       "D3.js",
-     
+      "24/7 scraping engine",
+      "10T",
       "AWS",
       "Chrome Extension",
       "NER",
@@ -97,14 +100,14 @@
             "proj": "OCR Recognition Platform",
             "desc": [
               "OCR Model (PyTorch + FastAPI): Fine-tuned TrOCR with a synthetic image data generator server (diverse fonts + noise injection) to improve real-world generalization without manual labelling",
-              "Frontend (Flutter): Built responsive Flutter app targeting Web + iOS with MVVM (Provider); implemented caching strategies and WebSocket for real-time OCR status updates.",
+              "Frontend: Built responsive Flutter app targeting Web + iOS with MVVM architecture; implemented caching strategies and WebSocket for real-time OCR status updates.",
               "Backend (Node.js + MongoDB): Designed RESTful APIs with chunked uploads for large PDFs, Bull queue for async OCR job scheduling, and worker pool for parallel page processing—achieving 1,000+ docs/hour with 99.9% uptime and 35% faster queries."
             ]
           },
           {
             "proj": "Comprehensive Federated Learning Platform",
             "desc": [
-              "As the first project at the company, rapidly onboarded Flutter with MVVM architecture (Provider) and MongoDB to design and deliver a responsive model monitoring dashboard.",
+              "As the first project at the company, rapidly onboarded Flutter with MVVM architecture and MongoDB to design and deliver a responsive model monitoring dashboard.",
               "Designed and implemented unit and integration tests, utilizing dependency injections and mocking to verify page navigation and widget states.",
               "Drafted the whitepaper: Federated Learning: <a href='https://www.astri.org/wp-content/uploads/2025/11/Whitepaper-on-Federated-Learning_Unlocking-Innovation-in-the-Insurance-Sector.pdf' target='_blank' rel='noopener'>Unlocking Innovation in the Insurance Sector</a>"
             ]
@@ -119,11 +122,11 @@
         "desc": "",
         "projects": [
           {
-            "proj": "Social Listening Platform in Greater Bay Area --<a href='https://www.polyu.edu.hk/shtm/news-and-events/news/2023/20230428_public-seminar-tourometer' target='_blank' rel='noopener'>TOURMETER</a>",
+            "proj": "Social Listening Platform in Greater Bay Area -- <a href='https://www.polyu.edu.hk/shtm/news-and-events/news/2023/20230428_public-seminar-tourometer' target='_blank' rel='noopener'>TOURMETER</a>",
             "desc": [
               "Model Development: Built SOTA multi-lingual (Simplified/Traditional Chinese, Japanese, Korean, and English) sentiment models (CNN, Bi-LSTM) with >90% accuracy and a topic-relevance classifier for tourism relevance",
               "Real-time Data Scraping System: Built a 24/7 scraping engine collecting >10T real-time data from major social media/news platforms (Weibo, Twitter, Facebook, etc.) with anti-blocking mechanisms including dynamic IP rotation and human behavior simulation",
-              "Product Deployment: Created an interac tive vanilla JS + D3.js dashboard delivering real-time tourism insights and policy recommendations to government stakeholders"
+              "Product Deployment: Created an interactive vanilla JavaScript + D3.js dashboard delivering real-time tourism insights and policy recommendations to government stakeholders"
             ]
           }
         ]
