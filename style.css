@@ -230,7 +230,7 @@ body.shake{ animation: shake .3s steps(4); }
 
 /* ============ Contact CTA ============ */
 .contact{background:var(--yellow-bg);border-top:var(--border-thick);}
-.contact-box{border:var(--border-thick);background:var(--bg);box-shadow:var(--shadow-lg);border-radius:0;padding:46px;text-align:center;position:relative;overflow:hidden;}
+.contact-box{border:var(--border-thick);background:var(--bg);box-shadow:var(--shadow-lg);border-radius:0;padding:46px 46px 90px;text-align:center;position:relative;overflow:hidden;}
 .contact-box h2{font-size:clamp(1rem,3vw,1.7rem);line-height:1.4;}
 .contact-box p{margin:16px auto 28px;max-width:480px;color:var(--muted);font-size:22px;}
 .contact-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
@@ -248,6 +248,48 @@ body.shake{ animation: shake .3s steps(4); }
 .ctc--linkedin:hover{border-color:var(--cyan);}
 .ctc--resume:hover{border-color:var(--green);}
 .ctc--github:hover{border-color:var(--purple);}
+
+/* ---------- Pixel Mario & Mushroom ---------- */
+/* Mario stands at bottom centre, idle bounce */
+.mario{
+  position:absolute;bottom:0;left:50%;margin-left:-22px;
+  image-rendering:pixelated;pointer-events:none;z-index:2;
+  animation:marioIdle 1.6s ease-in-out infinite;
+}
+@keyframes marioIdle{
+  0%,100%{transform:translateY(0);}
+  50%    {transform:translateY(-5px);}
+}
+/* Mario jumps up to "hit the block" */
+.mario.jump{
+  animation:marioJump .85s ease-in-out;
+}
+@keyframes marioJump{
+  0%   { transform:translateY(0) scaleY(1) scaleX(1); }
+  10%  { transform:translateY(4px) scaleY(.65) scaleX(1.15); }   /* squash */
+  28%  { transform:translateY(-170px) scaleY(1.15) scaleX(.9); } /* stretch up */
+  48%  { transform:translateY(-170px) scaleY(1) scaleX(1); }     /* peak — BONK */
+  65%  { transform:translateY(0) scaleY(1) scaleX(1); }           /* land */
+  75%  { transform:translateY(2px) scaleY(.8) scaleX(1.1); }      /* squash land */
+  100% { transform:translateY(0) scaleY(1) scaleX(1); }
+}
+/* Mushroom: hidden above, drops when Mario bonks the block */
+.mushroom{
+  position:absolute;top:-60px;left:50%;margin-left:-20px;
+  image-rendering:pixelated;pointer-events:none;z-index:10;
+  opacity:0;
+}
+.mushroom.go{
+  animation:mushroomFall 1.5s ease-in-out forwards;
+}
+@keyframes mushroomFall{
+  0%   { top:-60px; opacity:0; transform:scale(.3) rotate(-12deg); }
+  8%   { opacity:1; }
+  25%  { top:38px; opacity:1; transform:scale(1.2) rotate(0deg); }  /* bounce land */
+  35%  { top:38px; opacity:1; transform:scale(1) rotate(0deg); }
+  72%  { top:38px; left:50%; opacity:1; transform:scale(.9) rotate(4deg); }
+  100% { top:38px; left:calc(50% + 320px); opacity:0; transform:scale(.35) rotate(22deg); }
+}
 
 /* ---------- floating back-to-top button ---------- */
 .float-top{

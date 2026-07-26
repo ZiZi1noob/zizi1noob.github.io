@@ -230,8 +230,8 @@
     '<section class="contact" id="contact">'+
       '<div class="wrap">'+
         '<div class="contact-box tex-noise reveal">'+
-          '<img class="float" style="top:18px;left:22px;" src="assets/contact-rect.svg" width="50" height="50" alt="" aria-hidden="true">'+
-          '<img class="float" style="bottom:16px;right:24px;" src="assets/contact-star.svg" width="46" height="46" alt="" aria-hidden="true">'+
+          '<img class="mario" id="mario" src="assets/mario.svg" width="45" height="60" alt="Pixel Mario" aria-hidden="true">'+
+          '<img class="mushroom" id="mushroom" src="assets/mushroom.svg" width="40" height="40" alt="" aria-hidden="true">'+
           '<h2>'+esc(c.title)+'</h2>'+
           '<p>'+rich(c.desc)+'</p>'+
           '<div class="contact-cards">'+
@@ -333,15 +333,39 @@
 
     // weapon arsenal for the floating scroll-to-top button
     var WEAPONS = [
-      { name: '斧', src: 'assets/axe.svg' },
-      { name: '剑', src: 'assets/sword.svg' },
-      { name: '刀', src: 'assets/blade.svg' },
-      { name: '枪', src: 'assets/spear.svg' },
-      { name: '棍', src: 'assets/staff.svg' },
+      { name: 'axe', src: 'assets/weapon-axe.svg' },
+      { name: 'sword', src: 'assets/weapon-sword.svg' },
+      { name: 'blade', src: 'assets/weapon-blade.svg' },
+      { name: 'spear', src: 'assets/weapon-spear.svg' },
+      { name: 'staff', src: 'assets/weapon-staff.svg' },
     ];
     WEAPONS.forEach(function(w){ var _i = new Image(); _i.src = w.src; });
 
     var SPARK_COLORS = ['#00E5FF','#FF1493','#FFCB2E','#7CFF4F','#B388FF','#FB923C'];
+
+    // Mario jump → mushroom drop on contact card click
+    var _mario = document.getElementById('mario');
+    var _mushroom = document.getElementById('mushroom');
+    var _contactCards = document.querySelector('.contact-cards');
+    if (_mario && _mushroom && _contactCards){
+      _contactCards.addEventListener('click', function(){
+        // Mario jumps up (hits the block)
+        _mario.classList.remove('jump');
+        void _mario.offsetWidth;
+        _mario.classList.add('jump');
+
+        // Mushroom drops after Mario reaches peak (~.35s)
+        setTimeout(function(){
+          _mushroom.classList.remove('go');
+          void _mushroom.offsetWidth;
+          _mushroom.classList.add('go');
+        }, 350);
+
+        _mushroom.addEventListener('animationend', function(){
+          _mushroom.classList.remove('go');
+        }, { once: true });
+      });
+    }
 
     // floating scroll-to-top button: click = back to top + cycle weapon + shake + sparks
     var _ftBadge = document.getElementById('floatTop');
@@ -446,7 +470,7 @@
 })();
 </script>
 <button class="float-top" id="floatTop" aria-label="Back to top">
-  <img src="assets/sword.svg" alt="" width="28" height="28" aria-hidden="true">
+  <img src="assets/weapon-sword.svg" alt="" width="28" height="28" aria-hidden="true">
 </button>
 </body>
 </html>
