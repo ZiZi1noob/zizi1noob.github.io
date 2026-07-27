@@ -165,26 +165,7 @@ body.shake{ animation: shake .3s steps(4); }
 .bar-fill.c4{background:var(--orange);}
 .bar-fill.c5{background:var(--lime);}
 
-/* ============ Projects Bento grid ============ */
-.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(170px,auto);gap:20px;}
-.proj{border:var(--border);box-shadow:var(--shadow);border-radius:0;padding:24px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:var(--text);position:relative;overflow:hidden;transition:transform .13s ease,box-shadow .13s ease,border-color .13s ease;}
-.proj:hover{transform:translate(-4px,-4px);box-shadow:var(--shadow-lg);border-color:var(--cyan);}
-.proj:active{transform:translate(6px,6px);box-shadow:0 0 0 transparent;}
-.proj .ptag{font-family:var(--font-head);font-size:.58rem;color:var(--muted);}
-.proj h3{font-size:.82rem;margin:10px 0 8px;line-height:1.5;}
-.proj p{font-size:20px;color:var(--muted);}
-.proj .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
-.proj .chip{font-family:var(--font-body);font-size:18px;border:2px solid var(--line);padding:3px 8px;background:var(--panel);color:var(--text);}
 .hl{font-family:var(--font-body);border:2px solid var(--line);padding:1px 6px;background:var(--panel);color:var(--cyan);white-space:nowrap;}
-.proj.wide{grid-column:span 2;}
-.proj.tall{grid-row:span 2;}
-.proj--pink{background:var(--pink-bg);}
-.proj--blue{background:var(--cyan-bg);}
-.proj--purple{background:var(--purple-bg);}
-.proj--lime{background:var(--lime-bg);}
-.proj--orange{background:var(--orange-bg);}
-.proj--yellow{background:var(--yellow-bg);}
-.proj .arrow{position:absolute;top:18px;right:18px;}
 
 /* ============ Timeline ============ */
 .timeline{background:var(--cyan-bg);border-top:var(--border);border-bottom:var(--border);}
@@ -218,9 +199,9 @@ body.shake{ animation: shake .3s steps(4); }
 
 /* ============ About ============ */
 .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:center;}
-.about-portrait{border:var(--border-thick);background:var(--lime-bg);box-shadow:var(--shadow-lg);border-radius:0;padding:24px;display:grid;place-items:center;max-width:300px;}
+.about-portrait{border:var(--border-thick);background:var(--lime-bg);box-shadow:var(--shadow-lg);border-radius:0;display:grid;place-items:center;max-width:300px;}
 .about-portrait svg{width:100%;max-width:240px;height:auto;image-rendering:pixelated;}
-.about-photo{width:100%;max-width:240px;height:auto;aspect-ratio:1/1;object-fit:cover;image-rendering:pixelated;border:3px solid var(--line);}
+.about-photo{width:100%;max-width:240px;height:auto;aspect-ratio:1/1;object-fit:cover;image-rendering:pixelated;}
 .about h2{font-size:clamp(1rem,3vw,1.6rem);line-height:1.4;}
 .about p{margin:18px 0;color:var(--muted);font-size:21px;}
 .about-stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px;}
@@ -230,14 +211,14 @@ body.shake{ animation: shake .3s steps(4); }
 
 /* ============ Contact CTA ============ */
 .contact{background:var(--yellow-bg);border-top:var(--border-thick);}
-.contact-box{border:var(--border-thick);background:var(--bg);box-shadow:var(--shadow-lg);border-radius:0;padding:46px 46px 90px;text-align:center;position:relative;overflow:hidden;}
+.contact-box{border:var(--border-thick);background:var(--bg);box-shadow:var(--shadow-lg);border-radius:0;padding:46px 46px 210px;text-align:center;position:relative;overflow:hidden;}
 .contact-box h2{font-size:clamp(1rem,3vw,1.7rem);line-height:1.4;}
 .contact-box p{margin:16px auto 28px;max-width:480px;color:var(--muted);font-size:22px;}
 .contact-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
 .contact-cards{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
 .ctc-card{display:flex;flex-direction:column;align-items:center;gap:8px;
   padding:24px 28px 22px;border:var(--border-thick);background:var(--panel);
-  text-decoration:none;color:var(--text);min-width:180px;
+  text-decoration:none;color:var(--text);min-width:180px;cursor:pointer;
   box-shadow:var(--shadow);transition:transform .09s ease,box-shadow .09s ease,border-color .09s ease;}
 .ctc-card:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow-lg);border-color:var(--cyan);}
 .ctc-card:active{transform:translate(4px,4px);box-shadow:0 0 0 transparent;}
@@ -254,6 +235,9 @@ body.shake{ animation: shake .3s steps(4); }
 .mario{
   position:absolute;bottom:0;left:50%;margin-left:-22px;
   image-rendering:pixelated;pointer-events:none;z-index:2;
+  --jump:-170px;                 /* 跳跃高度变量（JS 会按卡片动态覆盖） */
+  transition:left .22s ease;     /* hover 时水平滑到卡片正下方 */
+  will-change:left;
   animation:marioIdle 1.6s ease-in-out infinite;
 }
 @keyframes marioIdle{
@@ -267,28 +251,63 @@ body.shake{ animation: shake .3s steps(4); }
 @keyframes marioJump{
   0%   { transform:translateY(0) scaleY(1) scaleX(1); }
   10%  { transform:translateY(4px) scaleY(.65) scaleX(1.15); }   /* squash */
-  28%  { transform:translateY(-170px) scaleY(1.15) scaleX(.9); } /* stretch up */
-  48%  { transform:translateY(-170px) scaleY(1) scaleX(1); }     /* peak — BONK */
+  28%  { transform:translateY(var(--jump)) scaleY(1.15) scaleX(.9); } /* stretch up */
+  48%  { transform:translateY(var(--jump)) scaleY(1) scaleX(1); }     /* peak — BONK */
   65%  { transform:translateY(0) scaleY(1) scaleX(1); }           /* land */
   75%  { transform:translateY(2px) scaleY(.8) scaleX(1.1); }      /* squash land */
   100% { transform:translateY(0) scaleY(1) scaleX(1); }
 }
 /* Mushroom: hidden above, drops when Mario bonks the block */
+.mario-bubble{
+  position:absolute;bottom:74px;left:50%;
+  transform:translateX(-50%) translateY(4px);
+  padding:6px 12px;
+  background:var(--bg);
+  border:3px solid var(--text);
+  box-shadow:4px 4px 0 var(--text);
+  font-family:var(--font-head);
+  font-size:12px;
+  letter-spacing:.02em;
+  color:var(--text);
+  white-space:nowrap;
+  text-transform:uppercase;
+  pointer-events:none;
+  z-index:6;
+  opacity:0;
+  transition:opacity .15s ease, transform .15s ease, left .22s ease;
+}
+.mario-bubble.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+.mario-bubble::after{
+  content:'';
+  position:absolute;
+  bottom:-10px;left:50%;
+  transform:translateX(-50%);
+  border-width:10px 8px 0;
+  border-style:solid;
+  border-color:var(--text) transparent transparent transparent;
+}
 .mushroom{
-  position:absolute;top:-60px;left:50%;margin-left:-20px;
+  position:absolute;top:var(--mTop,-60px);left:var(--mLeft,50%);margin-left:-20px;
   image-rendering:pixelated;pointer-events:none;z-index:10;
+  --roll:320px;                  /* 滚动距离变量 */
+  --mLeft:50%;                   /* 水平对齐到的卡片中心（百分比） */
+  --mTop:-60px;                  /* 蘑菇起始垂直位置（JS 设为被顶卡片的顶部） */
+  --mFloor:38px;                 /* 蘑菇落地垂直位置（JS 设为盒子底部附近） */
   opacity:0;
 }
 .mushroom.go{
   animation:mushroomFall 1.5s ease-in-out forwards;
 }
 @keyframes mushroomFall{
-  0%   { top:-60px; opacity:0; transform:scale(.3) rotate(-12deg); }
+  0%   { top:var(--mTop); left:var(--mLeft); opacity:0; transform:scale(.3) rotate(-12deg); }
   8%   { opacity:1; }
-  25%  { top:38px; opacity:1; transform:scale(1.2) rotate(0deg); }  /* bounce land */
-  35%  { top:38px; opacity:1; transform:scale(1) rotate(0deg); }
-  72%  { top:38px; left:50%; opacity:1; transform:scale(.9) rotate(4deg); }
-  100% { top:38px; left:calc(50% + 320px); opacity:0; transform:scale(.35) rotate(22deg); }
+  25%  { top:var(--mFloor); opacity:1; transform:scale(1.2) rotate(0deg); }  /* bounce land */
+  35%  { top:var(--mFloor); opacity:1; transform:scale(1) rotate(0deg); }
+  72%  { top:var(--mFloor); left:var(--mLeft); opacity:1; transform:scale(.9) rotate(4deg); }
+  100% { top:var(--mFloor); left:calc(var(--mLeft) + var(--roll)); opacity:0; transform:scale(.35) rotate(22deg); }
 }
 
 /* ---------- floating back-to-top button ---------- */
@@ -396,7 +415,11 @@ footer.foot{background:var(--bg);color:var(--text);padding:54px 0 34px;border-to
   .nav-toggle{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border:3px solid var(--line);background:var(--yellow);box-shadow:var(--shadow-sm);cursor:pointer;font-size:1.4rem;font-family:var(--font-head);color:#0E0F14;}
   .bento{grid-template-columns:1fr;}
   .proj.wide{grid-column:span 1;}
-  .contact-box{padding:30px 20px;}
+  .contact-box{padding:30px 20px 140px;}
+
+  /* 手机端：缩小跳跃与滚动距离，避免被盒子裁切 */
+  .mario{ --jump:-95px; }
+  .mushroom{ --roll:60px; }
 }
 
 /* ============ Reduced motion ============ */

@@ -11,10 +11,6 @@
       "href": "#skills"
     },
     {
-      "label": "Work",
-      "href": "#projects"
-    },
-    {
       "label": "Journey",
       "href": "#timeline"
     },
@@ -31,7 +27,7 @@
     "kicker": "// ABOUT",
     "title": "About Me",
     "paragraphs": [
-      "I'm Ziyang, a full-stack engineer who believes good interfaces should be both beautiful and genuinely usable.",
+      "Ziyang there, a full-stack engineer who believes good interfaces should be both beautiful and genuinely usable.",
       "Outside of code, I'm just a gamer who enjoys life, and believes in good vibes."
     ],
     "stats": [
@@ -187,81 +183,6 @@
       }
     ]
   },
-  "projects": {
-    "kicker": "// PROJECTS",
-    "title": "Featured Work",
-    "desc": "From commerce rebuilds to music players — each one wears its candy-colored personality. Tap to hear the story.",
-    "items": [
-      {
-        "title": "Donut Commerce Rebuild",
-        "tag": "ECOMMERCE",
-        "desc": "Front-end architecture overhaul for a large store. 60% faster first paint, 80%+ component reuse.",
-        "chips": [
-          "React",
-          "PWA",
-          "Perf"
-        ],
-        "color": "pink",
-        "size": "wide"
-      },
-      {
-        "title": "Pixel Weather",
-        "tag": "WEBAPP",
-        "desc": "Retro pixel-art weather app.",
-        "chips": [
-          "Vue",
-          "SVG"
-        ],
-        "color": "blue",
-        "size": ""
-      },
-      {
-        "title": "Neon Music Player",
-        "tag": "PLAYER",
-        "desc": "Web player with live audio spectrum.",
-        "chips": [
-          "WebAudio",
-          "Canvas"
-        ],
-        "color": "purple",
-        "size": ""
-      },
-      {
-        "title": "Doodle Notes",
-        "tag": "PRODUCTIVITY",
-        "desc": "Minimal note tool with handwriting and offline sync. Keyboard-accessible, zero dependencies.",
-        "chips": [
-          "IndexedDB",
-          "a11y",
-          "Offline"
-        ],
-        "color": "lime",
-        "size": "tall"
-      },
-      {
-        "title": "Retro Game Hub",
-        "tag": "GAME",
-        "desc": "8-bit mini-game collection.",
-        "chips": [
-          "Canvas"
-        ],
-        "color": "orange",
-        "size": ""
-      },
-      {
-        "title": "Candy Dashboard",
-        "tag": "DASHBOARD",
-        "desc": "Real-time viz wall with dark + high-contrast themes, WCAG AA compliant.",
-        "chips": [
-          "D3",
-          "Realtime",
-          "Themes"
-        ],
-        "color": "yellow",
-        "size": "wide"
-      }
-    ]
-  },
   "contact": {
     "title": "Wanna make something sweet? 🍬",
     "desc": "Got a project, a role, or just want to say hi? Drop me a line — I reply within 48 hours.",
@@ -281,10 +202,6 @@
       {
         "label": "Skills",
         "href": "#skills"
-      },
-      {
-        "label": "Work",
-        "href": "#projects"
       },
       {
         "label": "Journey",
