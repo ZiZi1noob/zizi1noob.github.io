@@ -32,6 +32,8 @@ python -m http.server 8000
 # or
 npx serve .
 
+---
+
 
 ## Customize
 
@@ -44,4 +46,3 @@ Edit `assets/data.json` to change **all** content — no HTML/CSS needed:
 
 Refresh the browser to see changes instantly.
 
----
