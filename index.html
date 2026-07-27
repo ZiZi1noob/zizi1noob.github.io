@@ -37,7 +37,6 @@
   <div id="aboutMount"></div>
   <div id="timelineMount"></div>
   <div id="skillsMount"></div>
-
   <div id="contactMount"></div>
 </main>
 
@@ -123,35 +122,76 @@
 
   function renderSkills(d){
     var s = d.skills;
-    // Count how many projects use each skill
-    var skillCounts = {};
-    d.timeline.items.forEach(function(item){
-      (item.projects || []).forEach(function(proj){
-        (proj.skills || []).forEach(function(skill){
-          skillCounts[skill] = (skillCounts[skill] || 0) + 1;
-        });
-      });
-    });
-    var groups = (s.groups || []).map(function(g, gi){
-      var tags = g.items.map(function(it, i){
-        var count = skillCounts[it.name] || 0;
-        var hasProjects = count > 0;
-        var delay = (i*0.04).toFixed(2);
-        var cls = 'skill-tag reveal' + (hasProjects ? ' skill-tag--has-projects' : ' skill-tag--empty');
-        var attrs = hasProjects ? 'data-skill="'+esc(it.name)+'"' : 'disabled';
-        var countBadge = count ? '<span class="skill-count mono">'+count+'</span>' : '';
-        return ''+
-        '<button class="'+cls+'" '+attrs+' style="--d:'+delay+'s" title="'+esc(it.name)+(count?' · '+count+' project'+(count>1?'s':'') : '')+'">'+
-          '<span class="skill-name">'+esc(it.name)+'</span>'+countBadge+
-        '</button>';
-      }).join('');
-      var gdelay = (gi*0.05).toFixed(2);
-      return ''+
-      '<div class="skill-group reveal" style="--d:'+gdelay+'s">'+
-        '<h3 class="skill-group-title">'+esc(g.title)+'</h3>'+
-        '<div class="skill-cloud">'+tags+'</div>'+
+    var axes = s.axes || [];
+    var N = axes.length;
+    var cx = 220, cy = 220, r = 150, labelR = r + 28;
+    var levels = 5;
+    function rad(i){ return (Math.PI * 2 * i / N) - Math.PI / 2; }
+
+    // Grid polygons + level labels
+    var grid = [];
+    for (var lv = 1; lv <= levels; lv++){
+      var pts = [];
+      for (var i = 0; i < N; i++){
+        var a = rad(i), p = lv / levels;
+        pts.push((cx + r * p * Math.cos(a)) + ',' + (cy + r * p * Math.sin(a)));
+      }
+      grid.push('<polygon points="'+pts.join(' ')+'" fill="none" stroke="rgba(232,233,239,0.10)" stroke-width="1" stroke-dasharray="3,4"/>');
+    }
+    // Level labels (20,40,60,80,100) on first axis
+    var levelLabels = [];
+    for (var lv = 1; lv <= levels; lv++){
+      var a0 = rad(0), p = lv / levels;
+      var lx = cx + r * p * Math.cos(a0) + 6, ly = cy + r * p * Math.sin(a0);
+      levelLabels.push('<text x="'+lx+'" y="'+ly+'" fill="rgba(232,233,239,0.35)" font-size="9" font-family="var(--font-head)" dominant-baseline="middle">'+(lv*20)+'</text>');
+    }
+
+    // Axes (colored per axis)
+    var axesSvg = [];
+    for (var i = 0; i < N; i++){
+      var a = rad(i);
+      var col = esc(axes[i].color || 'var(--cyan)');
+      axesSvg.push('<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+r*Math.cos(a))+'" y2="'+(cy+r*Math.sin(a))+'" stroke="'+col+'" stroke-width="1" stroke-opacity="0.25"/>');
+    }
+
+    // Data polygon (animated via CSS stroke-dasharray)
+    var dpts = [];
+    for (var i = 0; i < N; i++){
+      var a = rad(i), p = axes[i].pct / 100;
+      dpts.push((cx + r * p * Math.cos(a)) + ',' + (cy + r * p * Math.sin(a)));
+    }
+    var polyPoints = dpts.join(' ');
+    var dataPoly = '<polygon class="radar-area" points="'+polyPoints+'" fill="rgba(34,211,238,0.10)" stroke="var(--cyan)" stroke-width="2" data-pts="'+polyPoints+'"/>';
+
+    // Data dots + labels + hit areas (colored per axis)
+    var dots = [], labels = [], hitAreas = [], pctLabels = [];
+    for (var i = 0; i < N; i++){
+      var a = rad(i), p = axes[i].pct / 100;
+      var dx = cx + r * p * Math.cos(a), dy = cy + r * p * Math.sin(a);
+      var lx = cx + labelR * Math.cos(a), ly = cy + labelR * Math.sin(a);
+      var anchor = Math.cos(a) > 0.35 ? 'start' : (Math.cos(a) < -0.35 ? 'end' : 'middle');
+      var col = esc(axes[i].color || 'var(--cyan)');
+      var itemsJson = JSON.stringify(axes[i].items || []).replace(/"/g, '&quot;');
+      dots.push('<circle class="radar-dot" cx="'+dx+'" cy="'+dy+'" r="5" fill="var(--bg)" stroke="'+col+'" stroke-width="2.5" filter="url(#radar-glow)" data-axis="'+i+'"/>');
+      labels.push('<text class="radar-label" x="'+lx+'" y="'+ly+'" text-anchor="'+anchor+'" dominant-baseline="middle" fill="'+col+'" data-axis="'+i+'">'+esc(axes[i].name)+'</text>');
+      pctLabels.push('<text class="radar-pct" x="'+dx+'" y="'+(dy-14)+'" text-anchor="middle" fill="'+col+'" font-size="10" font-family="var(--font-head)" opacity="0" data-axis="'+i+'">'+axes[i].pct+'%</text>');
+      hitAreas.push('<circle cx="'+dx+'" cy="'+dy+'" r="14" fill="transparent" stroke="none" style="cursor:pointer;" data-axis="'+i+'" data-name="'+esc(axes[i].name)+'" data-pct="'+axes[i].pct+'" data-color="'+col+'" data-items="'+itemsJson+'"/>');
+    }
+    var radarSvg = ''+
+      '<div class="radar-wrap reveal">'+
+        '<svg viewBox="0 0 440 440" class="radar-svg" role="img" aria-label="Skill radar chart">'+
+          '<defs><filter id="radar-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>'+
+          '<g>'+grid.join('')+'</g>'+
+          '<g>'+levelLabels.join('')+'</g>'+
+          '<g>'+axesSvg.join('')+'</g>'+
+          dataPoly+
+          '<g>'+dots.join('')+'</g>'+
+          '<g>'+pctLabels.join('')+'</g>'+
+          '<g>'+labels.join('')+'</g>'+
+          '<g>'+hitAreas.join('')+'</g>'+
+        '</svg>'+
       '</div>';
-    }).join('');
+
     return ''+
     '<section class="skills tex-stripes" id="skills">'+
       '<div class="wrap">'+
@@ -160,13 +200,14 @@
           '<h2>'+esc(s.title)+'</h2>'+
           '<p>'+esc(s.desc)+'</p>'+
         '</div>'+
-        groups+
+        radarSvg+
+        '<div class="skill-detail" id="skillDetail"></div>'+
       '</div>'+
     '</section>';
   }
 
   function renderTimeline(d){
-    var t = d.timeline;
+    var t = d.experience;
     var cp = d.current_proj;
     var overall = Math.round(cp.phases.reduce(function(sum, ph){ return sum + (ph.progress || 0); }, 0) / cp.phases.length);
     var hl = t.highlights || [];
@@ -257,7 +298,7 @@
     '</div>';
 
     return ''+
-    '<section class="timeline tex-dots" id="timeline">'+
+    '<section class="timeline tex-dots" id="experience">'+
       '<div class="wrap">'+
         '<div class="section-head reveal" style="text-align:center;">'+
           '<span class="kicker">'+esc(t.kicker)+'</span>'+
@@ -398,41 +439,94 @@
     });
 
     // skill cloud → filter / highlight timeline projects
-    function filterTimelineBySkill(skillName){
-      var timelineTab = document.querySelector('.exp-tab[data-tab="timeline"]');
-      if (timelineTab && !timelineTab.classList.contains('active')){
-        switchExpTab('timeline');
+    // radar interactions: tooltip + detail panel + highlight
+    var radarWrap = document.querySelector('.radar-wrap');
+    var radarTip = document.createElement('div');
+    radarTip.className = 'radar-tip';
+    if (radarWrap) radarWrap.appendChild(radarTip);
+
+    function showRadarTip(el, axisName, pct, items, color){
+      if (!radarTip) return;
+      var html = '<strong style="color:'+esc(color)+'">'+esc(axisName)+' <span class="mono">'+pct+'%</span></strong><ul>'+(items || []).map(function(it){ return '<li>'+esc(it)+'</li>'; }).join('')+'</ul>';
+      radarTip.innerHTML = html;
+      // make visible off-screen first so dimensions can be measured
+      radarTip.style.visibility = 'hidden';
+      radarTip.classList.add('show');
+      var rect = el.getBoundingClientRect();
+      var wrapRect = radarWrap.getBoundingClientRect();
+      var tipW = radarTip.offsetWidth, tipH = radarTip.offsetHeight;
+      var tipX = rect.left - wrapRect.left + rect.width/2 - tipW/2;
+      var tipY = rect.top - wrapRect.top - tipH - 10;
+      if (tipY < 0) tipY = rect.top - wrapRect.top + rect.height + 10;
+      radarTip.style.left = Math.max(0, Math.min(tipX, wrapRect.width - tipW)) + 'px';
+      radarTip.style.top = tipY + 'px';
+      radarTip.style.visibility = 'visible';
+    }
+    function hideRadarTip(){
+      if (radarTip) radarTip.classList.remove('show');
+    }
+
+    function buildSkillDetail(axisName, pct, color, items){
+      var detail = document.getElementById('skillDetail');
+      if (!detail) return;
+      // find matching projects across timeline
+      var matches = [];
+      d.timeline.items.forEach(function(item){
+        (item.projects || []).forEach(function(proj){
+          var projSkills = proj.skills || [];
+          var matchedSkills = [];
+          items.forEach(function(sk){ if (projSkills.indexOf(sk) !== -1) matchedSkills.push(sk); });
+          if (matchedSkills.length){
+            matches.push({
+              company: item.company, year: item.year, role: item.role,
+              proj: proj.proj, desc: proj.desc, skills: matchedSkills
+            });
+          }
+        });
+      });
+      var cards = matches.map(function(m){
+        var descHtml = Array.isArray(m.desc)
+          ? '<ul class="sd-bullets">' + m.desc.map(function(d){ return '<li>'+richWithHL(d, hl)+'</li>'; }).join('') + '</ul>'
+          : '<p>'+richWithHL(m.desc, hl)+'</p>';
+        var skillTags = m.skills.map(function(sk){ return '<span class="sd-tag">'+esc(sk)+'</span>'; }).join('');
+        return ''+
+        '<article class="sd-card">'+
+          '<div class="sd-meta">'+esc(m.year)+' · '+rich(m.company)+'</div>'+
+          '<h4>'+rich(m.proj)+'</h4>'+
+          descHtml+
+          '<div class="sd-tags">'+skillTags+'</div>'+
+        '</article>';
+      }).join('');
+      var header = '<div class="sd-header"><span class="sd-dot" style="background:'+esc(color)+'"></span><strong>'+esc(axisName)+'</strong> <span class="mono">'+pct+'%</span></div>';
+      detail.innerHTML = header + (cards ? '<div class="sd-grid">'+cards+'</div>' : '<p class="sd-empty">No matching projects in timeline.</p>');
+      detail.classList.add('show');
+      detail.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    }
+    function clearSkillDetail(){
+      var detail = document.getElementById('skillDetail');
+      if (detail){ detail.classList.remove('show'); detail.innerHTML = ''; }
+      document.querySelectorAll('.radar-dot, .radar-label, .radar-pct').forEach(function(el){ el.classList.remove('active'); });
+    }
+
+    document.querySelectorAll('.radar-svg circle[data-axis]').forEach(function(hit){
+      var axisIdx = hit.dataset.axis;
+      hit.addEventListener('mouseenter', function(){
+        showRadarTip(hit, hit.dataset.name, hit.dataset.pct, JSON.parse(hit.dataset.items || '[]'), hit.dataset.color);
+        document.querySelectorAll('.radar-dot[data-axis="'+axisIdx+'"], .radar-label[data-axis="'+axisIdx+'"], .radar-pct[data-axis="'+axisIdx+'"]').forEach(function(el){ el.classList.add('active'); });
+      });
+      hit.addEventListener('mouseleave', function(){
+        hideRadarTip();
+        document.querySelectorAll('.radar-dot[data-axis="'+axisIdx+'"], .radar-label[data-axis="'+axisIdx+'"], .radar-pct[data-axis="'+axisIdx+'"]').forEach(function(el){ el.classList.remove('active'); });
+      });
+      hit.addEventListener('click', function(e){
+        e.stopPropagation();
+        buildSkillDetail(hit.dataset.name, hit.dataset.pct, hit.dataset.color, JSON.parse(hit.dataset.items || '[]'));
+      });
+    });
+    document.addEventListener('click', function(e){
+      if (!e.target.closest('.radar-svg') && !e.target.closest('#skillDetail')){
+        clearSkillDetail();
       }
-      document.querySelectorAll('.skill-tag').forEach(function(btn){
-        btn.classList.toggle('active', btn.dataset.skill === skillName);
-      });
-      document.querySelectorAll('.tl-item').forEach(function(item){
-        var hasSkill = item.dataset.skills && item.dataset.skills.split(',').includes(skillName);
-        item.classList.toggle('dimmed', !hasSkill);
-        item.classList.toggle('highlight', hasSkill);
-      });
-      document.querySelectorAll('.tl-sub').forEach(function(sub){
-        var hasSkill = sub.dataset.skills && sub.dataset.skills.split(',').includes(skillName);
-        sub.classList.toggle('dimmed', !hasSkill);
-        sub.classList.toggle('highlight', hasSkill);
-      });
-      var timelineSection = document.getElementById('timeline');
-      if (timelineSection) timelineSection.scrollIntoView({behavior: 'smooth', block: 'start'});
-    }
-    function clearSkillFilter(){
-      document.querySelectorAll('.skill-tag').forEach(function(btn){ btn.classList.remove('active'); });
-      document.querySelectorAll('.tl-item, .tl-sub').forEach(function(el){
-        el.classList.remove('dimmed', 'highlight');
-      });
-    }
-    document.querySelectorAll('.skill-tag').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        if (btn.classList.contains('active')) {
-          clearSkillFilter();
-        } else {
-          filterTimelineBySkill(btn.dataset.skill);
-        }
-      });
     });
 
     // weapon arsenal for the floating scroll-to-top button

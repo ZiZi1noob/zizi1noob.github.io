@@ -11,8 +11,8 @@
       "href": "#skills"
     },
     {
-      "label": "Journey",
-      "href": "#timeline"
+      "label": "Experience",
+      "href": "#experience"
     },
     {
       "label": "About",
@@ -49,8 +49,8 @@
       }
     ]
   },
-  "timeline": {
-    "kicker": "// JOURNEY",
+  "experience": {
+    "kicker": "// EXPERIENCE",
     "title": "Experience",
     "highlights": [
       "PySide6",
@@ -87,7 +87,11 @@
         "projects": [
           {
             "proj": "LVLM-RPA System",
-            "skills": ["PySide6", "Playwright / RPA", "VLM / LLM Fine-tuning"],
+            "skills": [
+              "PySide6",
+              "Playwright / RPA",
+              "VLM / LLM Fine-tuning"
+            ],
             "desc": [
               "Built a PySide6 screen recorder capturing video and user actions across Windows apps (Word, Excel, Chrome, Edge, Firefox) with timestamped event logs.",
               "Integrated Playwright to align video frames with UI actions and DOM selectors, generating paired training data (frame + action sequence) for VLM fine-tuning."
@@ -95,7 +99,15 @@
           },
           {
             "proj": "OCR Recognition Platform",
-            "skills": ["Python", "PyTorch", "FastAPI / Node.js", "Flutter (Web / iOS)", "MongoDB", "RESTful / WebSocket", "HTML / CSS / JS"],
+            "skills": [
+              "Python",
+              "PyTorch",
+              "FastAPI / Node.js",
+              "Flutter (Web / iOS)",
+              "MongoDB",
+              "RESTful / WebSocket",
+              "HTML / CSS / JS"
+            ],
             "desc": [
               "OCR Model (PyTorch + FastAPI): Fine-tuned TrOCR with a synthetic image data generator server (diverse fonts + noise injection) to improve real-world generalization without manual labelling",
               "Frontend: Built responsive Flutter app targeting Web + iOS with MVVM architecture; implemented caching strategies and WebSocket for real-time OCR status updates.",
@@ -104,7 +116,12 @@
           },
           {
             "proj": "Comprehensive Federated Learning Platform",
-            "skills": ["Federated Learning", "Flutter (Web / iOS)", "MongoDB", "CI / Tooling"],
+            "skills": [
+              "Federated Learning",
+              "Flutter (Web / iOS)",
+              "MongoDB",
+              "CI / Tooling"
+            ],
             "desc": [
               "As the first project at the company, rapidly onboarded Flutter with MVVM architecture and MongoDB to design and deliver a responsive model monitoring dashboard.",
               "Designed and implemented unit and integration tests, utilizing dependency injections and mocking to verify page navigation and widget states.",
@@ -122,7 +139,14 @@
         "projects": [
           {
             "proj": "Social Listening Platform in Greater Bay Area -- <a href='https://www.polyu.edu.hk/shtm/news-and-events/news/2023/20230428_public-seminar-tourometer' target='_blank' rel='noopener'>TOURMETER</a>",
-            "skills": ["Python", "CNN / Bi-LSTM / BERT", "D3.js", "HTML / CSS / JS", "10T Scraping Engine", "AWS"],
+            "skills": [
+              "Python",
+              "CNN / Bi-LSTM / BERT",
+              "D3.js",
+              "HTML / CSS / JS",
+              "10T Scraping Engine",
+              "AWS"
+            ],
             "desc": [
               "Model Development: Built SOTA multi-lingual (Simplified/Traditional Chinese, Japanese, Korean, and English) sentiment models (CNN, Bi-LSTM) with >90% accuracy and a topic-relevance classifier for tourism relevance",
               "Real-time Data Scraping System: Built a 24/7 scraping engine collecting >10T real-time data from major social media/news platforms (Weibo, Twitter, Facebook, etc.) with anti-blocking mechanisms including dynamic IP rotation and human behavior simulation",
@@ -140,7 +164,12 @@
         "projects": [
           {
             "proj": "Next-Generation Search Engine",
-            "skills": ["Python", "CNN / Bi-LSTM / BERT", "AWS", "HTML / CSS / JS"],
+            "skills": [
+              "Python",
+              "CNN / Bi-LSTM / BERT",
+              "AWS",
+              "HTML / CSS / JS"
+            ],
             "desc": [
               "Model Development: Fine-tuned NER models (BERT/RoBERTa) for search query understanding.",
               "Data Pipeline: Built an automated data labeling generator using external knowledge bases (Wikipedia/Freebase) to produce large-scale training data from unannotated search logs.",
@@ -158,56 +187,77 @@
     "startDate": "2026-07-19",
     "github_repo": "https://github.com/zizi1noob/homepage.github.io",
     "phases": [
-      { "name": "Pure HTML layout", "status": "completed", "progress": 100, "date": "2026-07-26", "desc": "Hand-coded the first version of this site with semantic HTML and pixel-perfect CSS." },
-      { "name": "JSON-driven content", "status": "completed", "progress": 100, "date": "2026-07-24", "desc": "Moved all content into data.json so the site can be re-generated without touching codes." },
-      { "name": "AI resume analysis", "status": "in-progress", "progress": 60, "date": "TBD", "desc": "Connecting an LLM to extract skills, projects and achievements from unstructured resume text, and generating data.json" },
-      { "name": "AI-powered theming", "status": "planned", "progress": 0, "date": "TBD", "desc": "Dynamic theming that reads the 'implied audience' from the resume. If the user lists patents and research papers → academic-serif, high-contrast, low-saturation. If they list metrics like '10M users' and 'VC funding' → modern-startup gradient + glassmorphism. If they list creative tools → experimental typography and noisy borders. The theme is inferred, not toggled." },
-      { "name": "Connect to GitHub", "status": "planned", "progress": 0, "date": "TBD", "desc": "Link to GitHub account and auto-deploy it as a username.github.io personal homepage." }
+      {
+        "name": "Design JSON-driven content",
+        "status": "completed",
+        "progress": 100,
+        "date": "2026-07-24",
+        "desc": "Moved all content into data.json so the site can be re-generated without touching codes."
+      },
+      {
+        "name": "Build pure HTML layout",
+        "status": "completed",
+        "progress": 100,
+        "date": "2026-07-26",
+        "desc": "Hand-coded the first version of this site with semantic HTML and pixel-perfect CSS."
+      },
+      {
+        "name": "Connect to LLM for resume analysis",
+        "status": "in-progress: collect resume data",
+        "progress": 60,
+        "date": "TBD",
+        "desc": "Connecting an LLM to extract skills, projects and achievements from unstructured resume text, and generating data.json"
+      },
+      {
+        "name": "AI-powered theming",
+        "status": "planned",
+        "progress": 0,
+        "date": "TBD",
+        "desc": "Dynamic theming that reads the 'implied audience' from the resume. If the user lists patents and research papers → academic-serif, high-contrast, low-saturation. If they list metrics like '10M users' and 'VC funding' → modern-startup gradient + glassmorphism. If they list creative tools → experimental typography and noisy borders. The theme is inferred, not toggled."
+      },
+      {
+        "name": "Connect to GitHub",
+        "status": "planned",
+        "progress": 0,
+        "date": "TBD",
+        "desc": "Link to GitHub account and auto-deploy it as a username.github.io personal homepage."
+      }
     ]
   },
   "skills": {
     "kicker": "// SKILLS",
     "title": "My Skill Stack",
-    "desc": "Click any skill to highlight projects where I've used it.",
-    "groups": [
+    "desc": "Hover or click a radar axis to see related projects.",
+    "axes": [
       {
-        "title": "Languages",
-        "items": [
-          { "name": "Python", "pct": 95, "color": "c1" },
-          { "name": "JavaScript / TypeScript", "pct": 85, "color": "c2" },
-          { "name": "Dart (Flutter)", "pct": 82, "color": "c3" },
-          { "name": "SQL", "pct": 80, "color": "c4" }
-        ]
+        "name": "Frontend",
+        "pct": 85,
+        "color": "#FF2E88",
+        "items": ["Flutter", "React", "PySide6", "HTML", "CSS", "JS", "D3.js"]
       },
       {
-        "title": "ML / AI",
-        "items": [
-          { "name": "PyTorch", "pct": 90, "color": "c5" },
-          { "name": "VLM / LLM Fine-tuning", "pct": 78, "color": "c1" },
-          { "name": "Federated Learning", "pct": 75, "color": "c2" },
-          { "name": "CNN / Bi-LSTM / BERT", "pct": 80, "color": "c3" }
-        ]
+        "name": "Backend",
+        "pct": 88,
+        "color": "#22D3EE",
+        "items": ["Node.js", "Go", "MongoDB", "SQL", "FastAPI", "RESTful", "WebSocket"]
       },
       {
-        "title": "Full-Stack",
-        "items": [
-          { "name": "Flutter (Web / iOS)", "pct": 85, "color": "c4" },
-          { "name": "FastAPI / Node.js", "pct": 88, "color": "c5" },
-          { "name": "RESTful / WebSocket", "pct": 86, "color": "c1" },
-          { "name": "MongoDB", "pct": 82, "color": "c2" },
-          { "name": "PySide6", "pct": 80, "color": "c3" },
-          { "name": "HTML / CSS / JS", "pct": 90, "color": "c4" },
-          { "name": "D3.js", "pct": 72, "color": "c5" }
-        ]
+        "name": "Cloud",
+        "pct": 74,
+        "color": "#A78BFA",
+        "items": ["AWS", "CI / Tooling", "Docker", "10T Scraping Engine"]
       },
       {
-        "title": "Data / Infra",
-        "items": [
-          { "name": "10T Scraping Engine", "pct": 84, "color": "c1" },
-          { "name": "AWS", "pct": 74, "color": "c2" },
-          { "name": "Playwright / RPA", "pct": 83, "color": "c3" },
-          { "name": "CI / Tooling", "pct": 78, "color": "c4" }
-        ]
+        "name": "ML / AI",
+        "pct": 90,
+        "color": "#BEF264",
+        "items": ["Python", "PyTorch", "VLM / LLM Fine-tuning", "CNN / Bi-LSTM / BERT", "Federated Learning", "Playwright / RPA"]
+      },
+      {
+        "name": "Language",
+        "pct": 92,
+        "color": "#FB923C",
+        "items": ["Proficient English", "Native Mandarin", "Entry-level Cantonese"]
       }
     ]
   },
@@ -232,8 +282,8 @@
         "href": "#skills"
       },
       {
-        "label": "Journey",
-        "href": "#timeline"
+        "label": "Experience",
+        "href": "#experience"
       }
     ],
     "socialTitle": "Social",
