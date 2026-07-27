@@ -124,7 +124,18 @@
     var s = d.skills;
     var axes = s.axes || [];
     var N = axes.length;
-    var cx = 220, cy = 220, r = 150, labelR = r + 28;
+    // Responsive sizing: smaller on mobile, labels pull inward based on length
+    var isMobile = window.innerWidth < 640;
+    var cx = isMobile ? 130 : 220, cy = isMobile ? 130 : 220, r = isMobile ? 72 : 150;
+    var viewSize = isMobile ? 260 : 440;
+    function labelRadius(name){
+      var extra = isMobile ? 10 : 28;
+      // longer words sit closer to the vertex so they don't overflow the edge
+      var len = name.length;
+      if (isMobile && len > 6) extra -= (len - 6) * 3;
+      if (isMobile && extra < 2) extra = 2;
+      return r + extra;
+    }
     var levels = 5;
     function rad(i){ return (Math.PI * 2 * i / N) - Math.PI / 2; }
 
@@ -168,8 +179,10 @@
     for (var i = 0; i < N; i++){
       var a = rad(i), p = axes[i].pct / 100;
       var dx = cx + r * p * Math.cos(a), dy = cy + r * p * Math.sin(a);
-      var lx = cx + labelR * Math.cos(a), ly = cy + labelR * Math.sin(a);
-      var anchor = Math.cos(a) > 0.35 ? 'start' : (Math.cos(a) < -0.35 ? 'end' : 'middle');
+      var lr = labelRadius(axes[i].name);
+      var lx = cx + lr * Math.cos(a), ly = cy + lr * Math.sin(a);
+      // anchor so text grows toward the chart center, never off-canvas
+      var anchor = Math.cos(a) > 0.35 ? 'end' : (Math.cos(a) < -0.35 ? 'start' : 'middle');
       var col = esc(axes[i].color || 'var(--cyan)');
       var itemsJson = JSON.stringify(axes[i].items || []).replace(/"/g, '&quot;');
       dots.push('<circle class="radar-dot" cx="'+dx+'" cy="'+dy+'" r="5" fill="var(--bg)" stroke="'+col+'" stroke-width="2.5" data-axis="'+i+'"/>');
@@ -179,7 +192,7 @@
     }
     var radarSvg = ''+
       '<div class="radar-wrap reveal">'+
-        '<svg viewBox="0 0 440 440" class="radar-svg" role="img" aria-label="Skill radar chart">'+
+        '<svg viewBox="0 0 '+viewSize+' '+viewSize+'" class="radar-svg" role="img" aria-label="Skill radar chart">'+
           '<defs><filter id="radar-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>'+
           '<g>'+grid.join('')+'</g>'+
           '<g>'+levelLabels.join('')+'</g>'+

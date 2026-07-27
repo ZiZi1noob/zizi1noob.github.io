@@ -153,7 +153,11 @@ body.shake{ animation: shake .3s steps(4); }
 .skills{background:var(--panel);border-top:var(--border);border-bottom:var(--border);}
 
 /* radar */
-.radar-wrap{max-width:560px;margin:0 auto 44px;text-align:center;position:relative;}
+.radar-wrap{max-width:560px;margin:0 auto 44px;text-align:center;position:relative;padding:0 16px;}
+@media (max-width:640px){
+  .radar-wrap{padding:0 8px;}
+  .radar-label{font-size:9px;}
+}
 .radar-svg{display:block;width:100%;height:auto;overflow:visible;}
 .radar-label{
   font-family:var(--font-head);font-size:11px;text-transform:uppercase;letter-spacing:.04em;
