@@ -3,20 +3,16 @@
   "site": "Ziyang ZHAN",
   "nav": [
     {
-      "label": "Home",
+      "label": "About",
       "href": "#about"
-    },
-    {
-      "label": "Skills",
-      "href": "#skills"
     },
     {
       "label": "Experience",
       "href": "#experience"
     },
     {
-      "label": "About",
-      "href": "#about"
+      "label": "Skills",
+      "href": "#skills"
     },
     {
       "label": "Contact",

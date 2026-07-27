@@ -250,7 +250,7 @@
 
     var tabs =
       '<button class="exp-tab active" data-tab="timeline" role="tab" aria-selected="true">Experience</button>'+
-      '<button class="exp-tab exp-tab--live" data-tab="current" role="tab" aria-selected="false">Now Building</button>';
+      '<button class="exp-tab exp-tab--live" data-tab="current" role="tab" aria-selected="false">Building</button>';
 
     var phases = cp.phases.map(function(ph, i){
       var delay = (i*0.06).toFixed(2);
@@ -756,8 +756,8 @@
     if (ss && d.version) ss.href = 'style.css?v=' + d.version;
     renderNav(d);
     document.getElementById('aboutMount').innerHTML = renderAbout(d);
-    document.getElementById('skillsMount').innerHTML = renderSkills(d);
     document.getElementById('timelineMount').innerHTML = renderTimeline(d);
+    document.getElementById('skillsMount').innerHTML = renderSkills(d);
     document.getElementById('contactMount').innerHTML = renderContact(d);
     document.getElementById('footerMount').innerHTML = renderFooter(d);
     initInteractions(d);

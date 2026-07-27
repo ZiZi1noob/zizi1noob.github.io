@@ -226,6 +226,8 @@ body.shake{ animation: shake .3s steps(4); }
 
 /* ============ Timeline ============ */
 .timeline{background:var(--cyan-bg);border-top:var(--border);border-bottom:var(--border);}
+
+
 .tl{position:relative;max-width:760px;margin:0 auto;padding-left:34px;}
 .tl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:4px;background:var(--line);}
 .tl-item{position:relative;margin-bottom:30px;}
