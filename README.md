@@ -4,6 +4,15 @@ A data-driven, zero-dependency personal homepage built with pure HTML/CSS/JS. Al
 
 🔗 **Live**: [zizi1noob.github.io](https://zizi1noob.github.io/)
 
+
+**Roadmap**:
+1. ✅ JSON-driven content system
+2. ✅ Pure HTML/CSS layout
+3. 🔄 LLM-powered resume analysis
+4. ⏳ AI-generated theming
+5. ⏳ One-click GitHub deploy
+
+
 ---
 
 ## What's Inside
@@ -51,16 +60,7 @@ Refresh the browser to see changes instantly.
 
 Drop your resume → get a `username.github.io` homepage. No templates, no terminal, no config.
 
-**Roadmap**:
-1. ✅ JSON-driven content system
-2. ✅ Pure HTML/CSS layout
-3. 🔄 LLM-powered resume analysis
-4. ⏳ AI-generated theming
-5. ⏳ One-click GitHub deploy
 
----
+ 
 
-## License
-
-
-Built with ♥ & pure HTML/CSS/JS by [Ziyang ZHAN](https://zizi1noob.github.io/).
+ 
