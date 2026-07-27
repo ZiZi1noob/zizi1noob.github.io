@@ -4,25 +4,19 @@ A data-driven, zero-dependency personal homepage built with pure HTML/CSS/JS. Al
 
 🔗 **Live**: [zizi1noob.github.io](https://zizi1noob.github.io/)
 
-
-**Roadmap**:
-1. ✅ JSON-driven content system
-2. ✅ Pure HTML/CSS layout
-3. 🔄 LLM-powered resume analysis
-4. ⏳ AI-generated theming
-5. ⏳ One-click GitHub deploy
-
-
 ---
 
-## What's Inside
+## 📊 Project Status
 
-| Section | Highlights |
-|---|---|
-| **About** | Hero intro, stats grid, pixel-art avatar |
-| **Experience** | Tabbed timeline — switch between **Experience** (work history) and **Building** (current project roadmap) |
-| **Skills** | Interactive SVG radar chart — 5 axes (Frontend / Backend / Cloud / ML·AI / Language). Hover for skill breakdown, click to filter related projects |
-| **Contact** | Mario-style CTA, email, LinkedIn, resume download |
+> **🟢 CURRENTLY ACTIVE** — Core system complete, iterating on AI integrations
+
+| Phase | Status | Description |
+|-------|--------|-------------|
+| **1. JSON-driven content system** | ✅ **COMPLETE** | All content externalized to `data.json` — edit once, update everywhere. Zero hardcoding, full flexibility. |
+| **2. Pure HTML/CSS layout** | ✅ **COMPLETE** | Clean, responsive, no external libraries or frameworks. Maintains performance and simplicity. |
+| **3. LLM-powered resume analysis** | 🔄 **IN PROGRESS** | Integrating LLM to parse resumes, extract key insights, and generate dynamic content suggestions for the homepage. |
+| **4. AI-generated theming** | ⏳ **PLANNED** | Automated color scheme generation based on user persona, sentiment, or brand input. Dynamic styling without manual CSS tweaks. |
+| **5. One-click GitHub deploy** | ⏳ **PLANNED** | Streamlined CI/CD pipeline — push to main, and the site auto-deploys to GitHub Pages with zero configuration. |
 
 ---
 
@@ -37,11 +31,7 @@ cd homepage.github.io
 python -m http.server 8000
 # or
 npx serve .
-```
 
-Then open `http://localhost:8000`.
-
----
 
 ## Customize
 
@@ -55,12 +45,3 @@ Edit `assets/data.json` to change **all** content — no HTML/CSS needed:
 Refresh the browser to see changes instantly.
 
 ---
-
-## Current Project: Resume-to-Web
-
-Drop your resume → get a `username.github.io` homepage. No templates, no terminal, no config.
-
-
- 
-
- 
