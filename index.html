@@ -123,13 +123,34 @@
 
   function renderSkills(d){
     var s = d.skills;
-    var cards = s.items.map(function(it, i){
-      var delay = (i*0.06).toFixed(2);
+    // Count how many projects use each skill
+    var skillCounts = {};
+    d.timeline.items.forEach(function(item){
+      (item.projects || []).forEach(function(proj){
+        (proj.skills || []).forEach(function(skill){
+          skillCounts[skill] = (skillCounts[skill] || 0) + 1;
+        });
+      });
+    });
+    var groups = (s.groups || []).map(function(g, gi){
+      var tags = g.items.map(function(it, i){
+        var count = skillCounts[it.name] || 0;
+        var hasProjects = count > 0;
+        var delay = (i*0.04).toFixed(2);
+        var cls = 'skill-tag reveal' + (hasProjects ? ' skill-tag--has-projects' : ' skill-tag--empty');
+        var attrs = hasProjects ? 'data-skill="'+esc(it.name)+'"' : 'disabled';
+        var countBadge = count ? '<span class="skill-count mono">'+count+'</span>' : '';
+        return ''+
+        '<button class="'+cls+'" '+attrs+' style="--d:'+delay+'s" title="'+esc(it.name)+(count?' · '+count+' project'+(count>1?'s':'') : '')+'">'+
+          '<span class="skill-name">'+esc(it.name)+'</span>'+countBadge+
+        '</button>';
+      }).join('');
+      var gdelay = (gi*0.05).toFixed(2);
       return ''+
-      '<article class="skill-card reveal" style="--d:'+delay+'s">'+
-        '<div class="top"><span class="name">'+esc(it.name)+'</span><span class="pct mono">'+esc(it.pct)+'%</span></div>'+
-        '<div class="bar"><div class="bar-fill '+esc(it.color)+'" data-width="'+esc(it.pct)+'%"></div></div>'+
-      '</article>';
+      '<div class="skill-group reveal" style="--d:'+gdelay+'s">'+
+        '<h3 class="skill-group-title">'+esc(g.title)+'</h3>'+
+        '<div class="skill-cloud">'+tags+'</div>'+
+      '</div>';
     }).join('');
     return ''+
     '<section class="skills tex-stripes" id="skills">'+
@@ -139,24 +160,30 @@
           '<h2>'+esc(s.title)+'</h2>'+
           '<p>'+esc(s.desc)+'</p>'+
         '</div>'+
-        '<div class="skill-grid">'+cards+'</div>'+
+        groups+
       '</div>'+
     '</section>';
   }
 
   function renderTimeline(d){
     var t = d.timeline;
+    var cp = d.current_proj;
+    var overall = Math.round(cp.phases.reduce(function(sum, ph){ return sum + (ph.progress || 0); }, 0) / cp.phases.length);
     var hl = t.highlights || [];
     var items = t.items.map(function(it, i){
       var delay = (i*0.08).toFixed(2);
+      var itemSkills = [];
       var projectsHtml = '';
       if (it.projects && it.projects.length){
         projectsHtml = '<div class="tl-subs">' + it.projects.map(function(sub){
+          var subSkills = (sub.skills || []);
+          itemSkills = itemSkills.concat(subSkills);
+          var subSkillsAttr = subSkills.join(',');
           var descHtml = Array.isArray(sub.desc)
             ? '<ul class="tl-bullets">' + sub.desc.map(function(d){ return '<li>'+richWithHL(d, hl)+'</li>'; }).join('') + '</ul>'
             : '<p>'+richWithHL(sub.desc, hl)+'</p>';
           return ''+
-          '<div class="tl-sub">'+
+          '<div class="tl-sub" data-skills="'+esc(subSkillsAttr)+'">'+
             '<span class="tl-sub-dot" aria-hidden="true"></span>'+
             '<div>'+
               '<h4>'+rich(sub.proj)+'</h4>'+
@@ -165,8 +192,9 @@
           '</div>';
         }).join('') + '</div>';
       }
+      var uniqueItemSkills = itemSkills.filter(function(s, idx, arr){ return arr.indexOf(s) === idx; }).join(',');
       return ''+
-      '<div class="tl-item reveal" style="--d:'+delay+'s">'+
+      '<div class="tl-item reveal" data-skills="'+esc(uniqueItemSkills)+'" style="--d:'+delay+'s">'+
         '<span class="tl-dot" aria-hidden="true"></span>'+
         '<div class="tl-card">'+
           '<span class="yr">'+esc(it.year)+'</span>'+
@@ -178,6 +206,56 @@
         '</div>'+
       '</div>';
     }).join('');
+
+    var tabs =
+      '<button class="exp-tab active" data-tab="timeline" role="tab" aria-selected="true">Experience</button>'+
+      '<button class="exp-tab exp-tab--live" data-tab="current" role="tab" aria-selected="false">Now Building</button>';
+
+    var phases = cp.phases.map(function(ph, i){
+      var delay = (i*0.06).toFixed(2);
+      var hereBadge = ph.status === 'in-progress' ? '<span class="phase-here">You are here</span>' : '';
+      return ''+
+      '<div class="phase-tl-item reveal status-'+esc(ph.status)+'" style="--d:'+delay+'s">'+
+        '<span class="phase-tl-dot" aria-hidden="true"></span>'+
+        '<div class="phase-tl-card">'+
+          '<div class="phase-tl-head">'+
+            '<h4>'+esc(ph.name)+'</h4>'+
+            '<span class="phase-status">'+esc(ph.status)+'</span>'+
+            '<span class="phase-date mono">'+esc(ph.date)+'</span>'+
+          '</div>'+
+          '<p>'+esc(ph.desc)+'</p>'+
+          '<div class="bar"><div class="bar-fill c'+((i%5)+1)+'" data-width="'+esc(ph.progress)+'%"></div></div>'+
+          '<span class="phase-pct mono">'+esc(ph.progress)+'%</span>'+
+          hereBadge+
+        '</div>'+
+      '</div>';
+    }).join('');
+
+    var githubRepoLink = cp.github_repo ? '<a class="overall-github" href="'+esc(cp.github_repo)+'" target="_blank" rel="noopener" aria-label="View on GitHub"><img src="assets/contact-github.svg" alt="GitHub" width="18" height="18"></a>' : '';
+
+    var currentPanel = ''+
+    '<div class="current-intro reveal">'+
+      '<h3>'+esc(cp.title)+'</h3>'+
+      '<p>'+esc(cp.desc)+'</p>'+
+      '<div class="current-meta">'+
+        '<span class="mono">Started: '+esc(cp.startDate)+'</span>'+
+        '<span class="mono">Overall: '+esc(overall)+'%</span>'+
+        githubRepoLink+
+      '</div>'+
+      '<div class="bar overall-bar"><div class="bar-fill c1" data-width="'+esc(overall)+'%"></div></div>'+
+    '</div>'+
+    '<div class="phase-timeline">'+
+      '<div class="phase-tl-line" aria-hidden="true"></div>'+
+      '<div class="phase-tl-item start reveal">'+
+        '<span class="phase-tl-dot" aria-hidden="true"></span>'+
+        '<div class="phase-tl-card">'+
+          '<span class="phase-date mono">'+esc(cp.startDate)+'</span>'+
+          '<h4>Project started</h4>'+
+        '</div>'+
+      '</div>'+
+      phases+
+    '</div>';
+
     return ''+
     '<section class="timeline tex-dots" id="timeline">'+
       '<div class="wrap">'+
@@ -185,7 +263,11 @@
           '<span class="kicker">'+esc(t.kicker)+'</span>'+
           '<h2>'+esc(t.title)+'</h2>'+
         '</div>'+
-        '<div class="tl">'+items+'</div>'+
+        '<div class="exp-tabs" role="tablist">'+tabs+'</div>'+
+        '<div class="exp-panel active" id="tab-panel-timeline">'+
+          '<div class="tl">'+items+'</div>'+
+        '</div>'+
+        '<div class="exp-panel" id="tab-panel-current">'+currentPanel+'</div>'+
       '</div>'+
     '</section>';
   }
@@ -297,6 +379,61 @@
       }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
       reveals.forEach(function(el){ io.observe(el); });
     }
+
+    // experience / current project tabs
+    function switchExpTab(id){
+      document.querySelectorAll('.exp-tab').forEach(function(b){
+        var active = b.dataset.tab === id;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      document.querySelectorAll('.exp-panel').forEach(function(p){
+        var active = p.id === 'tab-panel-' + id;
+        p.classList.toggle('active', active);
+        if (active) fillBars(p);
+      });
+    }
+    document.querySelectorAll('.exp-tab').forEach(function(btn){
+      btn.addEventListener('click', function(){ switchExpTab(btn.dataset.tab); });
+    });
+
+    // skill cloud → filter / highlight timeline projects
+    function filterTimelineBySkill(skillName){
+      var timelineTab = document.querySelector('.exp-tab[data-tab="timeline"]');
+      if (timelineTab && !timelineTab.classList.contains('active')){
+        switchExpTab('timeline');
+      }
+      document.querySelectorAll('.skill-tag').forEach(function(btn){
+        btn.classList.toggle('active', btn.dataset.skill === skillName);
+      });
+      document.querySelectorAll('.tl-item').forEach(function(item){
+        var hasSkill = item.dataset.skills && item.dataset.skills.split(',').includes(skillName);
+        item.classList.toggle('dimmed', !hasSkill);
+        item.classList.toggle('highlight', hasSkill);
+      });
+      document.querySelectorAll('.tl-sub').forEach(function(sub){
+        var hasSkill = sub.dataset.skills && sub.dataset.skills.split(',').includes(skillName);
+        sub.classList.toggle('dimmed', !hasSkill);
+        sub.classList.toggle('highlight', hasSkill);
+      });
+      var timelineSection = document.getElementById('timeline');
+      if (timelineSection) timelineSection.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+    function clearSkillFilter(){
+      document.querySelectorAll('.skill-tag').forEach(function(btn){ btn.classList.remove('active'); });
+      document.querySelectorAll('.tl-item, .tl-sub').forEach(function(el){
+        el.classList.remove('dimmed', 'highlight');
+      });
+    }
+    document.querySelectorAll('.skill-tag').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (btn.classList.contains('active')) {
+          clearSkillFilter();
+        } else {
+          filterTimelineBySkill(btn.dataset.skill);
+        }
+      });
+    });
 
     // weapon arsenal for the floating scroll-to-top button
     var WEAPONS = [
