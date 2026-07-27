@@ -560,16 +560,13 @@ body.shake{ animation: shake .3s steps(4); }
   transform:rotate(0deg);
 }
 
-/* ============ Footer (dark) ============ */
-footer.foot{background:var(--bg);color:var(--text);padding:54px 0 34px;border-top:var(--border-thick);}
-.foot-grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start;}
-.foot .logo{color:var(--text);}
-.foot .logo .mark{background:transparent;}
-.foot h3{font-family:var(--font-head);font-size:.72rem;margin-bottom:14px;line-height:1.5;}
-.foot ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
-.foot a{color:var(--muted);text-decoration:none;font-family:var(--font-body);font-size:20px;transition:color .12s;}
-.foot a:hover{color:var(--cyan);}
-.foot-bottom{margin-top:38px;padding-top:20px;border-top:2px solid #2A2D38;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:var(--font-body);font-size:18px;color:var(--muted);}
+/* ============ Footer (minimal) ============ */
+footer.foot{background:var(--bg);color:var(--text);padding:60px 0 40px;border-top:var(--border-thick);}
+.foot-center{text-align:center;}
+.foot-name{font-family:var(--font-head);font-size:1.1rem;line-height:1.5;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color .15s ease;}
+.foot-name:hover{color:var(--cyan);}
+.foot-slogan{color:var(--lime);font-size:22px;margin-top:10px;}
+.foot-built{font-family:var(--font-body);font-size:16px;color:var(--muted);margin-top:14px;}
 
 /* ============ Loading / error ============ */
 #errorBanner{display:none;position:relative;overflow:hidden;background:var(--pink);color:#0E0F14;border:var(--border-thick);padding:18px 22px;margin:20px 0;font-family:var(--font-body);font-size:20px;box-shadow:var(--shadow-lg);}

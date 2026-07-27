@@ -172,7 +172,7 @@
       var anchor = Math.cos(a) > 0.35 ? 'start' : (Math.cos(a) < -0.35 ? 'end' : 'middle');
       var col = esc(axes[i].color || 'var(--cyan)');
       var itemsJson = JSON.stringify(axes[i].items || []).replace(/"/g, '&quot;');
-      dots.push('<circle class="radar-dot" cx="'+dx+'" cy="'+dy+'" r="5" fill="var(--bg)" stroke="'+col+'" stroke-width="2.5" filter="url(#radar-glow)" data-axis="'+i+'"/>');
+      dots.push('<circle class="radar-dot" cx="'+dx+'" cy="'+dy+'" r="5" fill="var(--bg)" stroke="'+col+'" stroke-width="2.5" data-axis="'+i+'"/>');
       labels.push('<text class="radar-label" x="'+lx+'" y="'+ly+'" text-anchor="'+anchor+'" dominant-baseline="middle" fill="'+col+'" data-axis="'+i+'">'+esc(axes[i].name)+'</text>');
       pctLabels.push('<text class="radar-pct" x="'+dx+'" y="'+(dy-14)+'" text-anchor="middle" fill="'+col+'" font-size="10" font-family="var(--font-head)" opacity="0" data-axis="'+i+'">'+axes[i].pct+'%</text>');
       hitAreas.push('<circle cx="'+dx+'" cy="'+dy+'" r="14" fill="transparent" stroke="none" style="cursor:pointer;" data-axis="'+i+'" data-name="'+esc(axes[i].name)+'" data-pct="'+axes[i].pct+'" data-color="'+col+'" data-items="'+itemsJson+'"/>');
@@ -353,22 +353,12 @@
 
   function renderFooter(d){
     var f = d.footer;
-    var nav = f.nav.map(function(n){ return '<li><a href="'+esc(n.href)+'">'+esc(n.label)+'</a></li>'; }).join('');
-    var social = f.social.map(function(n){ return '<li><a href="'+esc(n.href)+'">'+esc(n.label)+'</a></li>'; }).join('');
     return ''+
     '<div class="wrap">'+
-      '<div class="foot-grid">'+
-        '<div>'+
-          '<a href="#about" class="logo" aria-label="Candy House">'+esc(d.site)+'</a>'+
-          '<p style="color:var(--muted);margin-top:12px;max-width:260px;font-size:20px;">'+rich(f.tagline)+'</p>'+
-        '</div>'+
-        '<div><h3>'+esc(f.navTitle)+'</h3><ul>'+nav+'</ul></div>'+
-        '<div><h3>'+esc(f.socialTitle)+'</h3><ul>'+social+'</ul></div>'+
-        '<div><h3>Slogan</h3><p class="mono" style="color:var(--lime);font-size:22px;">'+rich(f.slogan)+'</p></div>'+
-      '</div>'+
-      '<div class="foot-bottom">'+
-        '<span>'+esc(f.bottomLeft)+'</span>'+
-        '<span>'+esc(f.bottomRight)+'</span>'+
+      '<div class="foot-center">'+
+        '<a href="#about" class="foot-name">'+esc(d.site)+'</a>'+
+        '<p class="foot-slogan mono">'+rich(f.slogan)+'</p>'+
+        '<p class="foot-built">'+esc(f.bottomLeft)+'</p>'+
       '</div>'+
     '</div>';
   }
