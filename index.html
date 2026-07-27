@@ -206,7 +206,7 @@
     '</section>';
   }
 
-  function renderTimeline(d){
+  function renderExp(d){
     var t = d.experience;
     var cp = d.current_proj;
     var overall = Math.round(cp.phases.reduce(function(sum, ph){ return sum + (ph.progress || 0); }, 0) / cp.phases.length);
@@ -756,7 +756,7 @@
     if (ss && d.version) ss.href = 'style.css?v=' + d.version;
     renderNav(d);
     document.getElementById('aboutMount').innerHTML = renderAbout(d);
-    document.getElementById('timelineMount').innerHTML = renderTimeline(d);
+    document.getElementById('timelineMount').innerHTML = renderExp(d);
     document.getElementById('skillsMount').innerHTML = renderSkills(d);
     document.getElementById('contactMount').innerHTML = renderContact(d);
     document.getElementById('footerMount').innerHTML = renderFooter(d);
