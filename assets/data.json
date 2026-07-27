@@ -1,5 +1,5 @@
 {
-  "version": "5",
+  "version": "release1",
   "site": "Ziyang ZHAN",
   "nav": [
     {
@@ -7,8 +7,8 @@
       "href": "#about"
     },
     {
-      "label": "Experience",
-      "href": "#experience"
+      "label": "Journey",
+      "href": "#journey"
     },
     {
       "label": "Skills",
@@ -45,9 +45,131 @@
       }
     ]
   },
-  "experience": {
-    "kicker": "// EXPERIENCE",
-    "title": "Experience",
+  "current_proj": {
+    "kicker": "// NOW BUILDING",
+    "title": "Resume-to-Web",
+    "desc": "Zero-code, full-personality. Drop your resume and instantly claim your username.github.io — not a template, no terminal, no config. Just your story, live.",
+    "startDate": "2026-07-19",
+    "github_repo": "https://github.com/zizi1noob/homepage.github.io",
+    "phases": [
+      {
+        "name": "Design JSON-driven content",
+        "status": "completed",
+        "progress": 100,
+        "date": "2026-07-24",
+        "desc": "Moved all content into data.json so the site can be re-generated without touching codes."
+      },
+      {
+        "name": "Build pure HTML layout",
+        "status": "completed",
+        "progress": 100,
+        "date": "2026-07-26",
+        "desc": "Hand-coded the first version of this site with semantic HTML and pixel-perfect CSS."
+      },
+      {
+        "name": "Connect to LLM for resume analysis",
+        "status": "in-progress: collect resume data",
+        "progress": 60,
+        "date": "TBD",
+        "desc": "Connecting an LLM to extract skills, projects and achievements from unstructured resume text, and generating data.json"
+      },
+      {
+        "name": "AI-powered theming",
+        "status": "planned",
+        "progress": 0,
+        "date": "TBD",
+        "desc": "Dynamic theming that reads the 'implied audience' from the resume. If the user lists patents and research papers → academic-serif, high-contrast, low-saturation. If they list metrics like '10M users' and 'VC funding' → modern-startup gradient + glassmorphism. If they list creative tools → experimental typography and noisy borders. The theme is inferred, not toggled."
+      },
+      {
+        "name": "Connect to GitHub",
+        "status": "planned",
+        "progress": 0,
+        "date": "TBD",
+        "desc": "Link to GitHub account and auto-deploy it as a username.github.io personal homepage."
+      }
+    ]
+  },
+  "skills": {
+    "kicker": "// SKILLS",
+    "title": "My Skill Stack",
+    "desc": "Hover or click a radar axis to see related projects.",
+    "axes": [
+      {
+        "name": "Frontend",
+        "pct": 85,
+        "color": "#FF2E88",
+        "items": [
+          "Flutter",
+          "React",
+          "PySide6",
+          "HTML",
+          "CSS",
+          "JS",
+          "D3.js"
+        ]
+      },
+      {
+        "name": "Backend",
+        "pct": 88,
+        "color": "#22D3EE",
+        "items": [
+          "Node.js",
+          "Go",
+          "MongoDB",
+          "SQL",
+          "FastAPI",
+          "RESTful",
+          "WebSocket"
+        ]
+      },
+      {
+        "name": "Cloud",
+        "pct": 74,
+        "color": "#A78BFA",
+        "items": [
+          "AWS",
+          "Azure",
+          "Docker"
+        ]
+      },
+      {
+        "name": "ML/AI",
+        "pct": 90,
+        "color": "#BEF264",
+        "items": [
+          "Python",
+          "PyTorch",
+          "Federated Learning",
+          "Playwright / RPA"
+        ]
+      },
+      {
+        "name": "Language",
+        "pct": 92,
+        "color": "#FB923C",
+        "items": [
+          "Proficient English",
+          "Native Mandarin",
+          "Entry-level Cantonese"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Wanna make something sweet? ☕",
+    "desc": "Got a project, a role, or just want to say hi? Drop me a line — I reply within 48 hours.",
+    "email": "purplesunc@163.com",
+    "linkedin": "https://www.linkedin.com/in/ziyangzhan/",
+    "resume": "assets/Ziyang Zhan Resume --CS.pdf",
+    "github": "https://zizi1noob.github.io/"
+  },
+  "footer": {
+    "slogan": "\"Pixel-perfect, happily shipped.\"",
+    "bottom": "BUILT WITH ♥ & PURE HTML/CSS/JS"
+  },
+  "journey": {
+    "kicker": "// JOURNEY",
+    "title": "Journey",
     "highlights": [
       "PySide6",
       "Playwright",
@@ -175,134 +297,5 @@
         ]
       }
     ]
-  },
-  "current_proj": {
-    "kicker": "// NOW BUILDING",
-    "title": "Resume-to-Web",
-    "desc": "Zero-code, full-personality. Drop your resume and instantly claim your username.github.io — not a template, no terminal, no config. Just your story, live.",
-    "startDate": "2026-07-19",
-    "github_repo": "https://github.com/zizi1noob/homepage.github.io",
-    "phases": [
-      {
-        "name": "Design JSON-driven content",
-        "status": "completed",
-        "progress": 100,
-        "date": "2026-07-24",
-        "desc": "Moved all content into data.json so the site can be re-generated without touching codes."
-      },
-      {
-        "name": "Build pure HTML layout",
-        "status": "completed",
-        "progress": 100,
-        "date": "2026-07-26",
-        "desc": "Hand-coded the first version of this site with semantic HTML and pixel-perfect CSS."
-      },
-      {
-        "name": "Connect to LLM for resume analysis",
-        "status": "in-progress: collect resume data",
-        "progress": 60,
-        "date": "TBD",
-        "desc": "Connecting an LLM to extract skills, projects and achievements from unstructured resume text, and generating data.json"
-      },
-      {
-        "name": "AI-powered theming",
-        "status": "planned",
-        "progress": 0,
-        "date": "TBD",
-        "desc": "Dynamic theming that reads the 'implied audience' from the resume. If the user lists patents and research papers → academic-serif, high-contrast, low-saturation. If they list metrics like '10M users' and 'VC funding' → modern-startup gradient + glassmorphism. If they list creative tools → experimental typography and noisy borders. The theme is inferred, not toggled."
-      },
-      {
-        "name": "Connect to GitHub",
-        "status": "planned",
-        "progress": 0,
-        "date": "TBD",
-        "desc": "Link to GitHub account and auto-deploy it as a username.github.io personal homepage."
-      }
-    ]
-  },
-  "skills": {
-    "kicker": "// SKILLS",
-    "title": "My Skill Stack",
-    "desc": "Hover or click a radar axis to see related projects.",
-    "axes": [
-      {
-        "name": "Frontend",
-        "pct": 85,
-        "color": "#FF2E88",
-        "items": ["Flutter", "React", "PySide6", "HTML", "CSS", "JS", "D3.js"]
-      },
-      {
-        "name": "Backend",
-        "pct": 88,
-        "color": "#22D3EE",
-        "items": ["Node.js", "Go", "MongoDB", "SQL", "FastAPI", "RESTful", "WebSocket"]
-      },
-      {
-        "name": "Cloud",
-        "pct": 74,
-        "color": "#A78BFA",
-        "items": ["AWS", "CI / Tooling", "Docker", "10T Scraping Engine"]
-      },
-      {
-        "name": "ML / AI",
-        "pct": 90,
-        "color": "#BEF264",
-        "items": ["Python", "PyTorch", "VLM / LLM Fine-tuning", "CNN / Bi-LSTM / BERT", "Federated Learning", "Playwright / RPA"]
-      },
-      {
-        "name": "Language",
-        "pct": 92,
-        "color": "#FB923C",
-        "items": ["Proficient English", "Native Mandarin", "Entry-level Cantonese"]
-      }
-    ]
-  },
-  "contact": {
-    "title": "Wanna make something sweet? ☕",
-    "desc": "Got a project, a role, or just want to say hi? Drop me a line — I reply within 48 hours.",
-    "email": "purplesunc@163.com",
-    "linkedin": "https://www.linkedin.com/in/ziyangzhan/",
-    "resume": "assets/Ziyang Zhan Resume --CS.pdf",
-    "github": "https://zizi1noob.github.io/"
-  },
-  "footer": {
-    "tagline": "Building warm products with code and color. © 2026 Candy.",
-    "navTitle": "Navigate",
-    "nav": [
-      {
-        "label": "Home",
-        "href": "#about"
-      },
-      {
-        "label": "Skills",
-        "href": "#skills"
-      },
-      {
-        "label": "Experience",
-        "href": "#experience"
-      }
-    ],
-    "socialTitle": "Social",
-    "social": [
-      {
-        "label": "GitHub",
-        "href": "#contact"
-      },
-      {
-        "label": "Twitter",
-        "href": "#contact"
-      },
-      {
-        "label": "Email",
-        "href": "mailto:hi@candyhouse.dev"
-      },
-      {
-        "label": "Dribbble",
-        "href": "#contact"
-      }
-    ],
-    "slogan": "\"Pixel-perfect, happily shipped.\"",
-    "bottomLeft": "BUILT WITH ♥ & PURE HTML/CSS/JS",
-    "bottomRight": "NO FRAMEWORK · WCAG 2.1 AA"
   }
 }

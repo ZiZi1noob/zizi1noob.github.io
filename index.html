@@ -124,16 +124,16 @@
     var s = d.skills;
     var axes = s.axes || [];
     var N = axes.length;
-    // Responsive sizing: smaller on mobile, labels pull inward based on length
+    // Responsive sizing: bigger on all screens, labels pushed outward
     var isMobile = window.innerWidth < 640;
-    var cx = isMobile ? 130 : 220, cy = isMobile ? 130 : 220, r = isMobile ? 72 : 150;
-    var viewSize = isMobile ? 260 : 440;
+    var cx = isMobile ? 160 : 240, cy = isMobile ? 160 : 240, r = isMobile ? 95 : 165;
+    var viewSize = isMobile ? 320 : 480;
     function labelRadius(name){
-      var extra = isMobile ? 10 : 28;
-      // longer words sit closer to the vertex so they don't overflow the edge
+      var extra = isMobile ? 18 : 36;
+      // long labels pull inward slightly so they stay inside the SVG
       var len = name.length;
       if (isMobile && len > 6) extra -= (len - 6) * 3;
-      if (isMobile && extra < 2) extra = 2;
+      if (isMobile && extra < 6) extra = 6;
       return r + extra;
     }
     var levels = 5;
@@ -149,14 +149,6 @@
       }
       grid.push('<polygon points="'+pts.join(' ')+'" fill="none" stroke="rgba(232,233,239,0.10)" stroke-width="1" stroke-dasharray="3,4"/>');
     }
-    // Level labels (20,40,60,80,100) on first axis
-    var levelLabels = [];
-    for (var lv = 1; lv <= levels; lv++){
-      var a0 = rad(0), p = lv / levels;
-      var lx = cx + r * p * Math.cos(a0) + 6, ly = cy + r * p * Math.sin(a0);
-      levelLabels.push('<text x="'+lx+'" y="'+ly+'" fill="rgba(232,233,239,0.35)" font-size="9" font-family="var(--font-head)" dominant-baseline="middle">'+(lv*20)+'</text>');
-    }
-
     // Axes (colored per axis)
     var axesSvg = [];
     for (var i = 0; i < N; i++){
@@ -175,7 +167,7 @@
     var dataPoly = '<polygon class="radar-area" points="'+polyPoints+'" fill="rgba(34,211,238,0.10)" stroke="var(--cyan)" stroke-width="2" data-pts="'+polyPoints+'"/>';
 
     // Data dots + labels + hit areas (colored per axis)
-    var dots = [], labels = [], hitAreas = [], pctLabels = [];
+    var dots = [], labels = [], hitAreas = [];
     for (var i = 0; i < N; i++){
       var a = rad(i), p = axes[i].pct / 100;
       var dx = cx + r * p * Math.cos(a), dy = cy + r * p * Math.sin(a);
@@ -187,7 +179,6 @@
       var itemsJson = JSON.stringify(axes[i].items || []).replace(/"/g, '&quot;');
       dots.push('<circle class="radar-dot" cx="'+dx+'" cy="'+dy+'" r="5" fill="var(--bg)" stroke="'+col+'" stroke-width="2.5" data-axis="'+i+'"/>');
       labels.push('<text class="radar-label" x="'+lx+'" y="'+ly+'" text-anchor="'+anchor+'" dominant-baseline="middle" fill="'+col+'" data-axis="'+i+'">'+esc(axes[i].name)+'</text>');
-      pctLabels.push('<text class="radar-pct" x="'+dx+'" y="'+(dy-14)+'" text-anchor="middle" fill="'+col+'" font-size="10" font-family="var(--font-head)" opacity="0" data-axis="'+i+'">'+axes[i].pct+'%</text>');
       hitAreas.push('<circle cx="'+dx+'" cy="'+dy+'" r="14" fill="transparent" stroke="none" style="cursor:pointer;" data-axis="'+i+'" data-name="'+esc(axes[i].name)+'" data-pct="'+axes[i].pct+'" data-color="'+col+'" data-items="'+itemsJson+'"/>');
     }
     var radarSvg = ''+
@@ -195,11 +186,9 @@
         '<svg viewBox="0 0 '+viewSize+' '+viewSize+'" class="radar-svg" role="img" aria-label="Skill radar chart">'+
           '<defs><filter id="radar-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>'+
           '<g>'+grid.join('')+'</g>'+
-          '<g>'+levelLabels.join('')+'</g>'+
           '<g>'+axesSvg.join('')+'</g>'+
           dataPoly+
           '<g>'+dots.join('')+'</g>'+
-          '<g>'+pctLabels.join('')+'</g>'+
           '<g>'+labels.join('')+'</g>'+
           '<g>'+hitAreas.join('')+'</g>'+
         '</svg>'+
@@ -220,7 +209,7 @@
   }
 
   function renderExp(d){
-    var t = d.experience;
+    var t = d.journey;
     var cp = d.current_proj;
     var overall = Math.round(cp.phases.reduce(function(sum, ph){ return sum + (ph.progress || 0); }, 0) / cp.phases.length);
     var hl = t.highlights || [];
@@ -262,7 +251,7 @@
     }).join('');
 
     var tabs =
-      '<button class="exp-tab active" data-tab="timeline" role="tab" aria-selected="true">Experience</button>'+
+      '<button class="exp-tab active" data-tab="timeline" role="tab" aria-selected="true">Journey</button>'+
       '<button class="exp-tab exp-tab--live" data-tab="current" role="tab" aria-selected="false">Building</button>';
 
     var phases = cp.phases.map(function(ph, i){
@@ -311,7 +300,7 @@
     '</div>';
 
     return ''+
-    '<section class="timeline tex-dots" id="experience">'+
+    '<section class="timeline tex-dots" id="journey">'+
       '<div class="wrap">'+
         '<div class="section-head reveal" style="text-align:center;">'+
           '<span class="kicker">'+esc(t.kicker)+'</span>'+
@@ -371,7 +360,7 @@
       '<div class="foot-center">'+
         '<a href="#about" class="foot-name">'+esc(d.site)+'</a>'+
         '<p class="foot-slogan mono">'+rich(f.slogan)+'</p>'+
-        '<p class="foot-built">'+esc(f.bottomLeft)+'</p>'+
+        '<p class="foot-built">'+esc(f.bottom)+'</p>'+
       '</div>'+
     '</div>';
   }
@@ -450,7 +439,7 @@
 
     function showRadarTip(el, axisName, pct, items, color){
       if (!radarTip) return;
-      var html = '<strong style="color:'+esc(color)+'">'+esc(axisName)+' <span class="mono">'+pct+'%</span></strong><ul>'+(items || []).map(function(it){ return '<li>'+esc(it)+'</li>'; }).join('')+'</ul>';
+      var html = '<strong style="color:'+esc(color)+'">'+esc(axisName)+' <span class="rt-pct mono">'+pct+'%</span></strong><ul>'+(items || []).map(function(it){ return '<li>'+esc(it)+'</li>'; }).join('')+'</ul>';
       radarTip.innerHTML = html;
       // make visible off-screen first so dimensions can be measured
       radarTip.style.visibility = 'hidden';
@@ -500,7 +489,7 @@
           '<div class="sd-tags">'+skillTags+'</div>'+
         '</article>';
       }).join('');
-      var header = '<div class="sd-header"><span class="sd-dot" style="background:'+esc(color)+'"></span><strong>'+esc(axisName)+'</strong> <span class="mono">'+pct+'%</span></div>';
+      var header = '<div class="sd-header"><span class="sd-dot" style="background:'+esc(color)+'"></span><strong>'+esc(axisName)+'</strong> <span class="sd-pct mono">'+pct+'%</span></div>';
       detail.innerHTML = header + (cards ? '<div class="sd-grid">'+cards+'</div>' : '<p class="sd-empty">No matching projects in timeline.</p>');
       detail.classList.add('show');
       detail.scrollIntoView({behavior: 'smooth', block: 'nearest'});
@@ -508,18 +497,18 @@
     function clearSkillDetail(){
       var detail = document.getElementById('skillDetail');
       if (detail){ detail.classList.remove('show'); detail.innerHTML = ''; }
-      document.querySelectorAll('.radar-dot, .radar-label, .radar-pct').forEach(function(el){ el.classList.remove('active'); });
+      document.querySelectorAll('.radar-dot, .radar-label').forEach(function(el){ el.classList.remove('active'); });
     }
 
     document.querySelectorAll('.radar-svg circle[data-axis]').forEach(function(hit){
       var axisIdx = hit.dataset.axis;
       hit.addEventListener('mouseenter', function(){
         showRadarTip(hit, hit.dataset.name, hit.dataset.pct, JSON.parse(hit.dataset.items || '[]'), hit.dataset.color);
-        document.querySelectorAll('.radar-dot[data-axis="'+axisIdx+'"], .radar-label[data-axis="'+axisIdx+'"], .radar-pct[data-axis="'+axisIdx+'"]').forEach(function(el){ el.classList.add('active'); });
+        document.querySelectorAll('.radar-dot[data-axis="'+axisIdx+'"], .radar-label[data-axis="'+axisIdx+'"]').forEach(function(el){ el.classList.add('active'); });
       });
       hit.addEventListener('mouseleave', function(){
         hideRadarTip();
-        document.querySelectorAll('.radar-dot[data-axis="'+axisIdx+'"], .radar-label[data-axis="'+axisIdx+'"], .radar-pct[data-axis="'+axisIdx+'"]').forEach(function(el){ el.classList.remove('active'); });
+        document.querySelectorAll('.radar-dot[data-axis="'+axisIdx+'"], .radar-label[data-axis="'+axisIdx+'"]').forEach(function(el){ el.classList.remove('active'); });
       });
       hit.addEventListener('click', function(e){
         e.stopPropagation();
