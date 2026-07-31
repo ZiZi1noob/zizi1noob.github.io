@@ -52,6 +52,13 @@
     "startDate": "2026-07-19",
     "github_repo": "https://github.com/zizi1noob/homepage.github.io",
     "phases": [
+       {
+        "name": "Build pure HTML layout",
+        "status": "completed",
+        "progress": 100,
+        "date": "2026-07-26",
+        "desc": "Hand-coded the first version of this site with semantic HTML and pixel-perfect CSS."
+      },
       {
         "name": "Design JSON-driven content",
         "status": "completed",
@@ -59,13 +66,7 @@
         "date": "2026-07-24",
         "desc": "Moved all content into data.json so the site can be re-generated without touching codes."
       },
-      {
-        "name": "Build pure HTML layout",
-        "status": "completed",
-        "progress": 100,
-        "date": "2026-07-26",
-        "desc": "Hand-coded the first version of this site with semantic HTML and pixel-perfect CSS."
-      },
+     
       {
         "name": "Connect to LLM for resume analysis",
         "status": "in-progress: collect resume data",
@@ -164,7 +165,7 @@
     "github": "https://zizi1noob.github.io/"
   },
   "footer": {
-    "slogan": "\"Pixel-perfect, happily shipped.\"",
+    "slogan": "\"Less is more.\"",
     "bottom": "BUILT WITH ♥ & PURE HTML/CSS/JS"
   },
   "journey": {
