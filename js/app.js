@@ -105,7 +105,12 @@
     b.classList.add('show');
     b.innerHTML =
       '<img class="err-ico" src="assets/err-icon.svg" width="44" height="44" alt="" aria-hidden="true">'+
-      '<div class="err-body">'+msg+'</div>'+
+      '<div class="err-body">'+
+        msg+
+        '<div class="err-actions">'+
+          '<a class="btn btn--small" href="ai-tool.html">Try AI generation</a>'+
+        '</div>'+
+      '</div>'+
       '<img class="err-float err-float--1" src="assets/err-star.svg" width="22" height="22" alt="" aria-hidden="true">'+
       '<img class="err-float err-float--2" src="assets/err-dot.svg" width="14" height="14" alt="" aria-hidden="true">';
   }

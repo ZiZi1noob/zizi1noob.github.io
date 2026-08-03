@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Generate · ZIYANG Portfolio</title>
+<meta name="description" content="Generate your portfolio data.json with AI">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="index.html#main" class="skip">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a href="index.html" class="site-header__logo" aria-label="Ziyang House"><span id="logoText">Ziyang House</span></a>
+    <nav class="site-header__nav" aria-label="Primary">
+      <button class="site-header__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">≡</button>
+      <ul class="site-header__links" id="navLinks">
+        <li class="site-header__item"><a class="site-header__link" href="index.html">Home</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="ai-tool-page">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center; padding-top: 60px;">
+      <span class="kicker">AI Assistant</span>
+      <h2>Generate your data.json</h2>
+      <p>Paste your resume below, pick a model, and let AI generate the portfolio data. Your API token is only used in this request and is never stored.</p>
+    </div>
+
+    <section class="ai-tool-card">
+      <div class="ai-tool-grid">
+        <div class="ai-tool-field">
+          <label class="ai-tool-label" for="aiProvider">Provider</label>
+          <select id="aiProvider" class="ai-tool-select">
+            <option value="openai">OpenAI</option>
+            <option value="openrouter">OpenRouter</option>
+          </select>
+        </div>
+
+        <div class="ai-tool-field">
+          <label class="ai-tool-label" for="aiModel">Model</label>
+          <select id="aiModel" class="ai-tool-select"></select>
+        </div>
+      </div>
+
+      <div class="ai-tool-field">
+        <label class="ai-tool-label" for="aiToken">
+          API Token
+          <span class="ai-tool-hint">— token is used once, not saved</span>
+        </label>
+        <input id="aiToken" class="ai-tool-input" type="password" placeholder="sk-... or sk-or-..." autocomplete="off">
+      </div>
+
+      <div class="ai-tool-field">
+        <label class="ai-tool-label" for="aiResume">Resume / Bio</label>
+        <div class="ai-tool-dropzone" id="aiDropzone">
+          <input type="file" id="aiFile" class="ai-tool-file" accept=".txt,.md,.pdf,.doc,.docx">
+          <svg class="ai-tool-dropzone__icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="15" y2="15"></line>
+          </svg>
+          <div class="ai-tool-dropzone__text">
+            <strong>Drag & drop your resume document</strong>
+            <span>or click to browse · .txt / .md / .pdf / .docx</span>
+          </div>
+        </div>
+        <textarea id="aiResume" class="ai-tool-textarea" rows="12" placeholder="Or paste your resume, LinkedIn summary, or any text that describes your experience, skills, projects and contact info..."></textarea>
+      </div>
+
+      <div class="ai-tool-actions">
+        <button id="aiGenerate" class="btn btn--primary" type="button">Generate data.json</button>
+        <span id="aiStatus" class="ai-tool-status" aria-live="polite"></span>
+      </div>
+
+      <div class="ai-tool-output" id="aiOutputWrap" style="display:none;">
+        <label class="ai-tool-label" for="aiResult">Generated JSON</label>
+        <textarea id="aiResult" class="ai-tool-textarea ai-tool-textarea--code" rows="12" readonly></textarea>
+        <div class="ai-tool-actions">
+          <button id="aiDownload" class="btn" type="button">Download data.json</button>
+          <a href="index.html" class="btn btn--ghost">Back to homepage</a>
+        </div>
+        <p class="ai-tool-note">Replace <code>assets/data.json</code> with the downloaded file, then refresh the homepage.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__center">
+      <a href="index.html" class="site-footer__name">Ziyang House</a>
+      <p class="site-footer__built">Built with curiosity and a little AI magic.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/utils.js"></script>
+<script src="js/ai-tool.js"></script>
+
+</body>
+</html>
