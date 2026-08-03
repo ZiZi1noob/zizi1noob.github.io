@@ -138,16 +138,7 @@
         })
         .then(function(d){ AppBoot.boot(d); })
         .catch(function(err){
-          if (window.AppAnalyzer){
-            AppAnalyzer.showPanel(function(generated){
-              var banner = document.getElementById('errorBanner');
-              if (banner){ banner.classList.remove('show'); banner.innerHTML = ''; }
-              AppBoot.boot(generated);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-          } else {
-            showError(' Could not load <code>assets/data.json</code> — the site needs this file to render. ');
-          }
+          showError(' Could not load <code>assets/data.json</code> — the site needs this file to render. ');
         });
     }
   };
