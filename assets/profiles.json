@@ -1,0 +1,7 @@
+{
+  "directory": "assets/profile-data",
+  "profiles": [
+    { "file": "data.json" },
+    { "file": "data-copy.json" }
+  ]
+}

@@ -1,5 +1,8 @@
 (function(){
   'use strict';
+  var U = window.AppUtils;
+
+  var CACHE_KEY = 'cache_profiles';
 
   var MODELS = {
     openai: [
@@ -33,7 +36,7 @@
     '  "about": {',
     '    "kicker": "// ABOUT",',
     '    "title": "About Me",',
-    '    "paragraphs": ["Ziyang there, a full-stack engineer...", "Outside of code, I'm just a gamer..."],',
+    '    "paragraphs": ["Ziyang there, a full-stack engineer...", "Outside of code, I am just a gamer..."],',
     '    "stats": [',
     '      {"num": "10+", "label": "Shipped"},',
     '      {"num": "3+", "label": "Years"},',
@@ -117,6 +120,54 @@
 
   function $(id){ return document.getElementById(id); }
 
+  var mode = null; // null | 'file' | 'paste'
+  var loadedFileName = '';
+  var defaultDropTitle = '';
+  var defaultDropHint = '';
+
+  function setMode(newMode){
+    mode = newMode;
+    var dropzone = $('aiDropzone');
+    var title = dropzone.querySelector('.ai-tool-dropzone__text strong');
+    var hint = dropzone.querySelector('.ai-tool-dropzone__text span');
+    var btn = $('aiPasteToggle');
+    var wrap = $('aiPasteWrap');
+    var area = $('aiResume');
+
+    if (!defaultDropTitle){
+      defaultDropTitle = title.textContent;
+      defaultDropHint = hint.textContent;
+    }
+
+    dropzone.classList.remove('is-filled', 'is-disabled');
+
+    if (mode === 'file'){
+      dropzone.classList.add('is-filled');
+      title.textContent = 'Resume loaded';
+      hint.textContent = loadedFileName || 'File ready';
+      btn.disabled = true;
+      btn.textContent = 'File uploaded — paste disabled';
+      btn.setAttribute('aria-expanded', 'false');
+      wrap.classList.remove('is-open');
+      if (area) area.disabled = true;
+    } else if (mode === 'paste'){
+      dropzone.classList.add('is-disabled');
+      title.textContent = 'Resume text entered';
+      hint.textContent = 'Click to upload a file instead';
+      btn.disabled = false;
+      btn.textContent = wrap.classList.contains('is-open') ? 'Hide paste box' : 'Or paste resume text';
+      if (area) area.disabled = false;
+    } else {
+      title.textContent = defaultDropTitle;
+      hint.textContent = defaultDropHint;
+      btn.disabled = false;
+      btn.textContent = 'Or paste resume text';
+      btn.setAttribute('aria-expanded', 'false');
+      wrap.classList.remove('is-open');
+      if (area) area.disabled = false;
+    }
+  }
+
   function populateModels(){
     var provider = $('aiProvider').value;
     var select = $('aiModel');
@@ -141,6 +192,92 @@
       text = text.replace(/^```(?:json)?\s*/, '').replace(/\s*```$/, '');
     }
     return JSON.parse(text);
+  }
+
+  function validateProfile(data){
+    var errors = [];
+    if (!data || typeof data !== 'object' || Array.isArray(data)){
+      errors.push('JSON must be an object');
+      return { valid: false, errors: errors };
+    }
+    if (typeof data.site !== 'string' || !data.site.trim()){
+      errors.push('missing "site" name');
+    }
+    if (!data.about || typeof data.about !== 'object'){
+      errors.push('missing "about" section');
+    }
+    return { valid: errors.length === 0, errors: errors };
+  }
+
+  function renderValidation(check){
+    var el = $('aiValidation');
+    if (!el) return;
+    el.style.display = 'block';
+    if (check.valid){
+      el.className = 'ai-tool-validation ai-tool-validation--ok';
+      el.innerHTML = '<span class="ai-tool-validation__dot" aria-hidden="true"></span> Format check passed — ready to use.';
+    } else {
+      el.className = 'ai-tool-validation ai-tool-validation--bad';
+      var list = (check.errors || []).map(function(e){ return '<li>' + U.esc(e) + '</li>'; }).join('');
+      el.innerHTML = '<span class="ai-tool-validation__dot" aria-hidden="true"></span> Format check failed:' +
+        '<ul class="ai-tool-validation__list">' + list + '</ul>';
+    }
+  }
+
+  function loadCacheList(){
+    try {
+      var raw = localStorage.getItem(CACHE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch(e) { /* ignore */ }
+    return [];
+  }
+
+  function saveCacheList(list){
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify(list));
+      return true;
+    } catch(e) {
+      return false;
+    }
+  }
+
+  function saveCacheProfile(data){
+    var list = loadCacheList();
+    var id = 'cache-' + Date.now();
+    var label = loadedFileName || 'data.json';
+    list.push({ id: id, label: label, data: data });
+    var ok = saveCacheList(list);
+    return { ok: ok, id: id, label: label };
+  }
+
+  function showApplyHint(){
+    var el = $('aiApplyHint');
+    if (!el) return;
+    el.style.display = 'block';
+    el.className = 'ai-tool-apply-hint ai-tool-apply-hint--ok';
+    el.innerHTML =
+      '<span class="ai-tool-apply-hint__icon" aria-hidden="true">✓</span>' +
+      '<div>' +
+        '<strong>Saved to this browser</strong>' +
+        '<p>You can now switch to this profile on the homepage via <em>Profile Data</em> (tagged “cache”).</p>' +
+      '</div>';
+    var btn = $('aiApply');
+    if (btn){
+      btn.style.display = 'inline-flex';
+      btn.textContent = 'Apply to homepage →';
+      btn.disabled = false;
+    }
+  }
+
+  function hideApplyHint(){
+    var el = $('aiApplyHint');
+    if (el) el.style.display = 'none';
+    var btn = $('aiApply');
+    if (btn) btn.style.display = 'none';
+  }
+
+  function applyToHomepage(){
+    window.location.href = 'index.html';
   }
 
   function callOpenAI(token, model, resume){
@@ -193,7 +330,7 @@
       return;
     }
     if (!resume){
-      setStatus('Please paste your resume or drop a file.', 'error');
+      setStatus('Please upload a resume document or paste the resume text.', 'error');
       $('aiResume').focus();
       return;
     }
@@ -214,10 +351,23 @@
         var content = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
         if (!content) throw new Error('Empty response from AI.');
         var json = extractJson(content);
+        var check = validateProfile(json);
         var pretty = JSON.stringify(json, null, 2);
         $('aiResult').value = pretty;
         $('aiOutputWrap').style.display = 'block';
-        setStatus('Done! Review and download your data.json.', 'success');
+        renderValidation(check);
+        if (check.valid){
+          var saved = saveCacheProfile(json);
+          if (saved.ok){
+            setStatus('Done! Saved to this browser — switch to it on the homepage.', 'success');
+            showApplyHint();
+          } else {
+            setStatus('Done! Format check passed (browser storage full, please download).', 'warning');
+          }
+        } else {
+          hideApplyHint();
+          setStatus('Generated, but format check failed. Fix before using.', 'warning');
+        }
         $('aiOutputWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
       })
       .catch(function(err){
@@ -231,6 +381,12 @@
   function download(){
     var text = $('aiResult').value;
     if (!text) return;
+    var json;
+    try { json = JSON.parse(text); } catch(e){ json = null; }
+    var check = json ? validateProfile(json) : { valid: false, errors: ['JSON is not valid'] };
+    if (!check.valid){
+      if (!confirm('This JSON failed the format check. Download anyway?')) return;
+    }
     var blob = new Blob([text], { type: 'application/json' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
@@ -265,11 +421,13 @@
       readTextFile(file)
         .then(function(text){
           $('aiResume').value = text;
+          loadedFileName = file.name;
+          setMode('file');
           setStatus('File loaded. Ready to generate.', 'success');
         })
         .catch(function(err){ setStatus(err.message, 'error'); });
     } else if (name.endsWith('.pdf') || name.endsWith('.doc') || name.endsWith('.docx')){
-      setStatus('PDF / Word files can\'t be read directly — please open and paste the text below.', 'error');
+      setStatus('PDF / Word files can\'t be read directly — open them and paste the text (use "Or paste resume text").', 'error');
     } else {
       setStatus('Unsupported file type. Please paste the text instead.', 'error');
     }
@@ -285,6 +443,10 @@
     });
 
     dropzone.addEventListener('click', function(e){
+      if (mode === 'paste'){
+        $('aiResume').value = '';
+        setMode(null);
+      }
       if (e.target !== fileInput) fileInput.click();
     });
 
@@ -317,6 +479,38 @@
     }, false);
   }
 
+  function initPasteToggle(){
+    var btn = $('aiPasteToggle');
+    var wrap = $('aiPasteWrap');
+    var area = $('aiResume');
+    var fileInput = $('aiFile');
+    if (!btn || !wrap) return;
+    btn.addEventListener('click', function(){
+      if (mode === 'file'){
+        if (fileInput) fileInput.value = '';
+        loadedFileName = '';
+        wrap.classList.add('is-open');
+        setMode('paste');
+        if (area) area.focus();
+        return;
+      }
+      var open = wrap.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? 'Hide paste box' : 'Or paste resume text';
+      if (open && area) area.focus();
+    });
+  }
+
+  function initResumeInput(){
+    var area = $('aiResume');
+    if (!area) return;
+    area.addEventListener('input', function(){
+      var hasText = area.value.trim().length > 0;
+      if (hasText && mode !== 'paste') setMode('paste');
+      if (!hasText && mode === 'paste') setMode(null);
+    });
+  }
+
   function initNav(){
     var toggle = $('navToggle');
     var links = $('navLinks');
@@ -328,9 +522,14 @@
   }
 
   populateModels();
+  hideApplyHint();
   $('aiProvider').addEventListener('change', populateModels);
   $('aiGenerate').addEventListener('click', generate);
   $('aiDownload').addEventListener('click', download);
+  var applyBtn = $('aiApply');
+  if (applyBtn) applyBtn.addEventListener('click', applyToHomepage);
   initDropzone();
+  initPasteToggle();
+  initResumeInput();
   initNav();
 })();

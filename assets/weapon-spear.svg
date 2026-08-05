@@ -1,14 +1,17 @@
 <svg viewBox="0 0 16 16" width="26" height="26" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
-  <rect x="7" y="0" width="2" height="1" fill="#EEF2F7"/>
-  <rect x="6" y="1" width="4" height="3" fill="#4B5570"/>
-  <rect x="7" y="1" width="2" height="3" fill="#C7CDD6"/>
-  <rect x="7" y="2" width="1" height="2" fill="#EEF2F7"/>
-  <rect x="5" y="4" width="6" height="2" fill="#FFCB2E"/>
-  <rect x="5" y="4" width="6" height="1" fill="#4B5570"/>
-  <rect x="6" y="6" width="1" height="9" fill="#4B5570"/>
-  <rect x="9" y="6" width="1" height="9" fill="#4B5570"/>
-  <rect x="7" y="6" width="2" height="9" fill="#8A5A33"/>
-  <rect x="7" y="6" width="1" height="9" fill="#A06A3D"/>
-  <rect x="6" y="4" width="1" height="2" fill="#FF2E88"/>
-  <rect x="9" y="4" width="1" height="2" fill="#FF2E88"/>
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -6; 0 0" dur="0.55s" repeatCount="1" calcMode="spline" keySplines="0.2 0 0.2 1; 0.2 0 0.2 1" keyTimes="0; 0.45; 1"/>
+    <rect x="7" y="0" width="2" height="1" fill="#EEF2F7"/>
+    <rect x="6" y="1" width="4" height="3" fill="#4B5570"/>
+    <rect x="7" y="1" width="2" height="3" fill="#C7CDD6"/>
+    <rect x="7" y="2" width="1" height="2" fill="#EEF2F7"/>
+    <rect x="5" y="4" width="6" height="2" fill="#FFCB2E"/>
+    <rect x="5" y="4" width="6" height="1" fill="#4B5570"/>
+    <rect x="6" y="6" width="1" height="9" fill="#4B5570"/>
+    <rect x="9" y="6" width="1" height="9" fill="#4B5570"/>
+    <rect x="7" y="6" width="2" height="9" fill="#8A5A33"/>
+    <rect x="7" y="6" width="1" height="9" fill="#A06A3D"/>
+    <rect x="6" y="4" width="1" height="2" fill="#FF2E88"/>
+    <rect x="9" y="4" width="1" height="2" fill="#FF2E88"/>
+  </g>
 </svg>

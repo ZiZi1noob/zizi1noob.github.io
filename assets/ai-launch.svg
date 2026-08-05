@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="data-source__ai-icon">
+  <defs>
+    <style>
+      .ai-plane {
+        fill: currentColor;
+        transform-origin: 12px 12px;
+      }
+      .ai-trail {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        opacity: 0.55;
+        transform-origin: 12px 20px;
+      }
+      .ai-spark {
+        fill: currentColor;
+        opacity: 0;
+        transform-origin: center;
+      }
+      .launching .ai-plane {
+        animation: ai-fly 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      }
+      .launching .ai-trail {
+        animation: ai-trail-stretch 0.65s ease forwards;
+      }
+      .launching .ai-spark {
+        animation: ai-spark-burst 0.65s ease forwards;
+      }
+      @keyframes ai-fly {
+        0%, 18% { transform: translate(0, 0) scale(1) rotate(0deg); }
+        30% { transform: translate(2px, -3px) scale(1.12) rotate(-4deg); }
+        60% { transform: translate(8px, -14px) scale(0.85) rotate(-12deg); opacity: 1; }
+        100% { transform: translate(18px, -30px) scale(0.25) rotate(-22deg); opacity: 0; }
+      }
+      @keyframes ai-trail-stretch {
+        0%, 18% { transform: scaleY(1); opacity: 0.55; }
+        30% { transform: scaleY(1.6); opacity: 0.85; }
+        70% { transform: scaleY(3.2); opacity: 0.3; }
+        100% { transform: scaleY(5); opacity: 0; }
+      }
+      @keyframes ai-spark-burst {
+        0% { opacity: 0; transform: scale(0) translate(0, 0); }
+        25% { opacity: 1; transform: scale(1.4) translate(0, 0); }
+        100% { opacity: 0; transform: scale(0.3) translate(0, 14px); }
+      }
+    </style>
+  </defs>
+  <path class="ai-trail" d="M12 20 Q12 16 12 14" />
+  <path class="ai-plane" d="M4 11L20 6L14 22L11 14L4 11Z" />
+  <circle class="ai-spark" cx="10" cy="20" r="1.2" />
+  <circle class="ai-spark" cx="14" cy="20" r="1" />
+  <circle class="ai-spark" cx="12" cy="21.5" r="0.9" />
+</svg>

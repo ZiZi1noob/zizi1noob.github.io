@@ -1,0 +1,302 @@
+{
+  "version": "release1",
+  "site": "Ziyang ZHAN",
+  "nav": [
+    {
+      "label": "About",
+      "href": "#about"
+    },
+    {
+      "label": "Journey",
+      "href": "#journey"
+    },
+    {
+      "label": "Skills",
+      "href": "#skills"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    }
+  ],
+  "about": {
+    "kicker": "// ABOUT",
+    "title": "About Me",
+    "paragraphs": [
+      "Ziyang there, a full-stack engineer who believes good interfaces should be both beautiful and genuinely usable.",
+      "Outside of code, I'm just a gamer who enjoys life, and believes in good vibes."
+    ],
+    "stats": [
+      {
+        "num": "10+",
+        "label": "Shipped"
+      },
+      {
+        "num": "3+",
+        "label": "Years"
+      },
+      {
+        "num": "24/7",
+        "label": "Coffee Powered"
+      },
+      {
+        "num": "∞",
+        "label": "Still Stuck on Black Wukong"
+      }
+    ]
+  },
+  "current_proj": {
+    "kicker": "// NOW BUILDING",
+    "title": "Resume-to-Web",
+    "desc": "Zero-code, full-personality. Drop your resume and instantly claim your username.github.io — not a template, no terminal, no config. Just your story, live.",
+    "startDate": "2026-07-19",
+    "github_repo": "https://github.com/zizi1noob/homepage.github.io",
+    "phases": [
+       {
+        "name": "Build pure HTML layout",
+        "status": "completed",
+        "progress": 100,
+        "date": "2026-07-26",
+        "desc": "Hand-coded the first version of this site with semantic HTML and pixel-perfect CSS."
+      },
+      {
+        "name": "Design JSON-driven content",
+        "status": "completed",
+        "progress": 100,
+        "date": "2026-07-24",
+        "desc": "Moved all content into data.json so the site can be re-generated without touching codes."
+      },
+     
+      {
+        "name": "Connect to LLM for resume analysis",
+        "status": "in-progress: collect resume data",
+        "progress": 60,
+        "date": "TBD",
+        "desc": "Connecting an LLM to extract skills, projects and achievements from unstructured resume text, and generating data.json"
+      },
+      {
+        "name": "AI-powered theming",
+        "status": "planned",
+        "progress": 0,
+        "date": "TBD",
+        "desc": "Dynamic theming that reads the 'implied audience' from the resume. If the user lists patents and research papers → academic-serif, high-contrast, low-saturation. If they list metrics like '10M users' and 'VC funding' → modern-startup gradient + glassmorphism. If they list creative tools → experimental typography and noisy borders. The theme is inferred, not toggled."
+      },
+      {
+        "name": "Connect to GitHub",
+        "status": "planned",
+        "progress": 0,
+        "date": "TBD",
+        "desc": "Link to GitHub account and auto-deploy it as a username.github.io personal homepage."
+      }
+    ]
+  },
+  "skills": {
+    "kicker": "// SKILLS",
+    "title": "My Skill Stack",
+    "desc": "Hover or click a radar axis to see related projects.",
+    "axes": [
+      {
+        "name": "Frontend",
+        "pct": 85,
+        "color": "#FF2E88",
+        "items": [
+          "Flutter",
+          "React",
+          "PySide6",
+          "HTML",
+          "CSS",
+          "JS",
+          "D3.js"
+        ]
+      },
+      {
+        "name": "Backend",
+        "pct": 88,
+        "color": "#22D3EE",
+        "items": [
+          "Node.js",
+          "Go",
+          "MongoDB",
+          "SQL",
+          "FastAPI",
+          "RESTful",
+          "WebSocket"
+        ]
+      },
+      {
+        "name": "Cloud",
+        "pct": 74,
+        "color": "#A78BFA",
+        "items": [
+          "AWS",
+          "Azure",
+          "Docker"
+        ]
+      },
+      {
+        "name": "ML/AI",
+        "pct": 90,
+        "color": "#BEF264",
+        "items": [
+          "Python",
+          "PyTorch",
+          "Federated Learning",
+          "Playwright / RPA"
+        ]
+      },
+      {
+        "name": "Language",
+        "pct": 92,
+        "color": "#FB923C",
+        "items": [
+          "Proficient English",
+          "Native Mandarin",
+          "Entry-level Cantonese"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Wanna make something sweet? ☕",
+    "desc": "Got a project, a role, or just want to say hi? Drop me a line — I reply within 48 hours.",
+    "email": "purplesunc@163.com",
+    "linkedin": "https://www.linkedin.com/in/ziyangzhan/",
+    "resume": "assets/Ziyang Zhan Resume --CS.pdf",
+    "github": "https://zizi1noob.github.io/"
+  },
+  "footer": {
+    "slogan": "\"Less is more.\"",
+    "bottom": "BUILT WITH ♥ & PURE HTML/CSS/JS"
+  },
+  "journey": {
+    "kicker": "// JOURNEY",
+    "title": "Journey",
+    "highlights": [
+      "PySide6",
+      "Playwright",
+      "VLM",
+      "PyTorch",
+      "FastAPI",
+      "image data generator",
+      "Flutter",
+      "MVVM architecture",
+      "WebSocket",
+      "Node.js",
+      "RESTful APIs",
+      "MongoDB",
+      "JavaScript",
+      "Federated Learning",
+      "CNN",
+      "Bi-LSTM",
+      "D3.js",
+      "24/7 scraping engine",
+      "10T",
+      "AWS",
+      "Chrome Extension",
+      "NER",
+      "RESTful API"
+    ],
+    "items": [
+      {
+        "year": "2023.11 — Now",
+        "role": "Full Stack Engineer",
+        "place": "Hong Kong SAR",
+        "company": "<a href='https://www.astri.org' target='_blank' rel='noopener'>Hong Kong Applied Science and Technology Research Institute</a>",
+        "desc": "",
+        "projects": [
+          {
+            "proj": "LVLM-RPA System",
+            "skills": [
+              "PySide6",
+              "Playwright / RPA",
+              "VLM / LLM Fine-tuning"
+            ],
+            "desc": [
+              "Built a PySide6 screen recorder capturing video and user actions across Windows apps (Word, Excel, Chrome, Edge, Firefox) with timestamped event logs.",
+              "Integrated Playwright to align video frames with UI actions and DOM selectors, generating paired training data (frame + action sequence) for VLM fine-tuning."
+            ]
+          },
+          {
+            "proj": "OCR Recognition Platform",
+            "skills": [
+              "Python",
+              "PyTorch",
+              "FastAPI / Node.js",
+              "Flutter (Web / iOS)",
+              "MongoDB",
+              "RESTful / WebSocket",
+              "HTML / CSS / JS"
+            ],
+            "desc": [
+              "OCR Model (PyTorch + FastAPI): Fine-tuned TrOCR with a synthetic image data generator server (diverse fonts + noise injection) to improve real-world generalization without manual labelling",
+              "Frontend: Built responsive Flutter app targeting Web + iOS with MVVM architecture; implemented caching strategies and WebSocket for real-time OCR status updates.",
+              "Backend (Node.js + MongoDB): Designed RESTful APIs with chunked uploads for large PDFs, Bull queue for async OCR job scheduling, and worker pool for parallel page processing—achieving 1,000+ docs/hour with 99.9% uptime and 35% faster queries."
+            ]
+          },
+          {
+            "proj": "Comprehensive Federated Learning Platform",
+            "skills": [
+              "Federated Learning",
+              "Flutter (Web / iOS)",
+              "MongoDB",
+              "CI / Tooling"
+            ],
+            "desc": [
+              "As the first project at the company, rapidly onboarded Flutter with MVVM architecture and MongoDB to design and deliver a responsive model monitoring dashboard.",
+              "Designed and implemented unit and integration tests, utilizing dependency injections and mocking to verify page navigation and widget states.",
+              "Drafted the whitepaper: Federated Learning: <a href='https://www.astri.org/wp-content/uploads/2025/11/Whitepaper-on-Federated-Learning_Unlocking-Innovation-in-the-Insurance-Sector.pdf' target='_blank' rel='noopener'>Unlocking Innovation in the Insurance Sector</a>"
+            ]
+          }
+        ]
+      },
+      {
+        "year": "Feb. 2022 — May 2023",
+        "role": "Associate Researcher",
+        "place": "Hong Kong",
+        "company": "Hong Kong Polytechnic University",
+        "desc": "",
+        "projects": [
+          {
+            "proj": "Social Listening Platform in Greater Bay Area -- <a href='https://www.polyu.edu.hk/shtm/news-and-events/news/2023/20230428_public-seminar-tourometer' target='_blank' rel='noopener'>TOURMETER</a>",
+            "skills": [
+              "Python",
+              "CNN / Bi-LSTM / BERT",
+              "D3.js",
+              "HTML / CSS / JS",
+              "10T Scraping Engine",
+              "AWS"
+            ],
+            "desc": [
+              "Model Development: Built SOTA multi-lingual (Simplified/Traditional Chinese, Japanese, Korean, and English) sentiment models (CNN, Bi-LSTM) with >90% accuracy and a topic-relevance classifier for tourism relevance",
+              "Real-time Data Scraping System: Built a 24/7 scraping engine collecting >10T real-time data from major social media/news platforms (Weibo, Twitter, Facebook, etc.) with anti-blocking mechanisms including dynamic IP rotation and human behavior simulation",
+              "Product Deployment: Created an interactive vanilla JavaScript + D3.js dashboard delivering real-time tourism insights and policy recommendations to government stakeholders"
+            ]
+          }
+        ]
+      },
+      {
+        "year": "Jan. 2023 – Aug. 2023",
+        "role": "Researcher",
+        "place": "Remote",
+        "company": "UIUC Forward Data Lab",
+        "desc": "",
+        "projects": [
+          {
+            "proj": "Next-Generation Search Engine",
+            "skills": [
+              "Python",
+              "CNN / Bi-LSTM / BERT",
+              "AWS",
+              "HTML / CSS / JS"
+            ],
+            "desc": [
+              "Model Development: Fine-tuned NER models (BERT/RoBERTa) for search query understanding.",
+              "Data Pipeline: Built an automated data labeling generator using external knowledge bases (Wikipedia/Freebase) to produce large-scale training data from unannotated search logs.",
+              "Product Deployment: Deployed the model as a FastAPI service on AWS and developed a Manifest Chrome Extension that highlights entities instantly upon user text selection."
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
